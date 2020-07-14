@@ -15,7 +15,14 @@
     </ion-card-header>
     <ion-card-content>{{intervencion.descripcion}}</ion-card-content>
     <ion-card-content>
-      Estado: {{intervencion.estado}}    
-    </ion-card-content>   
+      Estado: {{intervencion.estado}}
+    </ion-card-content>
+    <ion-card-content>
+      <div style="text-align: center;" *ngIf="user.tipo == 'ADMIN'">
+        <ion-button fill="clear" slot="start" color="success">Aprobar</ion-button>
+        <ion-button fill="clear" slot="end" color="danger">Rechazar</ion-button>
+      </div>        
+    </ion-card-content>
+    
   </ion-card>  
 </ion-content>

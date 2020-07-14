@@ -1,4 +1,25 @@
-<app-header titulo="Administrador"></app-header>
+<ion-app>
+  <ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button color="success" menu="primerMenu"></ion-menu-button>
+        </ion-buttons>
+        <img src="../../../assets/Logo.svg" class="logo animated fadeIn" alt="" >
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-toolbar>
+      <div style="text-align: center;">
+          <ion-button fill="clear"  color="success">Intervenciones</ion-button>
+      </div>     
+  </ion-toolbar>
+    <app-lista-arboles></app-lista-arboles>
+  </ion-content>
+
+</ion-app>
+
+
+<!--app-header titulo="Administrador"></app-header-->
 
 <!--<ion-header>
   <ion-toolbar>
@@ -10,6 +31,4 @@
   </ion-toolbar>
 </ion-header>-->
 
-<ion-content>
 
-</ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { IntervencionModalPageRoutingModule } from './intervencion-modal-routing.module';
 
 import { IntervencionModalPage } from './intervencion-modal.page';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { IntervencionModalPage } from './intervencion-modal.page';
     IonicModule,
     IntervencionModalPageRoutingModule
   ],
+  providers: [UsersService],
   declarations: [IntervencionModalPage]
 })
 export class IntervencionModalPageModule {}

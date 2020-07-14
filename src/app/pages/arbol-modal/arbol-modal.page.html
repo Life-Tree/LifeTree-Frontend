@@ -16,7 +16,13 @@
     </ion-card-header>
     <ion-card-content>{{arbol.description}}</ion-card-content>
     <ion-card-content>
-      <ion-card-subtitle><strong>Intervenciones realizadas</strong></ion-card-subtitle>
+      <div *ngIf="user.tipo == 'ADMIN' ">
+        <ion-button color="danger" fill="clear">Eliminar</ion-button>
+        <hr>
+      </div>      
+      <ion-card-subtitle ><strong>Intervenciones realizadas</strong></ion-card-subtitle>      
+    </ion-card-content>    
+    <ion-card-content>      
       <div *ngIf="arbol.intervenciones.length > 0; else bloqueElse">
         <ion-item *ngFor="let intervencion of arbol.intervenciones" (click)="abrirModalIntervencion(intervencion)">
           <ion-label slot="start">

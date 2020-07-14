@@ -8,6 +8,7 @@ import { ArbolModalPageRoutingModule } from './arbol-modal-routing.module';
 
 import { ArbolModalPage } from './arbol-modal.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     IonicModule,
     ArbolModalPageRoutingModule, ComponentsModule
   ],
+  providers: [UsersService],
   declarations: [ArbolModalPage]
 })
 export class ArbolModalPageModule {}

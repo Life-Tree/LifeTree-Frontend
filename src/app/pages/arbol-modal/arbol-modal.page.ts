@@ -3,6 +3,8 @@ import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ModalController } from '@ionic/angular';
 import { IntervencionModalPage } from '../intervencion-modal/intervencion-modal.page';
 import { Intervencion } from 'src/app/interfaces/intervencion.interface';
+import { User } from 'src/app/interfaces/user.interface';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-arbol-modal',
@@ -11,9 +13,10 @@ import { Intervencion } from 'src/app/interfaces/intervencion.interface';
 })
 export class ArbolModalPage implements OnInit {
 
+  private user: User;
   @Input() arbol: Arbol;
-  constructor(private modalCtrl: ModalController) { 
-    
+  constructor(private modalCtrl: ModalController, private userService: UsersService) { 
+    this.user = this.userService.getUser();
   }
 
   ngOnInit() {
