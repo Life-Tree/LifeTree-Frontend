@@ -1,0 +1,33 @@
+<ion-menu side="start" menuId="primerMenu" contentId="main">
+  <ion-header>
+    <ion-toolbar color="success">
+      <ion-title  color ="light" size="large" class="centrado">Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list >
+      <ion-menu-toggle>
+        <ion-item routerLink="/inicio">
+          <ion-icon slot="start" src="../../../assets/energia.svg"></ion-icon>
+          <ion-label>Pantalla principal</ion-label>
+        </ion-item>
+        <ion-item routerLink='{{reportarArbol.redirectTo}}'>
+          <ion-icon slot="start"  src="{{reportarArbol.icon}}"></ion-icon>
+          <ion-label >{{reportarArbol.name}}</ion-label>        
+        </ion-item>
+        <ion-item routerLink='{{reportarIntervencion.redirectTo}}'>
+          <ion-icon slot= "start" src="{{reportarIntervencion.icon}}"></ion-icon>
+          <ion-label>{{reportarIntervencion.name}}</ion-label>
+        </ion-item>
+        <ion-item routerLink='{{consultarIndicadores.redirectTo}}'>
+          <ion-icon slot="start" src="{{consultarIndicadores.icon}}"></ion-icon>
+          <ion-label>{{consultarIndicadores.name}}</ion-label>
+        </ion-item>
+        <ion-item routerLink= '{{consultarInstructivos.redirectTo}}'>
+          <ion-icon slot="start" src="{{consultarInstructivos.icon}}"></ion-icon>
+          <ion-label>{{consultarInstructivos.name}}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>

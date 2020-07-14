@@ -1,0 +1,7 @@
+{
+  "name": "lifeTree",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
