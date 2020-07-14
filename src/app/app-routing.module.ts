@@ -51,6 +51,18 @@ const routes: Routes = [
     path: 'indicadores',
     loadChildren: () => import('./pages/indicadores/indicadores.module').then( m => m.IndicadoresPageModule)
   },
+  {
+    path: 'arboles-list',
+    loadChildren: () => import('./pages/arboles-list/arboles-list.module').then( m => m.ArbolesListPageModule)
+  },
+  {
+    path: 'intervencion-modal',
+    loadChildren: () => import('./pages/intervencion-modal/intervencion-modal.module').then( m => m.IntervencionModalPageModule)
+  },
+  {
+    path: 'arbol-modal',
+    loadChildren: () => import('./pages/arbol-modal/arbol-modal.module').then( m => m.ArbolModalPageModule)
+  },
 ];
 
 @NgModule({

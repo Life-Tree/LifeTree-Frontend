@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start" defaultHref="/">
+      <ion-back-button color="success" (click)="dismiss()"></ion-back-button>
+    </ion-buttons> 
+    <img src="../../../assets/Logo.svg" class="logo animated fadeIn" alt="" >
+    <!--ion-title><h1>Arbol</h1></ion-title-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <img src="{{arbol.imagenURL}}" alt="" srcset="">
+      <ion-card-title>{{arbol.ubicacion.barrio}}</ion-card-title>      
+    </ion-card-header>
+    <ion-card-content>{{arbol.description}}</ion-card-content>
+    <ion-card-content>
+      <ion-card-subtitle><strong>Intervenciones realizadas</strong></ion-card-subtitle>
+      <div *ngIf="arbol.intervenciones.length > 0; else bloqueElse">
+        <ion-item *ngFor="let intervencion of arbol.intervenciones" (click)="abrirModalIntervencion(intervencion)">
+          <ion-label slot="start">
+            <p>{{intervencion.descripcion}}</p>
+          </ion-label>
+          <ion-label slot="end" text-right>
+            <img src="{{intervencion.imgURL}}" alt="">
+          </ion-label>
+        </ion-item>
+      </div>
+      <ng-template #bloqueElse>Aún no se ha intervenido este árbol.</ng-template>    
+      
+    
+    </ion-card-content>  
+    
+  </ion-card>
+  <!--div style="text-align: center; padding: 2%;">
+    <img src="{{arbol.imagenURL}}" alt="" srcset="">
+  </div>
+  
+  <div style="padding: 2%; border-top: 3px solid #bbb;">
+    <h2>{{arbol.ubicacion.barrio}}</h2>
+    <p>{{arbol.description}}</p>
+  </div>
+
+  <ion-button style="padding-left: 2%; padding-right: 2%;" color="success" fill="solid" expand="full" (click)="dismiss()">Atras</ion-button-->
+</ion-content>
