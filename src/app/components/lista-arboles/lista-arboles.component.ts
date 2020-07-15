@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ModalController } from '@ionic/angular';
@@ -12,15 +12,11 @@ import { ArbolModalPage } from 'src/app/pages/arbol-modal/arbol-modal.page';
 })
 export class ListaArbolesComponent implements OnInit {
 
+  @Input() filtro: "ALL" | "PENDING_INTERVENCION";
   arboles: Arbol[] = [];
   arbolesLoaded: Arbol[] = [];
-  constructor(private arbolesService: ArbolesService, private modalCtrl: ModalController) { 
-    this.arboles = arbolesService.getArboles();
-    for(let i=0; i<25; i++){
-      if(i < this.arboles.length){
-        this.arbolesLoaded.push(this.arboles[i]);
-      }      
-    }
+  constructor(private arbolesService: ArbolesService, private modalCtrl: ModalController) {
+    
   }
 
   loadData(event) {
@@ -54,6 +50,27 @@ export class ListaArbolesComponent implements OnInit {
     return await modal.present();
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    let todosLosArboles =  this.arbolesService.getArboles();
+    console.log(this.filtro);
+    if(this.filtro == "PENDING_INTERVENCION"){
+      for (const arbol of todosLosArboles) {
+        for (const intervencion of arbol.intervenciones) {
+          if(intervencion.estado == "PENDIENTE"){
+            console.log("ee");
+            this.arboles.push(arbol); break;
+          }
+        }
+      }
+    }else{
+      this.arboles = todosLosArboles;
+    }
+
+    for(let i=0; i<25; i++){
+      if(i < this.arboles.length){
+        this.arbolesLoaded.push(this.arboles[i]);
+      }      
+    }
+  }
 
 }
