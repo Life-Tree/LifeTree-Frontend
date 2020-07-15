@@ -8,17 +8,17 @@ import { MapaComponent } from './mapa/mapa.component';
 import { ListaArbolesComponent } from './lista-arboles/lista-arboles.component';
 import { ArbolesService } from '../services/arboles/arboles.service';
 import { ArbolModalPageModule } from '../pages/arbol-modal/arbol-modal.module';
-import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent],
+  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent],
   imports: [
     CommonModule, IonicModule, RouterModule
   ],
   providers: [ArbolesService],
-  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent]
+  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent]
 })
 export class ComponentsModule { }

@@ -1,16 +1,17 @@
 <ion-app>
-    <ion-header>
-        <!--<app-header titulo="Inicio">   
-        </app-header>-->
+    <app-header></app-header>
+    <!--ion-header>
+        <app-header titulo="Inicio">   
+        </app-header>
         <ion-toolbar>
             <ion-buttons slot="start">
                 <ion-menu-button color="success" menu="primerMenu"></ion-menu-button>
             </ion-buttons>
             <img src="../../../assets/Logo.svg" class="logo animated fadeIn" alt="" >
-            <!--ion-icon slot="end" src="../../../assets/LifeTree.svg" ></ion-icon-->
-            <!--img src="../../../assets/LifeTree.svg"-->
+            <ion-icon slot="end" src="../../../assets/LifeTree.svg" ></ion-icon>
+            <img src="../../../assets/LifeTree.svg">
         </ion-toolbar>
-    </ion-header>
+    </ion-header-->
 
     <ion-content fullscream>
         <ion-slides pager="true">
@@ -49,7 +50,7 @@
                     <ion-card-content>
                         Aprende como identificar un arbol enfermo, siguiendo los intrucctivos brindados por el EPA.
                     </ion-card-content>
-                    <ion-button color="success" fill="clear" >APRENDE AQUI</ion-button>
+                    <ion-button color="success" fill="clear" routerLink="/instructivos">APRENDE AQUI</ion-button>
                 </ion-card>
             </ion-slide>
             <ion-slide>
@@ -61,7 +62,7 @@
                     <ion-card-content>
                         Aprende a realizar la intervención que piensas llevar a cambo y los permisos que exige el EPA.
                     </ion-card-content>
-                    <ion-button color="success" fill="clear">APRENDE AQUI</ion-button>
+                    <ion-button color="success" fill="clear" routerLink="/intructivo-intervenciones">APRENDE AQUI</ion-button>
                 </ion-card>
             </ion-slide>
           </ion-slides>

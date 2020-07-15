@@ -63,6 +63,10 @@ const routes: Routes = [
     path: 'arbol-modal',
     loadChildren: () => import('./pages/arbol-modal/arbol-modal.module').then( m => m.ArbolModalPageModule)
   },
+  {
+    path: 'intructivo-intervenciones',
+    loadChildren: () => import('./pages/intructivo-intervenciones/intructivo-intervenciones.module').then( m => m.IntructivoIntervencionesPageModule)
+  },
 ];
 
 @NgModule({

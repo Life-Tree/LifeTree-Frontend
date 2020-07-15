@@ -1,16 +1,17 @@
 <ion-app>
-  <ion-header>
+  <app-header></app-header>
+  <!--ion-header>
     <ion-toolbar>
         <ion-buttons slot="start">
             <ion-menu-button color="success" menu="primerMenu"></ion-menu-button>
         </ion-buttons>
         <img src="../../../assets/Logo.svg" class="logo animated fadeIn" alt="" >
     </ion-toolbar>
-  </ion-header>
+  </ion-header-->
   <ion-content>
     <ion-toolbar>
       <div style="text-align: center;">
-          <ion-button fill="clear"  color="success" border-color="medium">Ver lista de intervenciones</ion-button>
+          <ion-button routerLink="/intervenciones" fill="clear"  color="success" border-color="medium">Ver lista de intervenciones</ion-button>
       </div> 
       <div style="text-align: center;">
         <ion-text Color="medium">LISTA DE ARBOLES ENFERMOS</ion-text> 
