@@ -8,6 +8,9 @@ import { ReportarArbolPageRoutingModule } from './reportar-arbol-routing.module'
 
 import { ReportarArbolPage } from './reportar-arbol.page';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { CameraService } from 'src/app/services/camera/camera.service';
+import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 
 
 @NgModule({
@@ -18,6 +21,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ReportarArbolPageRoutingModule, 
     ComponentsModule
   ],
+  providers: [CameraService, GeolocationService, ArbolesService],
   declarations: [ReportarArbolPage]
 })
 export class ReportarArbolPageModule {}

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
+import { CameraService } from 'src/app/services/camera/camera.service';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -7,9 +10,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportarArbolPage implements OnInit {
 
-  constructor() { }
+  descripcion:string = "";
+  geolocation: { latitude: number, longitude: number } = null;
+  imgBase64: string = "";
+  barrio: string = "";
+  constructor(
+    private geolocationService: GeolocationService,
+    private cameraService: CameraService, 
+    private arbolesService: ArbolesService
+  ) { }
 
   ngOnInit() {
+    this.getGeolocation()
   }
 
+  async getGeolocation() {
+    this.geolocation = await this.geolocationService.getCurrentPosition()
+  }
+
+  async getfotoArbol(){
+    this.imgBase64 = await this.cameraService.takePicture()
+  }
+
+  registrarArbol(){
+    //Metodo Post
+    let respuesta = this.arbolesService.crearArbol(this.descripcion, this.barrio, 
+      this.geolocation.latitude, this.geolocation.longitude, this.imgBase64);
+    console.log(respuesta);
+    
+  }
 }

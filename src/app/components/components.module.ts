@@ -9,6 +9,7 @@ import { ListaArbolesComponent } from './lista-arboles/lista-arboles.component';
 import { ArbolesService } from '../services/arboles/arboles.service';
 import { ArbolModalPageModule } from '../pages/arbol-modal/arbol-modal.module';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
@@ -16,9 +17,9 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 @NgModule({
   declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent],
   imports: [
-    CommonModule, IonicModule, RouterModule
+    CommonModule, IonicModule, RouterModule, HttpClientModule
   ],
-  providers: [ArbolesService],
+  providers: [ArbolesService, HttpClient],
   exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent]
 })
 export class ComponentsModule { }

@@ -1,25 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
+import { Ubicacion } from 'src/app/interfaces/ubicacion.interface';
+import { HttpClient } from "@angular/common/http";
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' 
 })
 export class ArbolesService {
 
+  private BASE_URL: string = "http://lifetreev1.herokuapp.com";
   private selectedArbol: Arbol;
   private arboles: Arbol[] = [];
-  constructor() { 
+  constructor(private http: HttpClient) {
     
     this.arboles = [
       { 
-      ubicacion: {'latitud': 1234, 'longitud': 4321, 'barrio': "España"},
+      ubicacion: {'latitud': 10.394470,  'longitud': -75.510788, 'barrio': "España"},
       description: "Arbol inclinado",
       imagenURL: "https://ichef.bbci.co.uk/news/ws/720/amz/worldservice/live/assets/images/2014/10/09/141009111834_arbol1_640x360_bbc_nocredit.jpg",
       intervenciones: [],
       estado: "ENFERMO"
       },
-      { 
-        ubicacion: {'latitud': 7895, 'longitud': 6369, 'barrio': "España"},
+      {
+        ubicacion: {'latitud': 10.423965, 'longitud': -75.548001, 'barrio': "España"},
         description: "Arbol con huecos en el tronco, este se ve debilitado y pareciera a punto de caerse. ",
         imagenURL: "https://www.guadalajaradiario.es/images/mini/images/2018/12/01/arbol_enfermo-300x400.JPG",
         intervenciones: [
@@ -30,14 +34,14 @@ export class ArbolesService {
         estado: "INTERVENIDO"
       },
       { 
-        ubicacion: {'latitud': 7412, 'longitud': 2147, 'barrio': "Armenia"},
+        ubicacion: {'latitud': 10.416044, 'longitud': -75.539268, 'barrio': "Armenia"},
         description: "Arbol deshidratado",
         imagenURL: "https://jardinessinfronteras.files.wordpress.com/2018/07/reforzamiento-de-l-arbol.jpg?w=616",
         intervenciones: [],
         estado: "ENFERMO"
       },
       { 
-        ubicacion: {'latitud': 3258, 'longitud': 8523, 'barrio': "Campestre"},
+        ubicacion: {'latitud': 10.396203, 'longitud': -75.521840, 'barrio': "Campestre"},
         description: "Arbol sin hojas",
         imagenURL: "https://www.elheraldo.co/sites/default/files/styles/width_860/public/articulo/2017/04/22/arboles1.jpg?itok=zr4qxsq0",
         intervenciones: [
@@ -48,7 +52,7 @@ export class ArbolesService {
         estado: "INTERVENIDO"
       },
       { 
-        ubicacion: {'latitud': 9632, 'longitud': 2369, 'barrio': "Esperanza"},
+        ubicacion: {'latitud': 10.384545,  'longitud': -75.465249, 'barrio': "Esperanza"},
         description: "Arbol a punto de caerse",
         imagenURL: "https://sevillasemueve.org/wp-content/uploads/2013/04/IMG_1763.jpg",
         intervenciones: [
@@ -65,6 +69,26 @@ export class ArbolesService {
 
   public getArboles(): Arbol[]{
     return this.arboles;
+  }
+
+  public crearArbol(descripcion: string, barrio:string, lat:number, lon:number, imgBase64:string): string{
+    return; //Metodo post
+  }
+
+  public addIntervencion(): string{
+    return; //Metodo put
+  }
+
+  public deleteArbol(): string{
+    return; //Metodo Delee
+  }
+
+  public cambiarEstadoIntervencion(): string{
+    return; //Metodo Put
+  }
+
+  getA(): Observable<Arbol[]>{
+    return this.http.get<Arbol[]>(`${this.BASE_URL}/arboles`);
   }
 
 }

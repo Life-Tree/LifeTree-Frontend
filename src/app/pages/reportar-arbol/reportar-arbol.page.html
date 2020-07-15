@@ -1,11 +1,33 @@
 <app-header titulo="Reportar arbol enfermo"></app-header>
 
-<!--<ion-header>
-  <ion-toolbar>
-    <ion-title>reportarArbol</ion-title>
-  </ion-toolbar>
-</ion-header>-->
-
-<ion-content>
-
+<ion-content  fullscreen>
+  <ion-card>    
+    <ion-card-header style="text-align: center;">
+      <img src="../../../assets/imgArbol.png" />      
+    </ion-card-header>
+    <ion-card-content style="text-align: center;">
+      <ion-card-title><strong>Registre un Arbol enfermo</strong> </ion-card-title>
+      <!-- Textarea in an item with a floating label -->
+      <ion-item>
+        <ion-label color="Primary" position="floating">En que barrio está?</ion-label>
+        <ion-input [(ngModel)]="barrio"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="Primary" position="floating">Describa el estado del arbol</ion-label>
+        <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
+      </ion-item>      
+      <!-- Icons -->
+      <ion-button color="success" style="text-align: center;" shape="round" (click)="getfotoArbol()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Tomar foto al arbol
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <!-- fab placed to the bottom end -->
+  <ion-fab   vertical="bottom" horizontal="center" (click)="registrarArbol()">
+    <ion-fab-button color="success"> Reportar
+      <ion-icon name="arrow-forward-circle"></ion-icon> 
+    </ion-fab-button>
+  </ion-fab>   
+  
 </ion-content>
