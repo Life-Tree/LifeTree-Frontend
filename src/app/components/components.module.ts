@@ -15,7 +15,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent],
+  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent],
   imports: [
     CommonModule, IonicModule, RouterModule, HttpClientModule
   ],

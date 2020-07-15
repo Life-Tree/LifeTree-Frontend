@@ -4,21 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { IntructivoIntervencionesPageRoutingModule } from './intructivo-intervenciones-routing.module';
 
-import { LoginPage } from './login.page';
+import { IntructivoIntervencionesPage } from './intructivo-intervenciones.page';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { UsersService } from 'src/app/services/users/users.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
+    IntructivoIntervencionesPageRoutingModule,
     ComponentsModule
   ],
-  providers: [UsersService],
-  declarations: [LoginPage]
+  declarations: [IntructivoIntervencionesPage]
 })
-export class LoginPageModule {}
+export class IntructivoIntervencionesPageModule {}

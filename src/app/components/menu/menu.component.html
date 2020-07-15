@@ -7,7 +7,7 @@
   <ion-content>
     <ion-list >
       <ion-menu-toggle>
-        <div  *ngIf="user.tipo == 'ADMIN'; else bloqueElse">
+        <div  *ngIf="getUserTipo() == 'ADMIN'; else bloqueElse">
           <ion-item routerLink="/inicio-admin">
             <ion-icon slot="start" src="../../../assets/energia.svg"></ion-icon>
             <ion-label>Pantalla principal</ion-label>
@@ -35,10 +35,10 @@
           <ion-icon slot="start" src="{{consultarInstructivos.icon}}"></ion-icon>
           <ion-label>{{consultarInstructivos.name}}</ion-label>
         </ion-item>
-        <div *ngIf="user.tipo == 'ADMIN'">
-          <ion-item routerLink= '{{consultarInstructivos.redirectTo}}'>
-            <ion-icon slot="start" src="{{consultarInstructivos.icon}}"></ion-icon>
-            <ion-label>{{consultarInstructivos.name}}</ion-label>
+        <div *ngIf="getUserTipo() == 'ADMIN'">
+          <ion-item routerLink= '{{listaIntervenciones.redirectTo}}'>
+            <ion-icon slot="start" src="{{listaIntervenciones.icon}}"></ion-icon>
+            <ion-label>{{listaIntervenciones.name}}</ion-label>
           </ion-item>
         </div>
         

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { MenuAdminComponent } from './menu-admin.component';
+import { IntructivoIntervencionesPage } from './intructivo-intervenciones.page';
 
-describe('MenuAdminComponent', () => {
-  let component: MenuAdminComponent;
-  let fixture: ComponentFixture<MenuAdminComponent>;
+describe('IntructivoIntervencionesPage', () => {
+  let component: IntructivoIntervencionesPage;
+  let fixture: ComponentFixture<IntructivoIntervencionesPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MenuAdminComponent ],
+      declarations: [ IntructivoIntervencionesPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MenuAdminComponent);
+    fixture = TestBed.createComponent(IntructivoIntervencionesPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

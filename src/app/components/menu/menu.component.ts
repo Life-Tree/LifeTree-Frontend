@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
-import { UsersService } from 'src/app/services/users/users.service';
+import { UsersService, user } from 'src/app/services/users/users.service';
 
 export interface menuItem{
   name: string;
@@ -15,11 +15,13 @@ export interface menuItem{
 })
 export class MenuComponent implements OnInit {
 
-  user: User;
-  reportarArbol: menuItem; reportarIntervencion: menuItem; consultarIndicadores: menuItem; consultarInstructivos: menuItem;
+  
+  reportarArbol: menuItem; reportarIntervencion: menuItem; consultarIndicadores: menuItem; 
+  consultarInstructivos: menuItem; listaIntervenciones: menuItem;
   //itemsMenu: menuItem[] = [];
   constructor(private userService: UsersService) {
-    this.user = this.userService.getUser();
+    //this.user = this.userService.getUser();
+    //console.log(this.user);    
   }
 
   ngOnInit() {
@@ -50,11 +52,16 @@ export class MenuComponent implements OnInit {
       redirectTo: "/instructivos"
     };
 
+    this.listaIntervenciones= {
+      name: "Lista de intervenciones",
+      icon:"../../../assets/aprobacion.svg",
+      redirectTo:"/intervenciones"
+    };
+
   }
 
-  onClick(){
-    console.log("Sii");
-    
+  getUserTipo(): string{
+    return user.tipo;
   }
 
   /*getItems(): menuItem[]{
