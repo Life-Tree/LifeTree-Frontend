@@ -8,7 +8,6 @@ import { MapaComponent } from './mapa/mapa.component';
 import { ListaArbolesComponent } from './lista-arboles/lista-arboles.component';
 import { ArbolesService } from '../services/arboles/arboles.service';
 import { ArbolModalPageModule } from '../pages/arbol-modal/arbol-modal.module';
-import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
@@ -20,6 +19,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     CommonModule, IonicModule, RouterModule, HttpClientModule
   ],
   providers: [ArbolesService, HttpClient],
-  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent, MenuAdminComponent]
+  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent]
 })
 export class ComponentsModule { }
