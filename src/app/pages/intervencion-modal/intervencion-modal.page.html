@@ -19,8 +19,8 @@
     </ion-card-content>
     <ion-card-content>
       <div style="text-align: center;" *ngIf="user.tipo == 'ADMIN'">
-        <ion-button fill="clear" slot="start" color="success">Aprobar</ion-button>
-        <ion-button fill="clear" slot="end" color="danger">Rechazar</ion-button>
+        <ion-button fill="clear" slot="start" color="success" (click)="presentAlertConfirm2()">Aprobar</ion-button>
+        <ion-button fill="clear" slot="end" color="danger"(click)="presentAlertConfirm()">Rechazar</ion-button>
       </div>        
     </ion-card-content>
     

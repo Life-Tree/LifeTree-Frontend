@@ -5,6 +5,7 @@ import { IntervencionModalPage } from '../intervencion-modal/intervencion-modal.
 import { Intervencion } from 'src/app/interfaces/intervencion.interface';
 import { User } from 'src/app/interfaces/user.interface';
 import { UsersService } from 'src/app/services/users/users.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-arbol-modal',
@@ -15,7 +16,7 @@ export class ArbolModalPage implements OnInit {
 
   private user: User;
   @Input() arbol: Arbol;
-  constructor(private modalCtrl: ModalController, private userService: UsersService) { 
+  constructor(private modalCtrl: ModalController, private userService: UsersService, public alertController: AlertController) { 
     this.user = this.userService.getUser();
   }
 
@@ -30,13 +31,37 @@ export class ArbolModalPage implements OnInit {
     const modal = await this.modalCtrl.create(
       {
         component: IntervencionModalPage,
-        //cssClass: 'my-custom-class',
         componentProps: {
           'intervencion': inter
         }
       }
     );
     return await modal.present();
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'ALERTA',
+      message: '¿Deseas <strong>eliminar</strong> este arbol?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah'); //Aqui se maneja si hace click en rechazar
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {   
+            console.log('Confirm Okay'); //Aqui se maneja si hace click en confirmar
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

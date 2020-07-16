@@ -17,7 +17,7 @@
     <ion-card-content>{{arbol.description}}</ion-card-content>
     <ion-card-content>
       <div *ngIf="user.tipo == 'ADMIN' ">
-        <ion-button color="danger" fill="clear">Eliminar</ion-button>
+        <ion-button color="danger" fill="clear" (click)="presentAlertConfirm()">Eliminar</ion-button>
         <hr>
       </div>      
       <ion-card-subtitle ><strong>Intervenciones realizadas</strong></ion-card-subtitle>      
