@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class IntervencionComponent implements OnInit {
   descripcion: string = "";
   imgBase64: string = "";
   constructor(private cameraService: CameraService,
-    private arbolesLifeService: ArbolesLifeTreeService) { }
+    private arbolesService: ArbolesService) { }
 
   ngOnInit() { }
 
@@ -45,7 +45,7 @@ export class IntervencionComponent implements OnInit {
         imagenData: this.arbol.imagenURL,
         estado: "INTERVENIDO"
       }
-      this.arbolesLifeService.addIntervencion(arbol, this.arbol._id).subscribe(data => {
+      this.arbolesService.addIntervencion(arbol, this.arbol._id).subscribe(data => {
         console.log(data)
       }, error => console.log(error))
       console.log(arbol)

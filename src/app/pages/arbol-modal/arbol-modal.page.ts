@@ -4,9 +4,9 @@ import { ModalController } from '@ionic/angular';
 import { IntervencionModalPage } from '../intervencion-modal/intervencion-modal.page';
 import { Intervencion } from 'src/app/interfaces/intervencion.interface';
 import { AlertController } from '@ionic/angular';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 import { User } from 'src/app/interfaces/user.interface';
-import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
+import { UserLifeTreeService,user} from 'src/app/services/users/user-life-tree.service';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 
 @Component({
   selector: 'app-arbol-modal',
@@ -17,9 +17,10 @@ export class ArbolModalPage implements OnInit {
   private user: User
   @Input() arbol: Arbol;
   constructor(private modalCtrl: ModalController, public alertController: AlertController,
-    private arbolLifeTreeService: ArbolesLifeTreeService , 
+    private arbolesService: ArbolesService , 
     private userlifeTreeService: UserLifeTreeService) { 
-      this.user = this.userlifeTreeService.user
+      this.user = this.userlifeTreeService.getUsuario()
+      console.log(user)
   }
 
   ngOnInit() {
@@ -58,7 +59,7 @@ export class ArbolModalPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {  
-            this.arbolLifeTreeService.eliminarArbol(this.arbol._id).subscribe((result) => {
+            this.arbolesService.eliminarArbol(this.arbol._id).subscribe((result) => {
               if(result){
                 console.log(result); //Aqui se maneja si hace click en confirmar
                 this.dismiss()

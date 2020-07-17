@@ -9,27 +9,23 @@ import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.servi
   styleUrls: ['./login.page.scss'],
 })
 
-
-
-
 export class LoginPage implements OnInit {
   usuario: string;
   contrasena: string;
   result: boolean;
 
-  constructor(private userServices: UsersService, private router:Router, 
-    private userLifeTreeService:UserLifeTreeService) {
-    
-   }
+  constructor(private userServices: UsersService, private router: Router,
+    private userLifeTreeService: UserLifeTreeService) {
 
-  public validacion():void{
-    this.userLifeTreeService.validadUsuario({nickname:this.usuario,password:this.contrasena})
+  }
 
-    if(this.userLifeTreeService.user.tipo === 'ADMIN'){
+  public validacion(): void {
+    console.log(this.userLifeTreeService.validarUsuario({ nickname: this.usuario, password: this.contrasena }))
+    if (this.userLifeTreeService.validarUsuario({ nickname: this.usuario, password: this.contrasena })) {
       //redirectTo:"/inicio-admin";
       this.router.navigate(['/inicio-admin'])
-      
-    }else{
+
+    } else {
       console.log("Usuario o contraseña errados")
     }
 

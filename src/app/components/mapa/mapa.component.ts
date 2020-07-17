@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 declare var google;
 @Component({
@@ -17,7 +16,6 @@ export class MapaComponent implements OnInit {
   arboles: Arbol[] = [];
   constructor(
     private arbolesService: ArbolesService,
-    private arbolesLifeTreeService: ArbolesLifeTreeService,
   ) {
     //this.getA();
   }
@@ -25,7 +23,7 @@ export class MapaComponent implements OnInit {
   ngOnInit(): void {
     this.loadMap();
     //this.arboles = arbolesService.getArboles();
-    this.arbolesLifeTreeService.obtenerArboles().subscribe(data => {
+    this.arbolesService.obtenerArboles().subscribe(data => {
       this.arboles = data
       //marcadores
       this.createMarkers();
@@ -97,13 +95,6 @@ export class MapaComponent implements OnInit {
     for (const marker of this.markers) {
       marker.setMap(this.map);
     }
-  }
-
-  getA() {
-    this.arbolesService.getA().subscribe(
-      res => console.log(res),
-      err => console.log(err)
-    );
   }
 
 }

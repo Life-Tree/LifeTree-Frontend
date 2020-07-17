@@ -3,7 +3,6 @@ import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ModalController } from '@ionic/angular';
 import { ArbolModalPage } from 'src/app/pages/arbol-modal/arbol-modal.page';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 //import { ArbolModalPage } from 'src/app/pages/arbol-modal/arbol-modal.page';
 
 @Component({
@@ -19,7 +18,6 @@ export class ListaArbolesComponent implements OnInit {
   constructor(
     private arbolesService: ArbolesService,
     private modalCtrl: ModalController,
-    private arbolesLifeTreeService: ArbolesLifeTreeService
   ) { }
 
   loadData(event) {
@@ -54,7 +52,7 @@ export class ListaArbolesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.arbolesLifeTreeService.obtenerArboles().subscribe(data => {
+    this.arbolesService.obtenerArboles().subscribe(data => {
       let todosLosArboles = data;
       if (this.filtro == "PENDING_INTERVENCION") {
         for (const arbol of todosLosArboles) {

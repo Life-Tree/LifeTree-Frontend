@@ -3,21 +3,28 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/interfaces/user.interface';
 import { environment } from 'src/environments/environment';
 
+export let user: User = { nickname: "User", password: "NA", tipo: "CIUDADANO" };
 @Injectable({
   providedIn: 'root'
 })
 export class UserLifeTreeService {
-  user:User
-  constructor(private httpClient: HttpClient) { 
-    this.user = {nickname : "" , password : "NA" , tipo : 'CIUDADANO'}
-
+  user: User
+  constructor(private httpClient: HttpClient) {
   }
 
-  validadUsuario(user:User){
-    this.httpClient.post<User>(`${environment.lifeTreeUrl}users/valid`,user).subscribe(data => {
-      if(data){
-        this.user = {nickname:data.nickname, password:data.password,tipo : "ADMIN"}
+  validarUsuario(user: User): boolean {
+    this.httpClient.post<User>(`${environment.lifeTreeUrl}users/valid`, user).subscribe(data => {
+      if(data != null){
+        this.user = data
       }
     })
+    if(this.user != undefined){
+      user = { nickname: this.user.nickname, password: this.user.password, tipo: 'ADMIN' }
+    }
+    return this.user != undefined 
+  }
+
+  getUsuario(): User {
+    return user;
   }
 }

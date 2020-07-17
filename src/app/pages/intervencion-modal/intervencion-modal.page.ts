@@ -7,7 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 
 @Component({
   selector: 'app-intervencion-modal',
@@ -21,10 +21,10 @@ export class IntervencionModalPage implements OnInit {
   @Input() intervencion: Intervencion;
   constructor(private modalCtrl: ModalController,
     private userService: UsersService,
+    private arbolesService: ArbolesService,
     public alertController: AlertController,
-    private UserLifeTreeService: UserLifeTreeService,
-    private arbolesLifeTreeService: ArbolesLifeTreeService) {
-    this.user = this.UserLifeTreeService.user;
+    private UserLifeTreeService: UserLifeTreeService) {
+    this.user = this.UserLifeTreeService.getUsuario()
   }
 
   ngOnInit() {
@@ -61,7 +61,7 @@ export class IntervencionModalPage implements OnInit {
               }
             }    
             this.arbol.estado = "ENFERMO"
-            this.arbolesLifeTreeService.cambiarEstadoIntervencion(this.arbolActualizar(), this.arbol._id)
+            this.arbolesService.cambiarEstadoIntervencion(this.arbolActualizar(), this.arbol._id)
               .subscribe(data => {
                 console.log(data)
               },error=>console.log(error))
@@ -91,7 +91,7 @@ export class IntervencionModalPage implements OnInit {
           handler: () => {
             this.intervencion.estado = "APROBADA"
             this.arbol.estado = "INTERVENIDO"
-            this.arbolesLifeTreeService.cambiarEstadoIntervencion(this.arbolActualizar(),this.arbol._id)
+            this.arbolesService.cambiarEstadoIntervencion(this.arbolActualizar(),this.arbol._id)
             .subscribe(data=>{
              console.log(data)
             },error=>console.log(error))

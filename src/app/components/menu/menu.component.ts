@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user.interface';
-import { UsersService, user } from 'src/app/services/users/users.service';
+import { UserLifeTreeService,user} from 'src/app/services/users/user-life-tree.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 export interface menuItem{
   name: string;
@@ -14,13 +14,10 @@ export interface menuItem{
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
-  
   reportarArbol: menuItem; reportarIntervencion: menuItem; consultarIndicadores: menuItem; 
   consultarInstructivos: menuItem; listaIntervenciones: menuItem;
   //itemsMenu: menuItem[] = [];
-  constructor(private userService: UsersService) {
-    //this.user = this.userService.getUser();
+  constructor(private userService: UsersService,private userLifeTreeService:UserLifeTreeService) {
     //console.log(this.user);    
   }
 

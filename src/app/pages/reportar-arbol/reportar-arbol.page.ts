@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
-import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
-import { error } from '@angular/compiler/src/util';
+import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -19,7 +18,7 @@ export class ReportarArbolPage implements OnInit {
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
-    private arbolesLifeService: ArbolesLifeTreeService
+    private arbolesService: ArbolesService
   ) { }
 
   ngOnInit() {
@@ -46,7 +45,7 @@ export class ReportarArbolPage implements OnInit {
         descripcion: this.descripcion,
         imagenData: this.imgBase64
       }
-      this.arbolesLifeService.registrarArbol(arbol).subscribe(data => {
+      this.arbolesService.registrarArbol(arbol).subscribe(data => {
         console.log(data)
       }, error=> console.log(error))
       console.log(arbol)
