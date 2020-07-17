@@ -12,19 +12,24 @@ export class UserLifeTreeService {
   constructor(private httpClient: HttpClient) {
   }
 
-  validarUsuario(user: User): boolean {
-    this.httpClient.post<User>(`${environment.lifeTreeUrl}users/valid`, user).subscribe(data => {
+  validarUsuario(user2: User): boolean {
+    this.httpClient.post<User>(`${environment.lifeTreeUrl}users/valid`, user2).subscribe(data => {
       if(data != null){
         this.user = data
       }
     })
     if(this.user != undefined){
       user = { nickname: this.user.nickname, password: this.user.password, tipo: 'ADMIN' }
+      console.log(user)
     }
     return this.user != undefined 
   }
 
   getUsuario(): User {
     return user;
+  }
+
+  cambiarUsuario(){
+    user = { nickname: "User", password: "NA", tipo: "CIUDADANO" };
   }
 }
