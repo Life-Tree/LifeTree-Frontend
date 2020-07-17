@@ -22,7 +22,7 @@ export class IntervencionComponent implements OnInit {
     this.imgBase64 = await this.cameraService.takePicture()
   }
 
-  registrarArbol() {
+  agregarIntervencion() {
     //Metodo Post
     if (this.descripcion !== "" && this.imgBase64 !== "") {
       let intervenciones: any = []
