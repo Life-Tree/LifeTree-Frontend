@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
+import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 declare var google;
 @Component({
@@ -14,14 +15,25 @@ export class MapaComponent implements OnInit {
   heatmap = null;
   markers: any[] = [];
   arboles: Arbol[] = [];
-
-  constructor(private arbolesService: ArbolesService) { 
-    this.arboles = arbolesService.getArboles();
-    this.getA();
+  constructor(
+    private arbolesService: ArbolesService,
+    private arbolesLifeTreeService: ArbolesLifeTreeService,
+  ) {
+    //this.getA();
   }
 
   ngOnInit(): void {
     this.loadMap();
+    //this.arboles = arbolesService.getArboles();
+    this.arbolesLifeTreeService.obtenerArboles().subscribe(data => {
+      this.arboles = data
+      //marcadores
+      this.createMarkers();
+      //Mapa de calor
+      this.heatmap = new google.maps.visualization.HeatmapLayer({
+        data: this.getPoints(),
+      });
+    })
   }
 
   loadMap() {
@@ -40,14 +52,6 @@ export class MapaComponent implements OnInit {
 
     });
 
-    //Mapa de calor
-    this.heatmap = new google.maps.visualization.HeatmapLayer({
-      data: this.getPoints(),
-    });
-
-    //marcadores
-    this.createMarkers();
-
   }
 
   toggleHeatmap() {
@@ -63,7 +67,7 @@ export class MapaComponent implements OnInit {
     }
   }
 
-  getPoints(): any[]{
+  getPoints(): any[] {
     let points: any[] = [];
     for (const arbol of this.arboles) {
       points.push(new google.maps.LatLng(arbol.ubicacion.latitud, arbol.ubicacion.longitud));
@@ -71,9 +75,10 @@ export class MapaComponent implements OnInit {
     return points;
   }
 
-  createMarkers(){
+  createMarkers() {
+    console.log(this.arboles)
     for (const arbol of this.arboles) {
-      let pos = {lat: arbol.ubicacion.latitud, lng: arbol.ubicacion.longitud};
+      let pos = { lat: arbol.ubicacion.latitud, lng: arbol.ubicacion.longitud };
       this.markers.push(new google.maps.Marker({
         position: pos,
         title: 'arbol',
@@ -82,19 +87,19 @@ export class MapaComponent implements OnInit {
     }
   }
 
-  desactivarMarkers(): void{
+  desactivarMarkers(): void {
     for (const marker of this.markers) {
       marker.setMap(null);
     }
   }
 
-  activarMarkers(): void{
+  activarMarkers(): void {
     for (const marker of this.markers) {
       marker.setMap(this.map);
     }
   }
 
-  getA(){
+  getA() {
     this.arbolesService.getA().subscribe(
       res => console.log(res),
       err => console.log(err)

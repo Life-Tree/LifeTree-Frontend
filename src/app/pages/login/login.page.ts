@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { User } from 'src/app/interfaces/user.interface';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
-import { RouterLink, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +17,15 @@ export class LoginPage implements OnInit {
   contrasena: string;
   result: boolean;
 
-  constructor(private userServices: UsersService, private router:Router) {
+  constructor(private userServices: UsersService, private router:Router, 
+    private userLifeTreeService:UserLifeTreeService) {
     
    }
 
   public validacion():void{
-    this.result= this.userServices.validarUsuario(this.usuario,this.contrasena);
-    if(this.result){
+    this.userLifeTreeService.validadUsuario({nickname:this.usuario,password:this.contrasena})
+
+    if(this.userLifeTreeService.user.tipo === 'ADMIN'){
       //redirectTo:"/inicio-admin";
       this.router.navigate(['/inicio-admin'])
       

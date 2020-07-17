@@ -1,5 +1,5 @@
 export interface Intervencion{
     descripcion: string;
-    imgURL: string;
-    estado: "APROBADA"|"PENDIENTE";
+    imagenURL: string;
+    estado: "APROBADA"|"PENDIENTE"|"RECHAZADA";
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PedagogiaService } from 'src/app/services/pedagogia/pedagogia-life-tree.service';
 
 @Component({
   selector: 'app-intructivo-intervenciones',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./intructivo-intervenciones.page.scss'],
 })
 export class IntructivoIntervencionesPage implements OnInit {
-
-  constructor() { }
+  descripcion: string = '';
+  constructor(private pedagogiaService: PedagogiaService) { }
 
   ngOnInit() {
+    this.pedagogiaService.obtenerPedagogia().subscribe(data => {
+      this.descripcion = data[0].descripcion;
+    })
   }
 
 }

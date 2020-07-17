@@ -14,7 +14,7 @@
       <img src="{{arbol.imagenURL}}" alt="" srcset="">
       <ion-card-title>{{arbol.ubicacion.barrio}}</ion-card-title>      
     </ion-card-header>
-    <ion-card-content>{{arbol.description}}</ion-card-content>
+    <ion-card-content>{{arbol.descripcion}}</ion-card-content>
     <ion-card-content>
       <div *ngIf="user.tipo == 'ADMIN' ">
         <ion-button color="danger" fill="clear" (click)="presentAlertConfirm()">Eliminar</ion-button>
@@ -29,7 +29,7 @@
             <p>{{intervencion.descripcion}}</p>
           </ion-label>
           <ion-label slot="end" text-right>
-            <img src="{{intervencion.imgURL}}" alt="">
+            <img src="{{intervencion.imagenURL}}" alt="">
           </ion-label>
         </ion-item>
       </div>

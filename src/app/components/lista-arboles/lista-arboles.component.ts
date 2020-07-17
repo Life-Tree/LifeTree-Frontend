@@ -3,6 +3,7 @@ import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ModalController } from '@ionic/angular';
 import { ArbolModalPage } from 'src/app/pages/arbol-modal/arbol-modal.page';
+import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
 //import { ArbolModalPage } from 'src/app/pages/arbol-modal/arbol-modal.page';
 
 @Component({
@@ -15,17 +16,19 @@ export class ListaArbolesComponent implements OnInit {
   @Input() filtro: "ALL" | "PENDING_INTERVENCION";
   arboles: Arbol[] = [];
   arbolesLoaded: Arbol[] = [];
-  constructor(private arbolesService: ArbolesService, private modalCtrl: ModalController) {
-    
-  }
+  constructor(
+    private arbolesService: ArbolesService,
+    private modalCtrl: ModalController,
+    private arbolesLifeTreeService: ArbolesLifeTreeService
+  ) { }
 
   loadData(event) {
     setTimeout(() => {
       console.log('Done');
-      for(let i=this.arbolesLoaded.length; i<this.arbolesLoaded.length+25; i++){
-        if(i < this.arboles.length){
+      for (let i = this.arbolesLoaded.length; i < this.arbolesLoaded.length + 25; i++) {
+        if (i < this.arboles.length) {
           this.arbolesLoaded.push(this.arboles[i]);
-        }        
+        }
       }
       event.target.complete();
 
@@ -37,7 +40,7 @@ export class ListaArbolesComponent implements OnInit {
     }, 1000);
   }
 
-  async abrirModal(arbol: Arbol): Promise<void>{
+  async abrirModal(arbol: Arbol): Promise<void> {
     const modal = await this.modalCtrl.create(
       {
         component: ArbolModalPage,
@@ -51,26 +54,28 @@ export class ListaArbolesComponent implements OnInit {
   }
 
   ngOnInit() {
-    let todosLosArboles =  this.arbolesService.getArboles();
-    console.log(this.filtro);
-    if(this.filtro == "PENDING_INTERVENCION"){
-      for (const arbol of todosLosArboles) {
-        for (const intervencion of arbol.intervenciones) {
-          if(intervencion.estado == "PENDIENTE"){
-            console.log("ee");
-            this.arboles.push(arbol); break;
+    this.arbolesLifeTreeService.obtenerArboles().subscribe(data => {
+      let todosLosArboles = data;
+      if (this.filtro == "PENDING_INTERVENCION") {
+        for (const arbol of todosLosArboles) {
+          console.log(arbol)
+          for (const intervencion of arbol.intervenciones) {
+            if (intervencion.estado == "PENDIENTE") {
+              console.log("ee");
+              this.arboles.push(arbol); break;
+            }
           }
         }
+      } else {
+        this.arboles = todosLosArboles;
       }
-    }else{
-      this.arboles = todosLosArboles;
-    }
 
-    for(let i=0; i<25; i++){
-      if(i < this.arboles.length){
-        this.arbolesLoaded.push(this.arboles[i]);
-      }      
-    }
+      for (let i = 0; i < 25; i++) {
+        if (i < this.arboles.length) {
+          this.arbolesLoaded.push(this.arboles[i]);
+        }
+      }
+    })
   }
 
 }

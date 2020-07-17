@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  lifeTreeUrl: "https://lifetreev1.herokuapp.com/"
 };

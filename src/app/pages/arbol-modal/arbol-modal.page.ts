@@ -3,9 +3,10 @@ import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ModalController } from '@ionic/angular';
 import { IntervencionModalPage } from '../intervencion-modal/intervencion-modal.page';
 import { Intervencion } from 'src/app/interfaces/intervencion.interface';
-import { User } from 'src/app/interfaces/user.interface';
-import { UsersService } from 'src/app/services/users/users.service';
 import { AlertController } from '@ionic/angular';
+import { ArbolesLifeTreeService } from 'src/app/services/arboles/arboles-life-tree.service';
+import { User } from 'src/app/interfaces/user.interface';
+import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
 
 @Component({
   selector: 'app-arbol-modal',
@@ -13,11 +14,12 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./arbol-modal.page.scss'],
 })
 export class ArbolModalPage implements OnInit {
-
-  private user: User;
+  private user: User
   @Input() arbol: Arbol;
-  constructor(private modalCtrl: ModalController, private userService: UsersService, public alertController: AlertController) { 
-    this.user = this.userService.getUser();
+  constructor(private modalCtrl: ModalController, public alertController: AlertController,
+    private arbolLifeTreeService: ArbolesLifeTreeService , 
+    private userlifeTreeService: UserLifeTreeService) { 
+      this.user = this.userlifeTreeService.user
   }
 
   ngOnInit() {
@@ -32,6 +34,7 @@ export class ArbolModalPage implements OnInit {
       {
         component: IntervencionModalPage,
         componentProps: {
+          'arbol':this.arbol,
           'intervencion': inter
         }
       }
@@ -49,13 +52,18 @@ export class ArbolModalPage implements OnInit {
           text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah'); //Aqui se maneja si hace click en rechazar
+          handler: () => {
+            console.log('Confirm Cancel: Cancelado'); //Aqui se maneja si hace click en rechazar
           }
         }, {
           text: 'Confirmar',
-          handler: () => {   
-            console.log('Confirm Okay'); //Aqui se maneja si hace click en confirmar
+          handler: () => {  
+            this.arbolLifeTreeService.eliminarArbol(this.arbol._id).subscribe((result) => {
+              if(result){
+                console.log(result); //Aqui se maneja si hace click en confirmar
+                this.dismiss()
+              }
+            })
           }
         }
       ]

@@ -9,16 +9,17 @@ import { ListaArbolesComponent } from './lista-arboles/lista-arboles.component';
 import { ArbolesService } from '../services/arboles/arboles.service';
 import { ArbolModalPageModule } from '../pages/arbol-modal/arbol-modal.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { IntervencionComponent } from './intervencion/intervencion.component';
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent],
+  declarations: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent,IntervencionComponent],
   imports: [
     CommonModule, IonicModule, RouterModule, HttpClientModule
   ],
   providers: [ArbolesService, HttpClient],
-  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent]
+  exports: [HeaderComponent, MenuComponent, MapaComponent, ListaArbolesComponent,IntervencionComponent]
 })
 export class ComponentsModule { }
