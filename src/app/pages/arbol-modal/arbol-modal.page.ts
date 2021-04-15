@@ -21,7 +21,6 @@ export class ArbolModalPage implements OnInit {
     private arbolesService: ArbolesService , 
     private userlifeTreeService: UserLifeTreeService) { 
       this.user = this.userlifeTreeService.getUsuario()
-      console.log(user)
   }
 
   ngOnInit() {

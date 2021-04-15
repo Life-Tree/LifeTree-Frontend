@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserLifeTreeService, user } from 'src/app/services/users/user-life-tree.service';
 
 @Component({
   selector: 'app-bienvenido',
@@ -6,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./bienvenido.page.scss'],
 })
 export class BienvenidoPage implements OnInit {
-
-  constructor() { }
+  constructor( private userService : UserLifeTreeService) { }
 
   ngOnInit() {
+   this.userService.cambiarUsuario()
+   console.log(user)
   }
-
 }
