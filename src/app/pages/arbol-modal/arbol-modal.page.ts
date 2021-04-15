@@ -7,6 +7,7 @@ import { AlertController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user.interface';
 import { UserLifeTreeService,user} from 'src/app/services/users/user-life-tree.service';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
+import { ReportarIntervencionPage } from '../reportar-intervencion/reportar-intervencion.page';
 
 @Component({
   selector: 'app-arbol-modal',
@@ -37,6 +38,18 @@ export class ArbolModalPage implements OnInit {
         componentProps: {
           'arbol':this.arbol,
           'intervencion': inter
+        }
+      }
+    );
+    return await modal.present();
+  }
+
+  async abrirModalReportarIntervencion(): Promise<void>{
+    const modal = await this.modalCtrl.create(
+      {
+        component: ReportarIntervencionPage,
+        componentProps: {
+          'arbol':this.arbol
         }
       }
     );
