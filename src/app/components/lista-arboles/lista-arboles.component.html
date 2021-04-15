@@ -14,7 +14,7 @@
   <ion-item  *ngFor="let arbol of arbolesLoaded" (click)="abrirModal(arbol)" >
     <ion-label slot="start">
       <h4>{{arbol.ubicacion.barrio}}</h4>
-      <p>{{arbol.description}}</p>
+      <p>{{arbol.descripcion}}</p>
     </ion-label>
     <ion-label slot="end" text-right>
       <img src="{{arbol.imagenURL}}" alt="">
