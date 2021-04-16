@@ -31,6 +31,8 @@ export class ReportarArbolPage implements OnInit {
 
   async getfotoArbol() {
     this.imgBase64 = await this.cameraService.takePicture()
+    let pre:string = "data:image/png;base64,";
+    this.imgBase64 = pre+this.imgBase64;
   }
 
   registrarArbol() {
@@ -45,6 +47,7 @@ export class ReportarArbolPage implements OnInit {
         descripcion: this.descripcion,
         imagenData: this.imgBase64
       }
+      console.log(arbol);
       this.arbolesService.registrarArbol(arbol).subscribe(data => {
         console.log(data)
       }, error=> console.log(error))
