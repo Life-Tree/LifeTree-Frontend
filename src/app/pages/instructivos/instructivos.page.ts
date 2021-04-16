@@ -26,7 +26,14 @@ export class InstructivosPage implements OnInit {
   }
 
   leerPDF(){
-    this.document.viewDocument('../../../assets/instructivo-Identificar.pdf', 'application/pdf', options)
+    //let baseUrl:string = location.href.replace("/index.html", "");
+    this.document.viewDocument(this.getPath('instructivo-Identificar.pdf'), 'application/pdf', options)
+    //this.document.viewDocument('../../../assets/instructivo-Identificar.pdf', 'application/pdf', options)
+    
+  }
+
+  getPath(fileName: string){
+    return `file:///android_asset/www/assets/${fileName}`;
   }
 
 }
