@@ -3,6 +3,8 @@ import { GeolocationService } from 'src/app/services/geolocation/geolocation.ser
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -18,7 +20,9 @@ export class ReportarArbolPage implements OnInit {
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
-    private arbolesService: ArbolesService
+    private arbolesService: ArbolesService,
+    public toastController: ToastController,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -55,8 +59,19 @@ export class ReportarArbolPage implements OnInit {
       this.descripcion = "";
       this.imgBase64 = "";
       this.barrio = "";
+      this.presentToast("¡Árbol reportado exitosamente!");
+      this.router.navigate(['./indicadores'])
     } else {
+      this.presentToast("¡Llene todos los campos, por favor!");
       console.log('Campos vacios')
     }
+  }
+
+  async presentToast(mensaje: string) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: 2000
+    });
+    toast.present();
   }
 }

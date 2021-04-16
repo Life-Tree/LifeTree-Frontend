@@ -15,7 +15,8 @@ export interface menuItem{
 })
 export class MenuComponent implements OnInit {
   reportarArbol: menuItem; reportarIntervencion: menuItem; consultarIndicadores: menuItem; 
-  consultarInstructivos: menuItem; listaIntervenciones: menuItem;
+  consultarInstructivoIdentificacion: menuItem; listaIntervenciones: menuItem; 
+  consultarInstructivoIntervencion: menuItem;
   //itemsMenu: menuItem[] = [];
   constructor(private userService: UsersService,private userLifeTreeService:UserLifeTreeService) {
     //console.log(this.user);    
@@ -43,10 +44,16 @@ export class MenuComponent implements OnInit {
       redirectTo: "/indicadores"
     };
     
-    this.consultarInstructivos ={
-      name: "Consultar instructivos",
+    this.consultarInstructivoIdentificacion ={
+      name: "Aprende a identificarlo",
       icon:"../../../assets/cuaderno.svg",
       redirectTo: "/instructivos"
+    };
+
+    this.consultarInstructivoIntervencion ={
+      name: "Aprende sobre intervenciones",
+      icon:"../../../assets/ambiente.svg",
+      redirectTo: "/intructivo-intervenciones"
     };
 
     this.listaIntervenciones= {

@@ -2,18 +2,18 @@
 
 <ion-content padding>
   <ion-toolbar class="top" style="text-align: center;">
-    <ion-title tyle="text-align: center;">INSTRUCTIVOS</ion-title>
-    <ion-button
+    <ion-title tyle="text-align: center;">Como identificar un árbol enfermo</ion-title>
+    <!--ion-button
       routerLink="/intructivo-intervenciones"
       color="success"
       fill="outline"
     >
       Realizar intervención
-    </ion-button>
+    </ion-button-->
   </ion-toolbar>
-  <ion-toolbar class="ion-padding-top top" style="text-align: center;">
+  <!--ion-toolbar class="ion-padding-top top" style="text-align: center;">
     <ion-text color="medium">Identificar arbol enfermo</ion-text>
-  </ion-toolbar>
+  </ion-toolbar-->
     <ion-card class="ion-padding-top top" style="text-align: center;">
       <ion-card-header>
         <ion-card-title>Aprende a identificar un arbol enfermo</ion-card-title>
@@ -22,7 +22,7 @@
         >
       </ion-card-header>
       <ion-card-content>
-        <ion-button href="http://www.fao.org/3/a-y5041s.pdf" color="success">leer</ion-button>
+        <ion-button  color="success" (click)="leerPDF()">leer</ion-button>
       </ion-card-content>
     </ion-card>
 </ion-content>

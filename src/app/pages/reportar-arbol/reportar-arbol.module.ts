@@ -11,6 +11,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
+import { ToastController } from '@ionic/angular';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { ArbolesService } from 'src/app/services/arboles/arboles.service';
     ReportarArbolPageRoutingModule, 
     ComponentsModule
   ],
-  providers: [CameraService, GeolocationService, ArbolesService],
+  providers: [CameraService, GeolocationService, ArbolesService, ToastController],
   declarations: [ReportarArbolPage]
 })
 export class ReportarArbolPageModule {}
