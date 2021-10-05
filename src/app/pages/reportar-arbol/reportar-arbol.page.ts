@@ -5,6 +5,8 @@ import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Frame } from 'src/app/interfaces/imageset';
+import { Species } from 'src/app/interfaces/especie';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -17,6 +19,8 @@ export class ReportarArbolPage implements OnInit {
   geolocation: { latitude: number, longitude: number } = null;
   imgBase64: string = "";
   barrio: string = "";
+  species: Species[] = [];
+  defaultSpecies: Species;
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
@@ -27,6 +31,15 @@ export class ReportarArbolPage implements OnInit {
 
   ngOnInit() {
     this.getGeolocation()
+    this.arbolesService.getSpecies().subscribe( (data) => {
+      this.species = data;
+      for (const sp of data){
+        if (sp.name == 'unknown'){
+          this.defaultSpecies = sp;
+          break;
+        }
+      }
+    });
   }
 
   async getGeolocation() {
@@ -49,7 +62,8 @@ export class ReportarArbolPage implements OnInit {
           barrio: this.barrio
         },
         descripcion: this.descripcion,
-        imagenData: this.imgBase64
+        imageSet: {images: [{frame: Frame.TRONCO, base64: this.imgBase64, url: ''}]},
+        species: this.defaultSpecies
       }
       console.log(arbol);
       this.arbolesService.registrarArbol(arbol).subscribe(data => {

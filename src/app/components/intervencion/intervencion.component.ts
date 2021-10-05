@@ -28,7 +28,7 @@ export class IntervencionComponent implements OnInit {
       let intervenciones: any = []
       for (let i = 0; i < this.arbol.intervenciones.length; i++) {
         intervenciones.push({
-          imagenData: this.arbol.intervenciones[i].imagenURL,
+          imageSet: this.arbol.intervenciones[i].imageSet,
           descripcion: this.arbol.intervenciones[i].descripcion,
           estado: this.arbol.intervenciones[i].estado
         })
@@ -42,8 +42,9 @@ export class IntervencionComponent implements OnInit {
         ubicacion: this.arbol.ubicacion,
         descripcion: this.arbol.descripcion,
         intervenciones,
-        imagenData: this.arbol.imagenURL,
-        estado: "INTERVENIDO"
+        imageSet: this.arbol.imageSet,
+        estado: "INTERVENIDO",
+        species: this.arbol.species
       }
       this.arbolesService.addIntervencion(arbol, this.arbol._id).subscribe(data => {
         console.log(data)

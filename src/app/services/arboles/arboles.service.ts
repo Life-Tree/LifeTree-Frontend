@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
+import { Species } from 'src/app/interfaces/especie';
 
 @Injectable({
   providedIn: 'root' 
@@ -14,6 +15,10 @@ export class ArbolesService {
 
   obtenerArboles(){
     return this.httpClient.get<Arbol[]>(`${environment.lifeTreeUrl}arboles`)
+  }
+
+  getSpecies(){
+    return this.httpClient.get<Species[]>(`${environment.lifeTreeUrl}arboles/species`)
   }
 
   registrarArbol(arbol:ArbolReportar){

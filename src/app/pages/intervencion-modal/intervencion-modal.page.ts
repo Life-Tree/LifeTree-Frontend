@@ -16,7 +16,7 @@ import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 })
 export class IntervencionModalPage implements OnInit {
 
-  private user: User;
+  public user: User;
   @Input() arbol: Arbol;
   @Input() intervencion: Intervencion;
   constructor(private modalCtrl: ModalController,
@@ -107,7 +107,7 @@ export class IntervencionModalPage implements OnInit {
     let intervenciones:any = []
     for (let i = 0; i < this.arbol.intervenciones.length; i++) {
       intervenciones.push({
-        imagenData: this.arbol.intervenciones[i].imagenURL,
+        imageSet: this.arbol.intervenciones[i].imageSet,
         descripcion: this.arbol.intervenciones[i].descripcion,
         estado: this.arbol.intervenciones[i].estado
       })
@@ -116,8 +116,9 @@ export class IntervencionModalPage implements OnInit {
       ubicacion: this.arbol.ubicacion,
       descripcion: this.arbol.descripcion,
       intervenciones,
-      imagenData: this.arbol.imagenURL,
-      estado: this.arbol.estado
+      imageSet: this.arbol.imageSet,
+      estado: this.arbol.estado,
+      species: this.arbol.species
     }
     return arbol;
   }
