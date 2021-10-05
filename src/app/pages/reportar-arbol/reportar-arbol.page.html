@@ -12,15 +12,66 @@
         <ion-label color="Primary" position="floating">En que barrio está?</ion-label>
         <ion-input [(ngModel)]="barrio"></ion-input>
       </ion-item>
-      <ion-item>
+     <!--  <ion-item>
         <ion-label color="Primary" position="floating">Describa el estado del arbol</ion-label>
+        
+      </ion-item> -->
+      <ion-item lines="none">
+        <ion-label color="Primary">Especie del arbol</ion-label>
+      </ion-item>
+      <ion-item>
+        <button  (click)="presentModal()" class="edit-button buttons-rigth edit-especie">
+          <div>
+            <p>Selecionar</p>
+          </div>
+        </button>
+      </ion-item>
+      <ion-item>
+        <ion-label color="Primary" position="floating">Descripción </ion-label>
         <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
-      </ion-item>      
+      </ion-item>
+      <!--Partes del arbol: Raiz, troco y ramas-->
+      <ion-item lines="none">
+        <ion-label color="Primary" >Añadir imagenes</ion-label>
+        <ion-label color="Primary">(0/4)</ion-label>
+      </ion-item>
+      <div class="position-button">
+        <button  (click)="getfotoArbol()" class="edit-button buttons-rigth">
+          <div>
+            <p><b>+</b></p>
+          </div>
+          <div >
+            <p class="edit-text">Hojas</p>
+          </div>
+        </button>
+        <button  (click)="getfotoArbol()" class="edit-button">
+          <div>
+            <p><b>+</b></p>
+          </div>
+          <div>
+            <p class="edit-text">Raiz</p>
+          </div>
+        </button>
+        <button  (click)="getfotoArbol()" class="edit-button buttons-rigth">
+          <div>
+            <p><b>+</b></p>
+          </div>
+          <div>
+            <p class="edit-text">Tronco</p>
+          </div>
+        </button>
+        <button  (click)="getfotoArbol()" class="edit-button">
+          <div>
+            <p><b>+</b></p>
+          </div>
+          <div>
+            <p class="edit-text">Ramas</p>
+          </div>
+        </button>
+
+      </div>
+      
       <!-- Icons -->
-      <ion-button color="success" style="text-align: center;" shape="round" (click)="getfotoArbol()">
-        <ion-icon slot="start" name="camera"></ion-icon>
-        Tomar foto al arbol
-      </ion-button>
     </ion-card-content>
   </ion-card>
   <ion-card>
