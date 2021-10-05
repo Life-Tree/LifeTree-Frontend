@@ -18,3 +18,42 @@ ion-fab-button{
     orientation: auto;
     position: relative;   
 }
+
+.edit-button {
+    width: 120px;
+    height: 120px;
+    background-color: rgb(199, 245, 205);
+    border-radius: 5px;
+    right: 30%;
+    display: inline-block;
+    /* box-shadow: 2px 2px 0 rgb(170, 169, 169) */;
+}
+
+.edit-text{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 15px;
+    color: rgb(130, 133, 145);
+}
+
+.buttons-rigth{
+    position: relative;
+    right: 10%;
+    top: 4%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+}
+
+.position-button{
+    position: relative;
+    right: 5%;
+    top: 10px;
+}
+
+.edit-especie{
+    width: 220px;
+    height: 40px;
+    background-color: rgb(184, 241, 189);
+    box-shadow: 1px 1px 0 rgb(96, 128, 103);
+    left: -9%;
+    border-radius: 2px;
+}

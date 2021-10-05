@@ -3,10 +3,11 @@ import { GeolocationService } from 'src/app/services/geolocation/geolocation.ser
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
-import { ToastController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Frame } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
+import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -26,7 +27,8 @@ export class ReportarArbolPage implements OnInit {
     private cameraService: CameraService,
     private arbolesService: ArbolesService,
     public toastController: ToastController,
-    private router: Router
+    private router: Router,
+    public modalController: ModalController
   ) { }
 
   ngOnInit() {
@@ -50,6 +52,13 @@ export class ReportarArbolPage implements OnInit {
     this.imgBase64 = await this.cameraService.takePicture()
     let pre:string = "data:image/png;base64,";
     this.imgBase64 = pre+this.imgBase64;
+  }
+
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: EspeciesModalPage
+    });
+    return await modal.present();
   }
 
   registrarArbol() {

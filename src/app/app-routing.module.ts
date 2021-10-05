@@ -66,7 +66,11 @@ const routes: Routes = [
   {
     path: 'intructivo-intervenciones',
     loadChildren: () => import('./pages/intructivo-intervenciones/intructivo-intervenciones.module').then( m => m.IntructivoIntervencionesPageModule)
+  },  {
+    path: 'especies-modal',
+    loadChildren: () => import('./pages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
   },
+
 ];
 
 @NgModule({
