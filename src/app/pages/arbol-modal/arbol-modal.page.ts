@@ -15,7 +15,7 @@ import { ReportarIntervencionPage } from '../reportar-intervencion/reportar-inte
   styleUrls: ['./arbol-modal.page.scss'],
 })
 export class ArbolModalPage implements OnInit {
-  private user: User
+  public  user: User
   @Input() arbol: Arbol;
   constructor(private modalCtrl: ModalController, public alertController: AlertController,
     private arbolesService: ArbolesService , 

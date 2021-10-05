@@ -1,5 +1,7 @@
+import { ImageSet } from "./imageset";
+
 export interface Intervencion{
     descripcion: string;
-    imagenURL: string;
+    imageSet: ImageSet;
     estado: "APROBADA"|"PENDIENTE"|"RECHAZADA";
 }
