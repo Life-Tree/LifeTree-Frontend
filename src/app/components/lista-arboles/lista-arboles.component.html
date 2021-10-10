@@ -1,29 +1,58 @@
+<ion-content>
 
-<ion-list>
-  <!--ion-item  *ngFor="let arbol of arboles" (click)="abrirModal(arbol)" >    
-    <ion-label slot="start">
-      <h4>{{arbol.ubicacion.barrio}}</h4>
-      <p>{{arbol.description}}</p>
-    </ion-label>
-    <ion-label slot="end" text-right>
-      <img src="{{arbol.imagenURL}}" alt="">
-    </ion-label>
-  </ion-item-->
+  <ion-list>  
+    <ion-card *ngFor="let arbol of arbolesLoaded" (click)="abrirModal(arbol)">
+      <ion-item>
+        <ion-label size="4">
+          <img src="{{arbol.imageSet.images[0].url}}" alt="" >        
+        </ion-label>
+        <ion-grid>
+            <ion-row>
+              <ion-col size="12" >
+                <h4><b>{{arbol.ubicacion.barrio}}</b> </h4>
+              </ion-col>
+            </ion-row>
+            <ion-row style="height: 40px;">
+              <ion-col size="2">
+                <div class="icon">
+                  <ion-icon name="document-text-outline" slot="start"></ion-icon>
+                </div>              
+              </ion-col>
+              <ion-col size="10">                  
+                <p>{{arbol.descripcion}}</p>
+              </ion-col>          
+            </ion-row>
+            <ion-row style="height: 40px;">
+              <ion-col size="2">
+                <div class="icon">
+                  <ion-icon src="../../../assets/speciesIcon.svg" slot="start"></ion-icon>
+                </div>              
+              </ion-col>
+              <ion-col size="10">
+                <p><i>{{arbol.species.name}}</i></p>
+              </ion-col>
+            </ion-row>      
+        </ion-grid>
+        
+        
+        <!-- <ion-label slot="start">
+          <h4>{{arbol.ubicacion.barrio}}</h4>
+          <p>{{arbol.descripcion}}</p>
+        </ion-label>        
+        <ion-label slot="end" text-right>
+          <img src="{{arbol.imageSet.images[0].url}}" alt="">
+        </ion-label> -->
+      </ion-item>    
+    </ion-card>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
   
-  <ion-item  *ngFor="let arbol of arbolesLoaded" (click)="abrirModal(arbol)" >
-    <ion-label slot="start">
-      <h4>{{arbol.ubicacion.barrio}}</h4>
-      <p>{{arbol.descripcion}}</p>
-    </ion-label>
-    <ion-label slot="end" text-right>
-      <img src="{{arbol.imageSet.images[0].url}}" alt="">
-    </ion-label>
-  </ion-item>
-</ion-list>
+</ion-content>
 
-<ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
-  <ion-infinite-scroll-content
-    loadingSpinner="bubbles"
-    loadingText="Cargando...">
-  </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+

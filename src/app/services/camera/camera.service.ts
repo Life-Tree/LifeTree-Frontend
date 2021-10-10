@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plugins, CameraResultType, CameraSource } from '@capacitor/core'
+import { Plugins, CameraResultType, CameraSource, CameraDirection } from '@capacitor/core'
 
 const {Camera} = Plugins
 
@@ -8,16 +8,21 @@ const {Camera} = Plugins
 })
 export class CameraService {
 
+  base64 = "";
   constructor() { }
 
   async takePicture() {
     const image = await Camera.getPhoto({
       quality: 50,
       allowEditing: false,
+      source: CameraSource.Camera,
       resultType: CameraResultType.Base64,
-      saveToGallery: false
-    });
-
-    return image.base64String
+      saveToGallery: false,
+    }); 
+    if (image.base64String != this.base64){
+      this.base64 = image.base64String;
+      return image.base64String
+    }
+    return "";
   }
 }

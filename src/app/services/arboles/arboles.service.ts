@@ -11,6 +11,8 @@ import { Species } from 'src/app/interfaces/especie';
 })
 export class ArbolesService {
 
+  public COMMON_SPECIES_GROUP_NAME = "Especies comunes";
+  commonSpeciesNames = ["Almendro","Mango","Coco","Flor morado","Diomate","Caucho", "Totumo"]
   constructor(private httpClient:HttpClient) { }
 
   obtenerArboles(){
@@ -35,5 +37,23 @@ export class ArbolesService {
 
   public addIntervencion(arbol:ArbolReportar,id:string){
     return this.httpClient.post<string>(`${environment.lifeTreeUrl}/arboles/intervencion/${id}`,arbol)
+  }
+
+  public orderSpeciesByFamily(species: Species[]): Map<string, Species[]> {
+    let speciesMap = new Map<string, Species[]>();
+    speciesMap.set(this.COMMON_SPECIES_GROUP_NAME, this.getCommonSpecies(species));
+    for(let sp of species){
+      let spsOfFamily: Species[] = [];
+      if(speciesMap.has(sp.family)){
+        spsOfFamily = speciesMap.get(sp.family);
+      }
+      spsOfFamily.push(sp);
+      speciesMap.set(sp.family,spsOfFamily);
+    }
+    return speciesMap;
+  }
+
+  public getCommonSpecies(species: Species[]): Species[] {
+    return species.filter((sp:Species) => this.commonSpeciesNames.includes(sp.name));
   }
 }

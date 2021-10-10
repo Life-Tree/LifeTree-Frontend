@@ -8,43 +8,44 @@
     <ion-card-content style="text-align: center;">
       <ion-card-title><strong>Registre un Arbol enfermo</strong> </ion-card-title>
       <!-- Textarea in an item with a floating label -->
-      <ion-item>
+      <ion-item button="true">
         <ion-label color="Primary" position="floating">En que barrio está?</ion-label>
         <ion-input [(ngModel)]="barrio"></ion-input>
       </ion-item>
      <!--  <ion-item>
         <ion-label color="Primary" position="floating">Describa el estado del arbol</ion-label>
         
-      </ion-item> -->
-      <ion-item lines="none">
-        <ion-label color="Primary">Especie del arbol</ion-label>
-      </ion-item>
-      <ion-item>
+      </ion-item> -->      
+      <!-- <ion-item>
         <button  (click)="presentModal()" class="edit-button buttons-rigth edit-especie">
           <div>
             <p>Selecionar</p>
           </div>
         </button>
-      </ion-item>
-      <ion-item>
+      </ion-item> -->
+      <ion-item  button="true">
         <ion-label color="Primary" position="floating">Descripción </ion-label>
         <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
+      </ion-item>
+      <ion-item mode="ios" (click)="presentModal()" button="true">
+        <ion-label color="Primary">Especie</ion-label>
+        <ion-text slot="end" ><b><i>Seleccione...</i></b></ion-text>        
       </ion-item>
       <!--Partes del arbol: Raiz, troco y ramas-->
       <ion-item lines="none">
         <ion-label color="Primary" >Añadir imagenes</ion-label>
-        <ion-label color="Primary">(0/4)</ion-label>
+        <ion-label color="Primary">({{this.imageSet.images.length}}/4)</ion-label>
       </ion-item>
       <div class="position-button">
-        <button  (click)="getfotoArbol()" class="edit-button buttons-rigth">
-          <div>
-            <p><b>+</b></p>
-          </div>
-          <div >
-            <p class="edit-text">Hojas</p>
-          </div>
+        <button  (click)="getfotoArbol('HOJAS')" class="edit-button buttons-rigth">
+            <div>
+              <p><b>+</b></p>
+            </div>
+            <div>
+              <p class="edit-text">Hojas</p>
+            </div>       
         </button>
-        <button  (click)="getfotoArbol()" class="edit-button">
+        <button  (click)="getfotoArbol('RAIZ')" class="edit-button">
           <div>
             <p><b>+</b></p>
           </div>
@@ -52,7 +53,7 @@
             <p class="edit-text">Raiz</p>
           </div>
         </button>
-        <button  (click)="getfotoArbol()" class="edit-button buttons-rigth">
+        <button  (click)="getfotoArbol('TRONCO')" class="edit-button buttons-rigth">
           <div>
             <p><b>+</b></p>
           </div>
@@ -60,13 +61,13 @@
             <p class="edit-text">Tronco</p>
           </div>
         </button>
-        <button  (click)="getfotoArbol()" class="edit-button">
+        <button  (click)="getfotoArbol('RAMAS')" class="edit-button">
           <div>
             <p><b>+</b></p>
           </div>
           <div>
             <p class="edit-text">Ramas</p>
-          </div>
+          </div> 
         </button>
 
       </div>
@@ -89,5 +90,12 @@
       <ion-icon name="arrow-forward-circle"></ion-icon> 
     </ion-fab-button>
   </ion-fab-->   
+
+  <!-- <div *ngFor="let map of speciesByFamily | keyvalue">
+    <h3>{{map.key}}</h3>
+    <div *ngFor="let sp of map.value">
+      <p>{{sp.name}} , {{sp.scientificName}}</p>
+    </div>
+  </div> -->
   
 </ion-content>

@@ -74,7 +74,6 @@ export class MapaComponent implements OnInit {
   }
 
   createMarkers() {
-    console.log(this.arboles)
     for (const arbol of this.arboles) {
       let pos = { lat: arbol.ubicacion.latitud, lng: arbol.ubicacion.longitud };
       this.markers.push(new google.maps.Marker({

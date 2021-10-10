@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  lifeTreeUrl: "http://localhost:4000/"
+  lifeTreeUrl: "https://lifetreev1.herokuapp.com/"
 };
 
 /*
