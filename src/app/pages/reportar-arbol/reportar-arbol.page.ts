@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Frame } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
 import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
+import { ThrowStmt } from '@angular/compiler';
+import { NumberFormatStyle } from '@angular/common';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -22,6 +24,8 @@ export class ReportarArbolPage implements OnInit {
   barrio: string = "";
   species: Species[] = [];
   defaultSpecies: Species;
+  specie: Species;
+
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
@@ -55,8 +59,16 @@ export class ReportarArbolPage implements OnInit {
   }
 
   async presentModal() {
+    let specie = this.species[0];
+
     const modal = await this.modalController.create({
-      component: EspeciesModalPage
+      component: EspeciesModalPage,
+      
+      componentProps: {
+        'nombre': specie.name,
+        'familia': 'Camaroncitos',
+        'descripción': 'Es una especie muy bonita'
+      }
     });
     return await modal.present();
   }
@@ -97,4 +109,5 @@ export class ReportarArbolPage implements OnInit {
     });
     toast.present();
   }
+  
 }
