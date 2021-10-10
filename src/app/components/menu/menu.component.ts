@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
     //this.itemsMenu = this.getItems();
 
     this.reportarArbol =  {
-      name: "Reportar arbol enfermo",
+      name: "Reportar árbol enfermo",
       icon: "../../../assets/arbol-muerto.svg",
       redirectTo: "/reportar-arbol"
     };

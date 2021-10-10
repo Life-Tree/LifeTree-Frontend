@@ -9,9 +9,19 @@
 </ion-header>
 
 <ion-content>
+  <ion-slides mode="ios" pager="true" [options]="slideOpts" >
+    <ion-slide *ngFor="let img of arbol.imageSet.images">
+      <ion-card>
+        <ion-card-header>
+          <img src="{{img.url}}" alt="" srcset=""> 
+          <h4><i>{{img.frame}}</i> </h4>
+        </ion-card-header>
+      </ion-card>          
+    </ion-slide>               
+  </ion-slides>
+
   <ion-card>
     <ion-card-header>
-      <img src="{{arbol.imageSet.images[0].url}}" alt="" srcset="">
       <ion-card-title>{{arbol.ubicacion.barrio}}</ion-card-title>      
     </ion-card-header>
     <ion-card-content>{{arbol.descripcion}}</ion-card-content>

@@ -16,6 +16,10 @@ import { ReportarIntervencionPage } from '../reportar-intervencion/reportar-inte
 })
 export class ArbolModalPage implements OnInit {
   public  user: User
+  slideOpts = {
+    initialSlide: 1,
+    speed: 400
+  };
   @Input() arbol: Arbol;
   constructor(private modalCtrl: ModalController, public alertController: AlertController,
     private arbolesService: ArbolesService , 

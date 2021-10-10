@@ -5,7 +5,7 @@ import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { Frame } from 'src/app/interfaces/imageset';
+import { Frame, ImageSet } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
 import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
 import { ThrowStmt } from '@angular/compiler';
@@ -20,12 +20,14 @@ export class ReportarArbolPage implements OnInit {
 
   descripcion: string = "";
   geolocation: { latitude: number, longitude: number } = null;
+  imageSet: ImageSet = {images:[]};
   imgBase64: string = "";
   barrio: string = "";
   species: Species[] = [];
   defaultSpecies: Species;
+  framesLoaded: Map<string,boolean>;
+  speciesByFamily: Map<string,Species[]>;
   specie: Species;
-
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
@@ -33,7 +35,10 @@ export class ReportarArbolPage implements OnInit {
     public toastController: ToastController,
     private router: Router,
     public modalController: ModalController
-  ) { }
+  ) { 
+    this.framesLoaded = new Map<string, boolean>();
+    this.speciesByFamily = new Map<string,Species[]>();
+  }
 
   ngOnInit() {
     this.getGeolocation()
@@ -44,18 +49,43 @@ export class ReportarArbolPage implements OnInit {
           this.defaultSpecies = sp;
           break;
         }
+        this.speciesByFamily = this.arbolesService.orderSpeciesByFamily(data);
       }
     });
+    this.framesLoaded.set(Frame.HOJAS.toString(),false);
+    this.framesLoaded.set(Frame.RAIZ.toString(),false);
+    this.framesLoaded.set(Frame.RAMAS.toString(),false);
+    this.framesLoaded.set(Frame.TRONCO.toString(),false);
   }
 
   async getGeolocation() {
     this.geolocation = await this.geolocationService.getCurrentPosition()
   }
 
-  async getfotoArbol() {
+  async getfotoArbol(frameString: string) {
     this.imgBase64 = await this.cameraService.takePicture()
-    let pre:string = "data:image/png;base64,";
-    this.imgBase64 = pre+this.imgBase64;
+    if (this.imgBase64 != ""){
+      let pre:string = "data:image/png;base64,";
+      this.imgBase64 = pre+this.imgBase64;
+      let frame = this.getFrameFromString(frameString);
+      this.framesLoaded.set(frameString,true);
+      this.imageSet.images.push({frame: frame, base64: this.imgBase64, url:''})
+    }
+  }
+
+  getFrameFromString(fs: string): Frame {
+    switch (fs) {
+      case 'TRONCO':
+        return Frame.TRONCO;
+      case 'RAMAS':
+        return Frame.RAMAS;
+      case 'HOJAS':
+        return Frame.HOJAS;
+      case 'RAIZ':
+          return Frame.RAIZ;
+      default:
+        return Frame.TRONCO;
+    }
   }
 
   async presentModal() {
@@ -83,7 +113,7 @@ export class ReportarArbolPage implements OnInit {
           barrio: this.barrio
         },
         descripcion: this.descripcion,
-        imageSet: {images: [{frame: Frame.TRONCO, base64: this.imgBase64, url: ''}]},
+        imageSet: this.imageSet,
         species: this.defaultSpecies
       }
       console.log(arbol);
@@ -94,6 +124,8 @@ export class ReportarArbolPage implements OnInit {
       this.descripcion = "";
       this.imgBase64 = "";
       this.barrio = "";
+      this.species = [];
+      this.imageSet = {images:[]}
       this.presentToast("¡Árbol reportado exitosamente!");
       this.router.navigate(['./indicadores'])
     } else {
