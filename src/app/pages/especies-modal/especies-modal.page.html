@@ -10,22 +10,24 @@
   [animated]="true"
   [placeholder] = "'Buscar especie'"
   (ionInput) = "filter($event)"></ion-searchbar>
+  <ion-button color="success" fill="clear" style="width: 100%;" (click)="salirDefault()">¿Desconozco la especie?</ion-button>
 </ion-header>
 
 <ion-content>
   <div clas="ion-page">
+    <br>   
     <ion-list>
       <div *ngFor= "let family of speciesByFamilyToShow | keyvalue: unsorted">
         <ion-item >
           <h6 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h6>
           <ion-title> <h1>{{family.key}}</h1></ion-title>
         </ion-item>
-        <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(family.value)">
+        <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
           <ion-card-header>
             <ion-card-title class="text-title-style">{{specie.name}}</ion-card-title>
            </ion-card-header>
           <ion-card-content class="text-content-style">
-            <i>{{specie.scientificName}} </i>
+            <i>{{specie.scientificName}}</i>
           </ion-card-content>
         </ion-card>
       </div>    

@@ -19,26 +19,29 @@ export class EspeciesModalPage implements OnInit {
    specie: Species;
    commonSpeciesName = COMMON_SPECIES_GROUP_NAME;
    query: string = "";
+   defaultSpecie:Species;
   constructor(public modalController: ModalController, public navParamsSpecies : NavParams, public arbolesService: ArbolesService) { }
+
 
   ngOnInit() {
     this.species = this.navParamsSpecies.get('species');
     this.speciesByFamily = this.navParamsSpecies.get('speciesByFamily');
     this.speciesByFamilyToShow = this.speciesByFamily;
+    this.defaultSpecie = this.navParamsSpecies.get('defaultSpecie');
   }
 
   async salirSinInfo() {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
-    this.modalController.dismiss({
-      'dismissed': true
-    });
+    this.modalController.dismiss(null);
   }
 
-  salirConinfo(specie: Species){
-    this.modalController.dismiss({
-      specie: this.specie
-    });
+  salirConinfo(specieinfo: Species){
+    this.modalController.dismiss(specieinfo);
+  }
+
+  salirDefault(){
+    this.modalController.dismiss(this.defaultSpecie);
   }
 
   filter(e: any){
@@ -54,5 +57,7 @@ export class EspeciesModalPage implements OnInit {
   unsorted(a: KeyValue<string,Species[]>, b: KeyValue<string,Species[]>):number{
       return 0;
   }
+
+
 
 }
