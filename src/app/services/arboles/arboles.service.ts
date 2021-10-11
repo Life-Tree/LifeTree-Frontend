@@ -6,12 +6,12 @@ import { environment } from 'src/environments/environment';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { Species } from 'src/app/interfaces/especie';
 
+
+export const COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
 @Injectable({
   providedIn: 'root' 
 })
 export class ArbolesService {
-
-  public COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
   commonSpeciesNames = ["Almendro","Mango","Coco","Flor morado","Diomate","Caucho", "Totumo"]
   constructor(private httpClient:HttpClient) { }
 
@@ -39,9 +39,11 @@ export class ArbolesService {
     return this.httpClient.post<string>(`${environment.lifeTreeUrl}/arboles/intervencion/${id}`,arbol)
   }
 
-  public orderSpeciesByFamily(species: Species[]): Map<string, Species[]> {
+  public orderSpeciesByFamily(species: Species[], withCommon = true): Map<string, Species[]> {
     let speciesMap = new Map<string, Species[]>();
-    speciesMap.set(this.COMMON_SPECIES_GROUP_NAME, this.getCommonSpecies(species));
+    if(withCommon){
+      speciesMap.set(COMMON_SPECIES_GROUP_NAME, this.getCommonSpecies(species));
+    }    
     for(let sp of species){
       if (sp.family != "unknown"){
         let spsOfFamily: Species[] = [];
@@ -53,6 +55,10 @@ export class ArbolesService {
       }      
     }
     return speciesMap;
+  }
+
+  filterSpeciesByQuery(species: Species[], query: string){
+    return species.filter((sp) => sp.name.toLowerCase().includes(query.toLowerCase()));
   }
 
   public getCommonSpecies(species: Species[]): Species[] {

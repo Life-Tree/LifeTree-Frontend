@@ -1,9 +1,3 @@
-<head>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-</head>
-
 <ion-header>
   <ion-toolbar>
     <ion-title><h3><i>Especies</i></h3></ion-title>
@@ -11,15 +5,19 @@
       <ion-button color="success" (click)="salirSinInfo()">Atras</ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
+  <ion-searchbar
+  [(ngModel)] = "query"
+  [animated]="true"
+  [placeholder] = "'Buscar especie'"
+  (ionInput) = "filter($event)"></ion-searchbar>
 </ion-header>
 
 <ion-content>
   <div clas="ion-page">
     <ion-list>
-      <div *ngFor= "let family of speciesByFamily | keyvalue: unsorted">
+      <div *ngFor= "let family of speciesByFamilyToShow | keyvalue: unsorted">
         <ion-item >
-          <h6 class="color-text">Familia:</h6>
+          <h6 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h6>
           <ion-title> <h1>{{family.key}}</h1></ion-title>
         </ion-item>
         <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(family.value)">

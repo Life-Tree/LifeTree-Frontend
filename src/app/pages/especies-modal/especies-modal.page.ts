@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavParams} from '@ionic/angular';
 import { Species } from 'src/app/interfaces/especie';
+import {ArbolesService, COMMON_SPECIES_GROUP_NAME} from '../../services/arboles/arboles.service'
 
 @Component({
   selector: 'app-especies-modal',
@@ -14,14 +15,16 @@ export class EspeciesModalPage implements OnInit {
    familiaE: string;
    descripciónE: string;
    speciesByFamily: Map<string, Species[]>;
+   speciesByFamilyToShow: Map<string, Species[]>;
    specie: Species;
- 
-  constructor(public modalController: ModalController, public navParamsSpecies : NavParams) { }
+   commonSpeciesName = COMMON_SPECIES_GROUP_NAME;
+   query: string = "";
+  constructor(public modalController: ModalController, public navParamsSpecies : NavParams, public arbolesService: ArbolesService) { }
 
   ngOnInit() {
     this.species = this.navParamsSpecies.get('species');
     this.speciesByFamily = this.navParamsSpecies.get('speciesByFamily');
-
+    this.speciesByFamilyToShow = this.speciesByFamily;
   }
 
   async salirSinInfo() {
@@ -36,6 +39,16 @@ export class EspeciesModalPage implements OnInit {
     this.modalController.dismiss({
       specie: this.specie
     });
+  }
+
+  filter(e: any){
+    let query = e.target.value;
+    if(query != ""){
+      let speciesFiltered = this.arbolesService.filterSpeciesByQuery(this.species, query);
+      this.speciesByFamilyToShow = this.arbolesService.orderSpeciesByFamily(speciesFiltered,false);
+    }else{
+      this.speciesByFamilyToShow = this.speciesByFamily;
+    }
   }
 
   unsorted(a: KeyValue<string,Species[]>, b: KeyValue<string,Species[]>):number{
