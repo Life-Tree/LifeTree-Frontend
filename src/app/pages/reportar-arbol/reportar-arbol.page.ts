@@ -41,7 +41,7 @@ export class ReportarArbolPage implements OnInit {
     public sanitizer: DomSanitizer
   ) { 
     this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
-    this.speciesByFamily = new Map<string,Species[]>();
+    this.speciesByFamily = new Map<string,Species[]>();    
   }
 
   ngOnInit() {
@@ -108,7 +108,8 @@ export class ReportarArbolPage implements OnInit {
       
       componentProps: {
         species: this.species,
-        speciesByFamily: this.speciesByFamily
+        speciesByFamily: this.speciesByFamily,
+        defaultSpecie: this.defaultSpecies
       }
     });
     
@@ -116,12 +117,11 @@ export class ReportarArbolPage implements OnInit {
 
     const { data } = await modal.onWillDismiss();
     this.specieSelected = data;
-    console.log(this.specieSelected.name);
   }
 
   registrarArbol() {
     //Metodo Post
-    if (this.descripcion !== "" && this.barrio !== "" && this.imageSet.images.length > 0 ) {
+    if (this.descripcion !== "" && this.barrio !== "" && this.imageSet.images.length > 0 && this.specieSelected != null) {
       let arbol: ArbolReportar = {
         ubicacion: {
           latitud: this.geolocation.latitude,
@@ -130,20 +130,32 @@ export class ReportarArbolPage implements OnInit {
         },
         descripcion: this.descripcion,
         imageSet: this.imageSet,
-        species: this.defaultSpecies
+        species: this.specieSelected
       }
       console.log(arbol);
       this.arbolesService.registrarArbol(arbol).subscribe(data => {
         console.log(data)
-      }, error=> console.log(error))
-      console.log(arbol)
-      this.descripcion = "";
-      this.imgBase64 = "";
-      this.barrio = "";
-      this.species = [];
-      this.imageSet = {images:[]}
-      this.presentToast("¡Árbol reportado exitosamente!");
-      this.router.navigate(['./indicadores'])
+        this.descripcion = "";
+        this.imgBase64 = "";
+        this.barrio = "";
+        this.species = [];
+        this.imageSet = {images:[]}
+        this.cleanFramesLoaded();
+        this.specieSelected = null;
+        this.presentToast("¡Árbol reportado exitosamente!");
+        this.router.navigate(['./indicadores'])
+      }, error => {
+        console.log(error)
+        this.presentToast("¡Upss, algo salió mal, intente nuevamente!");
+        this.descripcion = "";
+        this.imgBase64 = "";
+        this.barrio = "";
+        this.species = [];
+        this.imageSet = {images:[]};
+        this.cleanFramesLoaded();
+        this.specieSelected = null;
+      });
+      console.log(arbol)      
     } else {
       this.presentToast("¡Llene todos los campos, por favor!");
       console.log('Campos vacios')
@@ -153,9 +165,17 @@ export class ReportarArbolPage implements OnInit {
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 2000
+      duration: 3000,
+      position: 'middle'
     });
     toast.present();
+  }
+
+  cleanFramesLoaded(){
+    this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.RAMAS.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.TRONCO.toString(),{loaded: false, path: ""});
   }
   
 }
