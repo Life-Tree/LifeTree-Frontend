@@ -11,7 +11,7 @@ import { Species } from 'src/app/interfaces/especie';
 })
 export class ArbolesService {
 
-  public COMMON_SPECIES_GROUP_NAME = "Especies comunes";
+  public COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
   commonSpeciesNames = ["Almendro","Mango","Coco","Flor morado","Diomate","Caucho", "Totumo"]
   constructor(private httpClient:HttpClient) { }
 
@@ -43,12 +43,14 @@ export class ArbolesService {
     let speciesMap = new Map<string, Species[]>();
     speciesMap.set(this.COMMON_SPECIES_GROUP_NAME, this.getCommonSpecies(species));
     for(let sp of species){
-      let spsOfFamily: Species[] = [];
-      if(speciesMap.has(sp.family)){
-        spsOfFamily = speciesMap.get(sp.family);
-      }
-      spsOfFamily.push(sp);
-      speciesMap.set(sp.family,spsOfFamily);
+      if (sp.family != "unknown"){
+        let spsOfFamily: Species[] = [];
+        if(speciesMap.has(sp.family)){
+          spsOfFamily = speciesMap.get(sp.family);
+        }
+        spsOfFamily.push(sp);
+        speciesMap.set(sp.family,spsOfFamily);
+      }      
     }
     return speciesMap;
   }

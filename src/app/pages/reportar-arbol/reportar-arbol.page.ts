@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
@@ -9,7 +9,8 @@ import { Frame, ImageSet } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
 import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
 import { ThrowStmt } from '@angular/compiler';
-import { NumberFormatStyle } from '@angular/common';
+import { KeyValue, NumberFormatStyle } from '@angular/common';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -25,7 +26,7 @@ export class ReportarArbolPage implements OnInit {
   barrio: string = "";
   species: Species[] = [];
   defaultSpecies: Species;
-  framesLoaded: Map<string,boolean>;
+  framesLoaded: Map<string,{loaded: boolean, path: string}>;
   speciesByFamily: Map<string,Species[]>;
   specie: Species;
   constructor(
@@ -34,9 +35,10 @@ export class ReportarArbolPage implements OnInit {
     private arbolesService: ArbolesService,
     public toastController: ToastController,
     private router: Router,
-    public modalController: ModalController
+    public modalController: ModalController,
+    public sanitizer: DomSanitizer
   ) { 
-    this.framesLoaded = new Map<string, boolean>();
+    this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
     this.speciesByFamily = new Map<string,Species[]>();
   }
 
@@ -52,25 +54,33 @@ export class ReportarArbolPage implements OnInit {
         this.speciesByFamily = this.arbolesService.orderSpeciesByFamily(data);
       }
     });
-    this.framesLoaded.set(Frame.HOJAS.toString(),false);
-    this.framesLoaded.set(Frame.RAIZ.toString(),false);
-    this.framesLoaded.set(Frame.RAMAS.toString(),false);
-    this.framesLoaded.set(Frame.TRONCO.toString(),false);
+    this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.RAMAS.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.TRONCO.toString(),{loaded: false, path: ""});
   }
 
   async getGeolocation() {
     this.geolocation = await this.geolocationService.getCurrentPosition()
   }
 
-  async getfotoArbol(frameString: string) {
-    this.imgBase64 = await this.cameraService.takePicture()
-    if (this.imgBase64 != ""){
+  async setArbolPicture(frameString: string) {
+    try {
+      this.imgBase64 = await this.cameraService.takePicture();
       let pre:string = "data:image/png;base64,";
       this.imgBase64 = pre+this.imgBase64;
       let frame = this.getFrameFromString(frameString);
-      this.framesLoaded.set(frameString,true);
+      this.framesLoaded.set(frameString,{loaded: true, path: this.imgBase64});
       this.imageSet.images.push({frame: frame, base64: this.imgBase64, url:''})
+    } catch (error) {
+      console.log(error);      
     }
+  }
+
+  unsetArbolPicture(frameString: string){
+    let newImages = this.imageSet.images.filter((img) => img.frame != frameString);
+    this.imageSet.images = newImages;
+    this.framesLoaded.set(frameString, {loaded: false, path: ""});    
   }
 
   getFrameFromString(fs: string): Frame {
@@ -105,7 +115,7 @@ export class ReportarArbolPage implements OnInit {
 
   registrarArbol() {
     //Metodo Post
-    if (this.descripcion !== "" && this.barrio !== "" && this.imgBase64 !== "") {
+    if (this.descripcion !== "" && this.barrio !== "" && this.imageSet.images.length > 0 ) {
       let arbol: ArbolReportar = {
         ubicacion: {
           latitud: this.geolocation.latitude,

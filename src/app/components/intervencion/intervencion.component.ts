@@ -19,7 +19,7 @@ export class IntervencionComponent implements OnInit {
   ngOnInit() { }
 
   async getfotoArbol() {
-    this.imgBase64 = await this.cameraService.takePicture()
+    this.imgBase64 = await this.cameraService.takePicture();
   }
 
   agregarIntervencion() {

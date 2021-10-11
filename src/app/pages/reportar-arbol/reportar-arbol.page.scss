@@ -26,6 +26,7 @@ ion-fab-button{
     border-radius: 5px;
     right: 30%;
     display: inline-block;
+    margin-bottom: 5%
     /* box-shadow: 2px 2px 0 rgb(170, 169, 169) */;
 }
 
@@ -47,6 +48,14 @@ ion-fab-button{
     position: relative;
     right: 5%;
     top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.image-bg{
+    background-position: center;
+    background-size: cover;
 }
 
 .edit-especie{
@@ -56,4 +65,20 @@ ion-fab-button{
     box-shadow: 1px 1px 0 rgb(96, 128, 103);
     left: -9%;
     border-radius: 2px;
+}
+
+.cancel-icon{
+    border-radius: 50%; 
+    background-color: black; 
+    color: white; 
+    width: 30px; 
+    height: 30px;    
+}
+
+.cancel-button{
+    background: transparent;
+    position: relative;
+    top: 1px;
+    left: 50%;
+    transform: translateX(-50%);
 }
