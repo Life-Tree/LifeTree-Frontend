@@ -1,6 +1,8 @@
+import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavParams} from '@ionic/angular';
+import { Species } from 'src/app/interfaces/especie';
 
 @Component({
   selector: 'app-especies-modal',
@@ -8,25 +10,36 @@ import { NavParams} from '@ionic/angular';
   styleUrls: ['./especies-modal.page.scss'],
 })
 export class EspeciesModalPage implements OnInit {
-   nombreE: string;
+   species: Species[] = [];
    familiaE: string;
    descripciónE: string;
+   speciesByFamily: Map<string, Species[]>;
+   specie: Species;
  
-  constructor(public modalController: ModalController, public navParamsNombre : NavParams,
-     public navParamsFamilia : NavParams, public navParamsDescripcion : NavParams) { }
+  constructor(public modalController: ModalController, public navParamsSpecies : NavParams) { }
 
   ngOnInit() {
-    this.nombreE = this.navParamsNombre.get('nombre'); 
-    this.familiaE = this.navParamsFamilia.get('familia');
-    this.descripciónE = this.navParamsDescripcion.get('descripcion'); 
+    this.species = this.navParamsSpecies.get('species');
+    this.speciesByFamily = this.navParamsSpecies.get('speciesByFamily');
+
   }
 
-  async dismiss() {
+  async salirSinInfo() {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
     this.modalController.dismiss({
       'dismissed': true
     });
+  }
+
+  salirConinfo(specie: Species){
+    this.modalController.dismiss({
+      specie: this.specie
+    });
+  }
+
+  unsorted(a: KeyValue<string,Species[]>, b: KeyValue<string,Species[]>):number{
+      return 0;
   }
 
 }
