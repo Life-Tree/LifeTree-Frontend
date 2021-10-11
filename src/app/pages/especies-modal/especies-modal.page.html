@@ -1,8 +1,14 @@
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+</head>
+
 <ion-header>
   <ion-toolbar>
-    <ion-title>Especies</ion-title>
+    <ion-title><h3><i>Especies</i></h3></ion-title>
     <ion-buttons slot="start">
-      <ion-button color="success" (click)="dismiss()">Atras</ion-button>
+      <ion-button color="success" (click)="salirSinInfo()">Atras</ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-searchbar></ion-searchbar>
@@ -11,70 +17,20 @@
 <ion-content>
   <div clas="ion-page">
     <ion-list>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title> {{nombreE}} </ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          {{familiaE}}
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 2</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 3</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 4</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 5</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 6</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 7</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>Card Title 8</ion-card-title>
-         </ion-card-header>
-        <ion-card-content>
-          Aqui hay contenido
-        </ion-card-content>
-      </ion-card>
+      <div *ngFor= "let family of speciesByFamily | keyvalue: unsorted">
+        <ion-item >
+          <h6 class="color-text">Familia:</h6>
+          <ion-title> <h1>{{family.key}}</h1></ion-title>
+        </ion-item>
+        <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(family.value)">
+          <ion-card-header>
+            <ion-card-title class="text-title-style">{{specie.name}}</ion-card-title>
+           </ion-card-header>
+          <ion-card-content class="text-content-style">
+            <i>{{specie.scientificName}} </i>
+          </ion-card-content>
+        </ion-card>
+      </div>    
     </ion-list>
   </div>
   

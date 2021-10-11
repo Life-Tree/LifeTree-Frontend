@@ -29,6 +29,8 @@ export class ReportarArbolPage implements OnInit {
   framesLoaded: Map<string,{loaded: boolean, path: string}>;
   speciesByFamily: Map<string,Species[]>;
   specie: Species;
+  specieSelected: Species;
+
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
@@ -99,18 +101,22 @@ export class ReportarArbolPage implements OnInit {
   }
 
   async presentModal() {
-    let specie = this.species[0];
+    let species;
 
     const modal = await this.modalController.create({
       component: EspeciesModalPage,
       
       componentProps: {
-        'nombre': specie.name,
-        'familia': 'Camaroncitos',
-        'descripción': 'Es una especie muy bonita'
+        species: this.species,
+        speciesByFamily: this.speciesByFamily
       }
     });
-    return await modal.present();
+    
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+    this.specieSelected = data;
+    console.log(this.specieSelected.name);
   }
 
   registrarArbol() {
