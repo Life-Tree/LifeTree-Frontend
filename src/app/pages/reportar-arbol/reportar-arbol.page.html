@@ -81,7 +81,7 @@
       </ion-item>
       <ion-item detail="true" (click)="presentModal()">
         <ion-label color="Primary">Especie del árbol</ion-label>
-        <ion-text slot="end"><b><i>Seleccione...</i></b></ion-text>   
+        <ion-text slot="end"><b><i>{{specieSelected==null? 'seleccione...' : specieSelected.name}}</i></b></ion-text>   
       </ion-item>
     </ion-card-content>
   </ion-card>

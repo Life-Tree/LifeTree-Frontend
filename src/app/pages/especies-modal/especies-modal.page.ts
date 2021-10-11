@@ -14,32 +14,35 @@ export class EspeciesModalPage implements OnInit {
    familiaE: string;
    descripciónE: string;
    speciesByFamily: Map<string, Species[]>;
-   specie: Species;
+   defaultSpecie:Species;
  
   constructor(public modalController: ModalController, public navParamsSpecies : NavParams) { }
 
   ngOnInit() {
     this.species = this.navParamsSpecies.get('species');
     this.speciesByFamily = this.navParamsSpecies.get('speciesByFamily');
+    this.defaultSpecie = this.navParamsSpecies.get('defaultSpecie');
 
   }
 
   async salirSinInfo() {
     // using the injected ModalController this page
     // can "dismiss" itself and optionally pass back data
-    this.modalController.dismiss({
-      'dismissed': true
-    });
+    this.modalController.dismiss(null);
   }
 
-  salirConinfo(specie: Species){
-    this.modalController.dismiss({
-      specie: this.specie
-    });
+  salirConinfo(specieinfo: Species){
+    this.modalController.dismiss(specieinfo);
+  }
+
+  salirDefault(){
+    this.modalController.dismiss(this.defaultSpecie);
   }
 
   unsorted(a: KeyValue<string,Species[]>, b: KeyValue<string,Species[]>):number{
       return 0;
   }
+
+
 
 }
