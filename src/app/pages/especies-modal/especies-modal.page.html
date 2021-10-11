@@ -20,11 +20,11 @@
       <div *ngFor= "let family of speciesByFamilyToShow | keyvalue: unsorted">
         <ion-item >
           <h6 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h6>
-          <ion-title> <h1>{{family.key}}</h1></ion-title>
+          <ion-title size="small"> <h1>{{family.key}}</h1></ion-title>
         </ion-item>
         <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
           <ion-card-header>
-            <ion-card-title class="text-title-style">{{specie.name}}</ion-card-title>
+            <ion-card-title class="text-title-style" >{{specie.name}}</ion-card-title>
            </ion-card-header>
           <ion-card-content class="text-content-style">
             <i>{{specie.scientificName}}</i>
