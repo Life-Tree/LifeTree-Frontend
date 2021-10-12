@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 declare var google;
+
 @Component({
   selector: 'app-mapa',
   templateUrl: './mapa.component.html',
@@ -21,7 +22,7 @@ export class MapaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadMap();
+    this.initMap();
     //this.arboles = arbolesService.getArboles();
     this.arbolesService.obtenerArboles().subscribe(data => {
       this.arboles = data
@@ -34,7 +35,8 @@ export class MapaComponent implements OnInit {
     })
   }
 
-  loadMap() {
+  
+  initMap() {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
     // create LatLng object

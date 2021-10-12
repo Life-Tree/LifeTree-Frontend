@@ -82,3 +82,31 @@ ion-fab-button{
     left: 50%;
     transform: translateX(-50%);
 }
+
+.fondo-transparente {
+    background-color: rgb(255, 255, 255);
+    /*IE*/
+    filter: alpha(opacity=50);
+    /*FireFox Opera*/
+    opacity: 0.5;
+    z-index: 3;
+  }
+  
+  .fondo-normal {
+  }
+
+  .spin{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+ }
+
+ ion-spinner {
+    width: 100px;
+    height: 100px;
+    stroke: #444; 
+    fill: #222;
+ }
+  

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
 import { Species } from 'src/app/interfaces/especie';
+import { Options } from 'selenium-webdriver';
 
 
 export const COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
@@ -24,7 +25,7 @@ export class ArbolesService {
   }
 
   registrarArbol(arbol:ArbolReportar){
-    return this.httpClient.post<string>(`${environment.lifeTreeUrl}arboles`,arbol)
+    return this.httpClient.post<string>(`${environment.lifeTreeUrl}arboles`,arbol, {responseType: 'text' as 'json'})
   }
 
   eliminarArbol(id:string){

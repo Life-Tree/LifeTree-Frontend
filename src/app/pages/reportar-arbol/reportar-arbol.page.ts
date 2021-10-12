@@ -1,4 +1,4 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 import { Frame, ImageSet } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
 import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
-import { ThrowStmt } from '@angular/compiler';
-import { KeyValue, NumberFormatStyle } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -30,6 +28,7 @@ export class ReportarArbolPage implements OnInit {
   speciesByFamily: Map<string,Species[]>;
   specie: Species;
   specieSelected: Species;
+  reportState: {loading: boolean, loaded: boolean} = {loading: false, loaded: false};
 
   constructor(
     private geolocationService: GeolocationService,
@@ -55,6 +54,9 @@ export class ReportarArbolPage implements OnInit {
         }
         this.speciesByFamily = this.arbolesService.orderSpeciesByFamily(data);
       }
+    }, (error) => {
+      console.log(error);
+      this.presentToast('Upss, verifique su conexión a internet', 'danger');
     });
     this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
     this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
@@ -63,7 +65,9 @@ export class ReportarArbolPage implements OnInit {
   }
 
   async getGeolocation() {
-    this.geolocation = await this.geolocationService.getCurrentPosition()
+    this.geolocation = await this.geolocationService.getCurrentPosition();
+    console.log(this.geolocation);
+    
   }
 
   async setArbolPicture(frameString: string) {
@@ -101,27 +105,32 @@ export class ReportarArbolPage implements OnInit {
   }
 
   async presentModal() {
-    let species;
-
-    const modal = await this.modalController.create({
-      component: EspeciesModalPage,
+    if(this.species.length > 0){
+      const modal = await this.modalController.create({
+        component: EspeciesModalPage,
+        
+        componentProps: {
+          species: this.species,
+          speciesByFamily: this.speciesByFamily,
+          defaultSpecie: this.defaultSpecies
+        }
+      });
       
-      componentProps: {
-        species: this.species,
-        speciesByFamily: this.speciesByFamily,
-        defaultSpecie: this.defaultSpecies
-      }
-    });
+      await modal.present();
+  
+      const { data } = await modal.onWillDismiss();
+      this.specieSelected = data;
+    }else{
+      this.presentToast('Upss verifique su conexión a internet', 'danger');
+    }
     
-    await modal.present();
-
-    const { data } = await modal.onWillDismiss();
-    this.specieSelected = data;
   }
 
   registrarArbol() {
     //Metodo Post
     if (this.descripcion !== "" && this.barrio !== "" && this.imageSet.images.length > 0 && this.specieSelected != null) {
+      this.reportState.loading = true;
+      this.reportState.loaded = false;
       let arbol: ArbolReportar = {
         ubicacion: {
           latitud: this.geolocation.latitude,
@@ -133,8 +142,10 @@ export class ReportarArbolPage implements OnInit {
         species: this.specieSelected
       }
       console.log(arbol);
-      this.arbolesService.registrarArbol(arbol).subscribe(data => {
-        console.log(data)
+      this.arbolesService.registrarArbol(arbol).toPromise().then((data:string) => {
+        this.reportState.loading = false;
+        this.reportState.loaded = true;
+        console.log("Data: " +data)
         this.descripcion = "";
         this.imgBase64 = "";
         this.barrio = "";
@@ -142,31 +153,31 @@ export class ReportarArbolPage implements OnInit {
         this.imageSet = {images:[]}
         this.cleanFramesLoaded();
         this.specieSelected = null;
-        this.presentToast("¡Árbol reportado exitosamente!");
-        this.router.navigate(['./indicadores'])
-      }, error => {
-        console.log(error)
-        this.presentToast("¡Upss, algo salió mal, intente nuevamente!");
-        this.descripcion = "";
-        this.imgBase64 = "";
-        this.barrio = "";
-        this.species = [];
-        this.imageSet = {images:[]};
-        this.cleanFramesLoaded();
-        this.specieSelected = null;
-      });
-      console.log(arbol)      
+        if (data == "EL ARBOL SE HA GUARDADO CORRECTAMENTE"){
+          this.presentToast("¡Árbol reportado exitosamente!");
+          this.router.navigate(['./indicadores'])
+        }else{
+          this.presentToast(data,'danger');
+        }
+      }).catch((err) => {
+        console.log("error: ")
+        console.log(err);        
+        this.reportState.loading = false;
+        this.reportState.loaded = true;
+        this.presentToast("¡Upss, algo salió mal!", 'danger');        
+      });  
     } else {
-      this.presentToast("¡Llene todos los campos, por favor!");
+      this.presentToast("¡Llene todos los campos, por favor!", 'warning');
       console.log('Campos vacios')
     }
   }
 
-  async presentToast(mensaje: string) {
+  async presentToast(mensaje: string, color= 'success') {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 3000,
-      position: 'middle'
+      position: 'top',
+      color: color
     });
     toast.present();
   }

@@ -1,6 +1,11 @@
+
 <app-header titulo="Reportar arbol enfermo"></app-header>
 
-<ion-content  fullscreen>
+<ion-content  fullscreen class="{{reportState.loading ? 'fondo-transparente': 'fondo-normal'}}">
+  <div class="spin" *ngIf="reportState.loading">
+    <ion-spinner name="lines" ></ion-spinner>
+    <!-- <ion-spinner name="crescent" color="success"></ion-spinner> -->
+  </div>
   <ion-card>    
     <ion-card-header style="text-align: center;">
       <img src="../../../assets/imgArbol.png" />      
@@ -87,7 +92,7 @@
   </ion-card>
 </ion-content>
 
-<ion-button 
+<ion-button [disabled] = "reportState.loading"
 style="z-index: 3; opacity: 1;" 
 color= "success"
 shape="round" 

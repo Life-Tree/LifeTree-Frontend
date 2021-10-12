@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ArbolesService } from './services/arboles/arboles.service';
@@ -15,7 +15,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private arbolesService: ArbolesService
+    private arbolesService: ArbolesService,
+    private toastController: ToastController
   ) {
     this.initializeApp();
   }
@@ -27,6 +28,14 @@ export class AppComponent {
     });
     this.arbolesService.obtenerArboles().subscribe((data) => {
       // This is the first calling to the server
+    }, async (error) => {
+      const toast = await this.toastController.create({
+        message: 'Verifique su conexión a internet',
+        duration: 10000,
+        position: 'top',
+        color: 'danger'
+      });
+      toast.present();
     });
   }
 }
