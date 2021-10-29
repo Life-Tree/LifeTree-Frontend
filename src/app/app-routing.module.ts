@@ -70,6 +70,10 @@ const routes: Routes = [
     path: 'especies-modal',
     loadChildren: () => import('./pages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
   },
+  {
+    path: 'reports',
+    loadChildren: () => import('./pages/reports/reports.module').then( m => m.ReportsPageModule)
+  },
 
 ];
 
