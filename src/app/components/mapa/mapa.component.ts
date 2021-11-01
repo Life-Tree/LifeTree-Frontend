@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Arbol } from 'src/app/interfaces/arbol.interface';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
+import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 declare var google;
 
 @Component({
@@ -13,17 +14,26 @@ export class MapaComponent implements OnInit {
   ionToggle = true;
   map = null;
   heatmap = null;
+  infoWindow: any
   markers: any[] = [];
   arboles: Arbol[] = [];
+  assetsBase: string = '../../../assets/'
+  currentLocation: {lat: number, lng: number} = { lat: 10.404972, lng: -75.511589 };
   constructor(
     private arbolesService: ArbolesService,
+    private geolocationService: GeolocationService
   ) {
     //this.getA();
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    const coords = await this.geolocationService.getCurrentPosition();
+    if (coords.latitude != 0 && coords.longitude != 0){
+      this.currentLocation = {lat:coords.latitude, lng: coords.longitude};
+      console.log(this.currentLocation);
+      
+    }    
     this.initMap();
-    //this.arboles = arbolesService.getArboles();
     this.arbolesService.obtenerArboles().subscribe(data => {
       this.arboles = data
       //marcadores
@@ -32,26 +42,24 @@ export class MapaComponent implements OnInit {
       this.heatmap = new google.maps.visualization.HeatmapLayer({
         data: this.getPoints(),
       });
-    })
+    });
+    
   }
 
   
   initMap() {
     // create a new map by passing HTMLElement
     const mapEle: HTMLElement = document.getElementById('map');
-    // create LatLng object
-    const myLatLng = { lat: 10.404972, lng: -75.511589 };
     // create map
     this.map = new google.maps.Map(mapEle, {
-      center: myLatLng,
+      center: this.currentLocation,
       zoom: 12,
       streetViewControl: false,
       mapTypeControlOptions: {
-        mapTypeIds: ["roadmap"],
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        mapTypeIds: ["roadmap", "satellite"],
       }
-
-    });
-
+    });  
   }
 
   toggleHeatmap() {
@@ -76,14 +84,23 @@ export class MapaComponent implements OnInit {
   }
 
   createMarkers() {
+    
     for (const arbol of this.arboles) {
       let pos = { lat: arbol.ubicacion.latitud, lng: arbol.ubicacion.longitud };
       this.markers.push(new google.maps.Marker({
         position: pos,
         title: 'arbol',
+        icon: this.assetsBase+"tree.png",
         map: this.map
       }));
     }
+    // Current location icon
+    this.markers.push(new google.maps.Marker({
+      position: this.currentLocation,
+      title: 'Ubicación actual',
+      icon: this.assetsBase+'my-location.png',
+      map: this.map
+    }));
   }
 
   desactivarMarkers(): void {

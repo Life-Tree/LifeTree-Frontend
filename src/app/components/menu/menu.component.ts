@@ -14,9 +14,14 @@ export interface menuItem{
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  reportarArbol: menuItem; reportarIntervencion: menuItem; consultarIndicadores: menuItem; 
-  consultarInstructivoIdentificacion: menuItem; listaIntervenciones: menuItem; 
+  reportarArbol: menuItem; 
+  reportarIntervencion: menuItem; 
+  consultarIndicadores: menuItem; 
+  verMapa: menuItem;
+  consultarInstructivoIdentificacion: menuItem; 
+  listaIntervenciones: menuItem; 
   consultarInstructivoIntervencion: menuItem;
+  listaArbolesRegistrados: menuItem;
   //itemsMenu: menuItem[] = [];
   constructor(private userService: UsersService,private userLifeTreeService:UserLifeTreeService) {
     //console.log(this.user);    
@@ -27,9 +32,15 @@ export class MenuComponent implements OnInit {
     //this.itemsMenu = this.getItems();
 
     this.reportarArbol =  {
-      name: "Reportar árbol enfermo",
+      name: "Registrar un árbol",
       icon: "../../../assets/arbol-muerto.svg",
       redirectTo: "/reportar-arbol"
+    };
+
+    this.listaArbolesRegistrados =  {
+      name: "Lista de árboles",
+      icon: "../../../assets/list-svgrepo-com.svg",
+      redirectTo: "/arboles-list"
     };
 
     this.reportarIntervencion ={
@@ -40,6 +51,12 @@ export class MenuComponent implements OnInit {
 
     this.consultarIndicadores = {
       name: "Consultar indicadores",
+      icon: "../../../assets/chart-svgrepo-com.svg",
+      redirectTo: "/reports"
+    };
+
+    this.verMapa = {
+      name: "Mapa de árboles",
       icon:"../../../assets/mapa.svg",
       redirectTo: "/indicadores"
     };
