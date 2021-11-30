@@ -67,6 +67,30 @@
           </button>
         </div>
 
+        <!-- <button *ngIf="!framesLoaded.get('RAIZ').loaded" (click)="setArbolPicture('RAIZ')" class="edit-button">
+          <div><h1><b>+</b></h1></div>
+          <div><p class="edit-text">Flor</p></div>
+        </button>
+        <div *ngIf="framesLoaded.get('RAIZ').loaded" 
+        class="edit-button image-bg" 
+        [style.background-image]="'url('+framesLoaded.get('RAIZ').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('RAIZ')">
+            <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
+          </button>
+        </div>
+
+        <button *ngIf="!framesLoaded.get('RAIZ').loaded" (click)="setArbolPicture('RAIZ')" class="edit-button">
+          <div><h1><b>+</b></h1></div>
+          <div><p class="edit-text">Fruto</p></div>
+        </button>
+        <div *ngIf="framesLoaded.get('RAIZ').loaded" 
+        class="edit-button image-bg" 
+        [style.background-image]="'url('+framesLoaded.get('RAIZ').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('RAIZ')">
+            <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
+          </button>
+        </div>
+ -->
       </div>
     </ion-card-content>
   </ion-card>
@@ -77,11 +101,11 @@
     <ion-card-content>
       <!-- Textarea in an item with a floating label -->
       <ion-item>
-        <ion-label color="Primary" position="floating">En que barrio está?</ion-label>
+        <ion-label color="Primary" position="floating">¿En que barrio está?</ion-label>
         <ion-input [(ngModel)]="barrio"></ion-input>
       </ion-item>
       <ion-item >
-        <ion-label color="Primary" position="floating">Que problema observa?</ion-label>
+        <ion-label color="Primary" position="floating">¿Qué problema observa?</ion-label>
         <ion-textarea [(ngModel)]="descripcion"></ion-textarea>
       </ion-item>
       <ion-item detail="true" (click)="presentModal()">
