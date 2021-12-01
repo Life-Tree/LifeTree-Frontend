@@ -60,8 +60,10 @@ export class ReportarArbolPage implements OnInit {
     });
     this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
     this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.RAMAS.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.TRONCO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.FLOR.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
   }
 
   async getGeolocation() {
@@ -91,16 +93,20 @@ export class ReportarArbolPage implements OnInit {
 
   getFrameFromString(fs: string): Frame {
     switch (fs) {
-      case 'TRONCO':
-        return Frame.TRONCO;
-      case 'RAMAS':
-        return Frame.RAMAS;
+      case 'TALLO':
+        return Frame.TALLO;
+      case 'FLOR':
+        return Frame.FLOR;
       case 'HOJAS':
         return Frame.HOJAS;
       case 'RAIZ':
           return Frame.RAIZ;
+      case 'FRUTO':
+        return Frame.FRUTO;
+      case 'PARTE_ENFERMA':
+        return Frame.PARTE_ENFERMA;
       default:
-        return Frame.TRONCO;
+        return Frame.TALLO;
     }
   }
 
@@ -185,8 +191,10 @@ export class ReportarArbolPage implements OnInit {
   cleanFramesLoaded(){
     this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
     this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.RAMAS.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.TRONCO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.FLOR.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
+    this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
   }
   
 }
