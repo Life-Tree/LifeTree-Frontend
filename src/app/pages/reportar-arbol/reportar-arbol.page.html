@@ -43,54 +43,54 @@
           </button>
         </div>
 
-        <button *ngIf="!framesLoaded.get('TRONCO').loaded" (click)="setArbolPicture('TRONCO')" class="edit-button buttons-rigth">
+        <button *ngIf="!framesLoaded.get('TALLO').loaded" (click)="setArbolPicture('TALLO')" class="edit-button buttons-rigth">
           <div><h1><b>+</b></h1></div>
-          <div><p class="edit-text">Tronco</p></div>
+          <div><p class="edit-text">Tallo</p></div>
         </button>
-        <div *ngIf="framesLoaded.get('TRONCO').loaded" 
+        <div *ngIf="framesLoaded.get('TALLO').loaded" 
         class="edit-button buttons-rigth image-bg" 
-        [style.background-image]="'url('+framesLoaded.get('TRONCO').path+')'">
-          <button class="cancel-button" (click) = "unsetArbolPicture('TRONCO')">
+        [style.background-image]="'url('+framesLoaded.get('TALLO').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('TALLO')">
             <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
           </button>
         </div>
 
-        <button *ngIf="!framesLoaded.get('RAMAS').loaded" (click)="setArbolPicture('RAMAS')" class="edit-button">
+        <button *ngIf="!framesLoaded.get('FLOR').loaded" (click)="setArbolPicture('FLOR')" class="edit-button">
           <div><h1><b>+</b></h1></div>
-          <div><p class="edit-text">Ramas</p></div> 
+          <div><p class="edit-text">Flor</p></div> 
         </button>
-        <div *ngIf="framesLoaded.get('RAMAS').loaded" 
+        <div *ngIf="framesLoaded.get('FLOR').loaded" 
         class="edit-button image-bg" 
-        [style.background-image]="'url('+framesLoaded.get('RAMAS').path+')'">
-          <button class="cancel-button" (click) = "unsetArbolPicture('RAMAS')">
+        [style.background-image]="'url('+framesLoaded.get('FLOR').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('FLOR')">
             <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
           </button>
         </div>
 
-        <!-- <button *ngIf="!framesLoaded.get('RAIZ').loaded" (click)="setArbolPicture('RAIZ')" class="edit-button">
-          <div><h1><b>+</b></h1></div>
-          <div><p class="edit-text">Flor</p></div>
-        </button>
-        <div *ngIf="framesLoaded.get('RAIZ').loaded" 
-        class="edit-button image-bg" 
-        [style.background-image]="'url('+framesLoaded.get('RAIZ').path+')'">
-          <button class="cancel-button" (click) = "unsetArbolPicture('RAIZ')">
-            <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-          </button>
-        </div>
-
-        <button *ngIf="!framesLoaded.get('RAIZ').loaded" (click)="setArbolPicture('RAIZ')" class="edit-button">
+        <button *ngIf="!framesLoaded.get('FRUTO').loaded" (click)="setArbolPicture('FRUTO')" class="edit-button buttons-rigth">
           <div><h1><b>+</b></h1></div>
           <div><p class="edit-text">Fruto</p></div>
         </button>
-        <div *ngIf="framesLoaded.get('RAIZ').loaded" 
-        class="edit-button image-bg" 
-        [style.background-image]="'url('+framesLoaded.get('RAIZ').path+')'">
-          <button class="cancel-button" (click) = "unsetArbolPicture('RAIZ')">
+        <div *ngIf="framesLoaded.get('FRUTO').loaded" 
+        class="edit-button buttons-rigth image-bg" 
+        [style.background-image]="'url('+framesLoaded.get('FRUTO').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('FRUTO')">
             <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
           </button>
         </div>
- -->
+
+        <button *ngIf="!framesLoaded.get('PARTE_ENFERMA').loaded" (click)="setArbolPicture('PARTE_ENFERMA')" class="edit-button">
+          <div><h1><b>+</b></h1></div>
+          <div><p class="edit-text">Parte enferma</p></div>
+        </button>
+        <div *ngIf="framesLoaded.get('PARTE_ENFERMA').loaded" 
+        class="edit-button image-bg" 
+        [style.background-image]="'url('+framesLoaded.get('PARTE_ENFERMA').path+')'">
+          <button class="cancel-button" (click) = "unsetArbolPicture('PARTE_ENFERMA')">
+            <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
+          </button>
+        </div>
+
       </div>
     </ion-card-content>
   </ion-card>
