@@ -17,6 +17,7 @@ import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ToastController } from '@ionic/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { PersonalComponent } from './steps/personal/personal.component';
 
 
 @NgModule({
@@ -39,6 +40,6 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     useValue: { displayDefaultIndicatorType: false }
     }
   ],  
-  declarations: [ReportarArbolPage]
+  declarations: [ReportarArbolPage, PersonalComponent]
 })
 export class ReportarArbolPageModule {}
