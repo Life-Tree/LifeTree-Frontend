@@ -14,6 +14,18 @@ export const COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
 })
 export class ArbolesService {
   commonSpeciesNames = ["Almendro","Mango","Coco","Flor morado","Diomate","Caucho", "Totumo"]
+  form: {
+    names?: string,
+    lastNames?: string,
+    typeId?: string,
+    numId?: number,
+    address?: string,
+    phoneNumber?: number, 
+    email?: string,
+    date?: Date,
+    geolocation?: { latitude: number, longitude: number };
+  } = {}
+  
   constructor(private httpClient:HttpClient) { }
 
   obtenerArboles(){

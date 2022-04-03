@@ -3,8 +3,8 @@
 
 <ion-content>
   <mat-stepper 
-  [linear]="true" 
-  color="success" 
+  [linear]="false" 
+  color="success"
   #stepper 
   style="background: var(--ion-color-background)"
   labelPosition="bottom"
@@ -16,10 +16,11 @@
           <mat-label>Name</mat-label>
           <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
         </mat-form-field>-->
-        <h1>Sección 1</h1>
-        <ion-button matStepperNext (click)="stepper.next()">
+        <h1>Datos personales</h1>
+        <app-personal [stepper]="stepper"></app-personal>
+        <!-- <ion-button color="success" type="submit"matStepperNext (click)="stepper.next()">
           Next
-        </ion-button>      
+        </ion-button>   -->    
     </mat-step>
     <mat-step label="Especie" state="species">
       
