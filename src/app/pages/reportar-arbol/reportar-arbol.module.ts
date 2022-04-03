@@ -15,6 +15,8 @@ import { CameraService } from 'src/app/services/camera/camera.service';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ToastController } from '@ionic/angular';
+import { MatIconModule } from '@angular/material/icon';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 @NgModule({
@@ -28,9 +30,15 @@ import { ToastController } from '@ionic/angular';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatIconModule,
     ComponentsModule
   ],
-  providers: [CameraService, GeolocationService, ArbolesService, ToastController],
+  providers: [CameraService, GeolocationService, ArbolesService, ToastController, 
+    {
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { displayDefaultIndicatorType: false }
+    }
+  ],  
   declarations: [ReportarArbolPage]
 })
 export class ReportarArbolPageModule {}

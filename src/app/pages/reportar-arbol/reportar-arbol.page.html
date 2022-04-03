@@ -2,10 +2,16 @@
 <app-header titulo="Reportar arbol enfermo"></app-header>
 
 <ion-content>
-  <mat-stepper [linear]="true" #stepper>
-    <mat-step>
+  <mat-stepper 
+  [linear]="true" 
+  color="success" 
+  #stepper 
+  style="background: var(--ion-color-background)"
+  labelPosition="bottom"
+  class="quad center">
+    <mat-step state="personal">
       
-        <ng-template matStepLabel>Personal</ng-template>
+        <ng-template  matStepLabel>Personal</ng-template>
         <!-- <mat-form-field appearance="fill">
           <mat-label>Name</mat-label>
           <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
@@ -15,7 +21,7 @@
           Next
         </ion-button>      
     </mat-step>
-    <mat-step label="Especie">
+    <mat-step label="Especie" state="species">
       
         <!-- <mat-form-field appearance="fill">
           <mat-label>Address</mat-label>
@@ -33,7 +39,7 @@
         </ion-buttons>
       
     </mat-step>
-    <mat-step>
+    <mat-step state="state">
       <ng-template matStepLabel>Estado</ng-template>
       <h1>Sección 3</h1>
       <ion-buttons>
@@ -45,6 +51,17 @@
         </ion-button>
       </ion-buttons>
     </mat-step>
+
+    <!-- Icon overrides. -->
+  <ng-template matStepperIcon="home">
+    <mat-icon aria-hidden="false" aria-label="Example home icon">perm_contact_calendar</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="species">
+    <mat-icon>list_alt</mat-icon>
+  </ng-template>
+  <ng-template matStepperIcon="state">
+    <mat-icon>perm_media</mat-icon>
+  </ng-template>
   </mat-stepper>  
 </ion-content>
 
