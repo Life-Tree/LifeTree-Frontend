@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Plugins, CameraResultType } from '@capacitor/core'
-
-const {Camera} = Plugins
+import { Camera, CameraResultType } from '@capacitor/camera'
 
 @Injectable({
   providedIn: 'root'

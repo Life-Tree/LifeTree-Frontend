@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule } from '@angular/material/input';
 
 import { ReportarArbolPageRoutingModule } from './reportar-arbol-routing.module';
 
@@ -20,6 +23,11 @@ import { ToastController } from '@ionic/angular';
     FormsModule,
     IonicModule,
     ReportarArbolPageRoutingModule, 
+    MatStepperModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     ComponentsModule
   ],
   providers: [CameraService, GeolocationService, ArbolesService, ToastController],

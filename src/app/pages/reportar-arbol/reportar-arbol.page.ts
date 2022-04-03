@@ -9,6 +9,7 @@ import { Frame, ImageSet } from 'src/app/interfaces/imageset';
 import { Species } from 'src/app/interfaces/especie';
 import { EspeciesModalPage } from '../especies-modal/especies-modal.page';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reportar-arbol',
@@ -30,6 +31,9 @@ export class ReportarArbolPage implements OnInit {
   specieSelected: Species;
   reportState: {loading: boolean, loaded: boolean} = {loading: false, loaded: false};
 
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
   constructor(
     private geolocationService: GeolocationService,
     private cameraService: CameraService,
@@ -37,14 +41,22 @@ export class ReportarArbolPage implements OnInit {
     public toastController: ToastController,
     private router: Router,
     public modalController: ModalController,
-    public sanitizer: DomSanitizer
+    public sanitizer: DomSanitizer,
+    private formBuilder: FormBuilder
   ) { 
     this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
     this.speciesByFamily = new Map<string,Species[]>();    
   }
 
   ngOnInit() {
-    this.getGeolocation()
+    this.getGeolocation();
+    this.firstFormGroup = this.formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
+    
     this.arbolesService.getSpecies().subscribe( (data) => {
       this.species = data;
       for (const sp of data){
@@ -64,6 +76,8 @@ export class ReportarArbolPage implements OnInit {
     this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
     this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
     this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
+
+    
   }
 
   async getGeolocation() {
