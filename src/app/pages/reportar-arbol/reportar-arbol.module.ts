@@ -17,9 +17,11 @@ import { GeolocationService } from 'src/app/services/geolocation/geolocation.ser
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ToastController } from '@ionic/angular';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PersonalComponent } from './steps/personal/personal.component';
 import { SpeciesComponent } from './steps/species/species.component';
+
 
 
 @NgModule({
@@ -35,7 +37,8 @@ import { SpeciesComponent } from './steps/species/species.component';
     MatInputModule,
     MatIconModule,
     MatRadioModule,
-    ComponentsModule
+    ComponentsModule,
+    MatSelectModule
   ],
   providers: [CameraService, GeolocationService, ArbolesService, ToastController, 
     {
