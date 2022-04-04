@@ -51,10 +51,13 @@
                 <input matInput placeholder="eje@example.com" required #email id="email" ngModel name="email"  >
                 <mat-icon class="color" matSuffix>attach_email</mat-icon>
                 <!-- <mat-hint>Hint</mat-hint> -->
-            </mat-form-field> 
-            <ion-button color="success" type="submit" matStepperNext >
-                siguiente
-            </ion-button>  
+            </mat-form-field>
+            <div class="ion-text-center">
+                <ion-button color="success" type="submit" matStepperNext expand="block">
+                    siguiente
+                </ion-button> 
+            </div>
+             
         </form>
     </ion-col>
 </ion-grid>

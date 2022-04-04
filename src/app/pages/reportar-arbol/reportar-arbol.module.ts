@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import {MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
@@ -19,6 +20,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PersonalComponent } from './steps/personal/personal.component';
+import { SpeciesComponent } from './steps/species/species.component';
 
 
 
@@ -34,6 +36,7 @@ import { PersonalComponent } from './steps/personal/personal.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatRadioModule,
     ComponentsModule,
     MatSelectModule
   ],
@@ -41,8 +44,12 @@ import { PersonalComponent } from './steps/personal/personal.component';
     {
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { displayDefaultIndicatorType: false }
+    },
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'accent' },
     }
   ],  
-  declarations: [ReportarArbolPage, PersonalComponent]
+  declarations: [ReportarArbolPage, PersonalComponent, SpeciesComponent]
 })
 export class ReportarArbolPageModule {}

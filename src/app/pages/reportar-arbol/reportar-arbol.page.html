@@ -3,44 +3,23 @@
 
 <ion-content>
   <mat-stepper 
-  [linear]="false" 
+  [linear]="true" 
   color="success"
   #stepper 
   style="background: var(--ion-color-background)"
   labelPosition="bottom"
   class="quad center">
-    <mat-step state="personal">
-      
+    <mat-step state="personal" completed="false">      
         <ng-template  matStepLabel>Personal</ng-template>
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>-->
         <h1>Datos personales</h1>
-        <app-personal [stepper]="stepper"></app-personal>
-        <!-- <ion-button color="success" type="submit"matStepperNext (click)="stepper.next()">
-          Next
-        </ion-button>   -->    
+        <app-personal [stepper]="stepper"></app-personal>   
     </mat-step>
-    <mat-step label="Especie" state="species">
-      
-        <!-- <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                 required>
-        </mat-form-field> -->
-        <h1>Sección 2</h1>
-        <ion-buttons>
-          <ion-button matStepperPrevious (click)="stepper.previous()">
-            Back
-          </ion-button>
-          <ion-button matStepperNext (click)="stepper.next()">
-            Next
-          </ion-button>
-        </ion-buttons>
-      
+
+    <mat-step label="Especie" state="species" completed="false">
+        <app-species [stepper]="stepper"></app-species>           
     </mat-step>
-    <mat-step state="state">
+
+    <mat-step state="state" completed="false">
       <ng-template matStepLabel>Estado</ng-template>
       <h1>Sección 3</h1>
       <ion-buttons>

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title><h3><i>Especies</i></h3></ion-title>
+    <ion-title><h2><i>Especies</i></h2></ion-title>
     <ion-buttons slot="start">
       <ion-button color="success" (click)="salirSinInfo()">Atrás</ion-button>
     </ion-buttons>
@@ -19,17 +19,27 @@
     <ion-list>
       <div *ngFor= "let family of speciesByFamilyToShow | keyvalue: unsorted">
         <ion-item >
-          <h6 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h6>
-          <ion-title size="small"> <h1>{{family.key}}</h1></ion-title>
+          <h5 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h5>
+          <ion-title size="small"> <h2>{{family.key}}</h2></ion-title>
         </ion-item>
-        <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
+        <ion-item *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
+          <ion-label class="text-title-style">
+            {{specie.name}}
+            <br />
+            <ion-badge color="success"><i>{{specie.scientificName}}</i></ion-badge>
+            <ion-badge color="medium"><i>género</i></ion-badge>
+            <ion-badge color="medium">EC</ion-badge>
+          </ion-label>
+          
+        </ion-item>
+        <!-- <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
           <ion-card-header>
             <ion-card-title class="text-title-style" >{{specie.name}}</ion-card-title>
            </ion-card-header>
           <ion-card-content class="text-content-style">
             <i>{{specie.scientificName}}</i>
           </ion-card-content>
-        </ion-card>
+        </ion-card> -->
       </div>    
     </ion-list>
   </div>

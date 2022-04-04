@@ -24,3 +24,21 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+
+.popup-modal{
+    padding: 170px 30px;
+
+    &::part(content) {
+        --border-radius: 30px !important;
+    }
+ }
+
+ .popup-modal-lg{
+    padding: 130px 30px;
+
+    &::part(content) {
+        --border-radius: 30px !important;
+    }
+ }
