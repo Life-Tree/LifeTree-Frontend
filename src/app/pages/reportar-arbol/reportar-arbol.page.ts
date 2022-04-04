@@ -128,6 +128,9 @@ export class ReportarArbolPage implements OnInit {
     if(this.species.length > 0){
       const modal = await this.modalController.create({
         component: EspeciesModalPage,
+        cssClass: 'popup-modal-lg',   
+        mode: 'ios',     
+        backdropDismiss: true,
         
         componentProps: {
           species: this.species,

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import {MatRadioModule, MAT_RADIO_DEFAULT_OPTIONS } from '@angular/material/radio';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule } from '@angular/material/input';
@@ -18,6 +19,7 @@ import { ToastController } from '@ionic/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PersonalComponent } from './steps/personal/personal.component';
+import { SpeciesComponent } from './steps/species/species.component';
 
 
 @NgModule({
@@ -32,14 +34,19 @@ import { PersonalComponent } from './steps/personal/personal.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatRadioModule,
     ComponentsModule
   ],
   providers: [CameraService, GeolocationService, ArbolesService, ToastController, 
     {
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { displayDefaultIndicatorType: false }
+    },
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'accent' },
     }
   ],  
-  declarations: [ReportarArbolPage, PersonalComponent]
+  declarations: [ReportarArbolPage, PersonalComponent, SpeciesComponent]
 })
 export class ReportarArbolPageModule {}
