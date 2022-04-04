@@ -13,21 +13,14 @@
         <ng-template  matStepLabel>Personal</ng-template>
         <app-personal [stepper]="stepper"></app-personal>   
     </mat-step>
+    
     <mat-step label="Especie" state="species" completed="false">
         <app-species [stepper]="stepper"></app-species>           
     </mat-step>
 
-    <mat-step state="state" completed="false">
-      <ng-template matStepLabel>Estado</ng-template>
-      <h1>Sección 3</h1>
-      <ion-buttons>
-        <ion-button matStepperPrevious (click)="stepper.previous()">
-          Back
-        </ion-button>
-        <ion-button matStepperNext (click)="stepper.reset()">
-          Reset
-        </ion-button>
-      </ion-buttons>
+    <mat-step state="images" completed="false">
+      <ng-template matStepLabel>Fotos</ng-template>
+      <app-photos [stepper]="stepper"></app-photos>
     </mat-step>
 
     <!-- Icon overrides. -->
@@ -37,7 +30,7 @@
   <ng-template matStepperIcon="species">
     <mat-icon>list_alt</mat-icon>
   </ng-template>
-  <ng-template matStepperIcon="state">
+  <ng-template matStepperIcon="images">
     <mat-icon>perm_media</mat-icon>
   </ng-template>
   </mat-stepper>  

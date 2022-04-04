@@ -21,6 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { PersonalComponent } from './steps/personal/personal.component';
 import { SpeciesComponent } from './steps/species/species.component';
+import { PhotosComponent } from './steps/photos/photos.component';
 
 
 
@@ -50,6 +51,6 @@ import { SpeciesComponent } from './steps/species/species.component';
       useValue: { color: 'accent' },
     }
   ],  
-  declarations: [ReportarArbolPage, PersonalComponent, SpeciesComponent]
+  declarations: [ReportarArbolPage, PersonalComponent, SpeciesComponent, PhotosComponent]
 })
 export class ReportarArbolPageModule {}

@@ -1,24 +1,25 @@
-<form class="form" ngNativeValidate #form="ngForm" (ngSubmit)="onNext(form)">
+<form  ngNativeValidate #form="ngForm" (ngSubmit)="onNext(form)">
     <ion-grid>
         <ion-row class="center ion-justify-content-center ion-text-center">
             <ion-col size="12" size-sm class="single">
                 <ion-list  class="round" style="height: fit-content;">
                     <h1>Datos de la especie</h1>
                     
-                    <ion-item lines="none">
+                    
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;" (click)="presentModal(form)">
                             <mat-label>Especie</mat-label>
                             <input matInput placeholder="Ej. Mango" trim="blur" ngModel name="commonName" required="true">
                             <mat-icon class="icon-color" matSuffix>expand_more</mat-icon>
-                            <mat-hint >{{hintSpeciesText}} <mat-icon matSuffix color="success">{{iconSpeciesText}}</mat-icon> </mat-hint>
+                            <mat-hint [ngStyle]="{'color': styleExp}">{{hintSpeciesText}} <mat-icon matSuffix color="success">{{iconSpeciesText}}</mat-icon> </mat-hint>
                             <mat-error class="error-message" *ngIf="form.form.get('commonName')?.hasError('required')">
                                 Selecciona una especie de la lista
                             </mat-error>
                         </mat-form-field>                        
-                    </ion-item>
+                    
                     
                     <br>
-                    <ion-item lines="none">                        
+                    <br>
+                                       
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
                             <mat-label>Diámetro del tronco (cm)</mat-label>
                             <input
@@ -39,9 +40,10 @@
                                 <mat-error class="error-message" *ngIf="form.form.get('trunkDiameter')?.hasError('required')">
                                 Debes indicar un diámetro</mat-error>
                         </mat-form-field>                     
-                    </ion-item>
+                    
                     <br>
-                     <ion-item lines="none">                        
+                    <br>
+                                           
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
                             <mat-label>Diámetro de la copa (m)</mat-label>
                             <input
@@ -62,9 +64,10 @@
                                 <mat-error class="error-message" *ngIf="form.form.get('topDiameter')?.hasError('required')">
                                 Debes indicar un diámetro</mat-error>
                         </mat-form-field>                     
-                    </ion-item>
+                    
                     <br>
-                    <ion-item lines="none">                        
+                    <br>
+                                      
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
                             <mat-label>Altura (m)</mat-label>
                             <input
@@ -85,9 +88,10 @@
                                 <mat-error class="error-message" *ngIf="form.form.get('height')?.hasError('required')">
                                 Debes indicar la altura del árbol</mat-error>
                         </mat-form-field>                     
-                    </ion-item>
+                    
                     <br>
-                    <ion-item lines="none">                        
+                    <br>
+                                    
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
                             <mat-label>Bifurcaciones</mat-label>
                             <input
@@ -109,10 +113,11 @@
                                 <mat-error class="error-message" *ngIf="form.form.get('numBranchs')?.hasError('required')">
                                 Debes indicar el número de bifurcaciones</mat-error>
                         </mat-form-field>                     
-                    </ion-item>
+                    
+                    <br>
                     <br>
                     <label id="example-radio-group-label">Hábito de crecimiento</label>
-                    <ion-item lines="none"> 
+                    
                         <mat-radio-group class="example-radio-group"
                             style="width: 100%; padding: 0px" [color]="color" [value]="1" ngModel name="growthHabit" required="true">
                         <ion-grid class="ion-no-padding">
@@ -129,10 +134,11 @@
                             <h5>Selecciona una opción</h5>
                         </mat-error>
                         </mat-radio-group> 
-                    </ion-item>
+                    
+                    <br>
                     <br>
                     <label id="example-radio-group-label">Origen de la especie</label>  
-                    <ion-item lines="none">                                             
+                                                              
                         <mat-radio-group class="example-radio-group"
                         style="width: 100%; padding: 0px" [color]="color" [value]="1" ngModel name="source" required="true">
                         <ion-grid class="ion-no-padding">
@@ -149,7 +155,7 @@
                             <h5>Selecciona una opción</h5>
                         </mat-error>
                         </mat-radio-group>                       
-                    </ion-item>
+                    
                     <br>
                 </ion-list>               
             </ion-col>
