@@ -50,12 +50,6 @@ export class ReportarArbolPage implements OnInit {
 
   ngOnInit() {
     this.getGeolocation();
-    this.firstFormGroup = this.formBuilder.group({
-      firstCtrl: ['', Validators.required],
-    });
-    this.secondFormGroup = this.formBuilder.group({
-      secondCtrl: ['', Validators.required],
-    });
     
     this.arbolesService.getSpecies().subscribe( (data) => {
       this.species = data;

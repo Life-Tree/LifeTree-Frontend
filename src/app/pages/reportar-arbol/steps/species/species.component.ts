@@ -24,6 +24,7 @@ export class SpeciesComponent implements OnInit {
   iconSpeciesText = '';
   hintSpeciesText = 'Seleccione la especie'
   speciesDisable = true;
+  styleExp = '';
 
   constructor(private arbolesService: ArbolesService, 
     public toastController: ToastController, 
@@ -61,6 +62,8 @@ export class SpeciesComponent implements OnInit {
     if(form.valid) {
       this.stepper.steps.get(1).completed = true;  
       this.stepper.next();          
+    }else{
+      this.presentToast('Debe completar los campos requeridos', 'danger'); 
     }
   }
 
@@ -89,6 +92,7 @@ export class SpeciesComponent implements OnInit {
       this.specieSelected = data
       this.iconSpeciesText = 'check_circle';
       this.hintSpeciesText = 'Especie seleccionada';
+      this.styleExp = 'var(--ion-color-success)'
       this.speciesDisable = false;
       let value = this.specieSelected?.name ? this.specieSelected?.name : '';
       form.form.get('commonName').setValue(value);
