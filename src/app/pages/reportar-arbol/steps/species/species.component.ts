@@ -65,7 +65,7 @@ export class SpeciesComponent implements OnInit {
   }
 
   onPrevious(form: NgForm) {
-    console.log(form);
+    this.stepper.previous();
   }
 
   async presentModal(form: NgForm) {
