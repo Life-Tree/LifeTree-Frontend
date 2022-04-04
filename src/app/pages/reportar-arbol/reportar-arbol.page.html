@@ -11,10 +11,8 @@
   class="quad center">
     <mat-step state="personal" completed="false">      
         <ng-template  matStepLabel>Personal</ng-template>
-        <h1>Datos personales</h1>
         <app-personal [stepper]="stepper"></app-personal>   
     </mat-step>
-
     <mat-step label="Especie" state="species" completed="false">
         <app-species [stepper]="stepper"></app-species>           
     </mat-step>
