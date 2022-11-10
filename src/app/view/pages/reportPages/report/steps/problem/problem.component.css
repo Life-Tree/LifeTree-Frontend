@@ -1,0 +1,113 @@
+.image-bg{
+    background-position: center;
+    background-size: cover;    
+    height: 100%;
+    border-radius: 10px;
+}
+
+.cancel-icon{
+    border-radius: 50%; 
+    background-color: black; 
+    color: white; 
+    width: 30px; 
+    height: 30px;    
+}
+
+.cancel-button{
+    background: transparent;
+    position: relative;
+    top: 1px;
+    left: 85%;
+    transform: translateX(-50%);
+}
+
+.buttons-rigth{
+    position: relative;
+    right: 10%;
+    top: 4%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+}
+
+.position-button{
+    position: relative;
+    right: 5%;
+    top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button-load{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+.image-bg{
+    background-position: center;
+    background-size: cover;    
+    height: 100%;
+    border-radius: 10px;
+}
+
+.cancel-icon{
+    border-radius: 50%; 
+    background-color: black; 
+    color: white; 
+    width: 30px; 
+    height: 30px;    
+}
+
+.buttons-rigth{
+    position: relative;
+    right: 10%;
+    top: 4%;
+    margin-bottom: 5%;
+    margin-left: 20%;
+}
+
+.position-button{
+    position: relative;
+    right: 5%;
+    top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.button-load{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+ion-checkbox {
+    --size: 32px;
+    --background-checked: #00d13f;
+}
+  
+ion-checkbox::part(container) {
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    
+}
+
+.text-size-x-large{
+    font-size: x-large;
+}
+
+.postion-checkbox{
+    display: block;
+    z-index: 4;
+    position: absolute;
+    top: 8%;
+    left: 6%;
+}
+
+.container-button{
+    display: block;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}

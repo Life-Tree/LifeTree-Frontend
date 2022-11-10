@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Arbol } from 'src/app/interfaces/arbol.interface';
+import { Arbol } from 'src/app/models/arbol.interface';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ArbolReportar } from 'src/app/interfaces/arbolReportar.interface';
-import { Species } from 'src/app/interfaces/especie';
+import { ArbolReportar } from 'src/app/models/arbolReportar.interface';
 import { Options } from 'selenium-webdriver';
+import { Especies } from 'src/app/models/especie';
 
 
 export const COMMON_SPECIES_GROUP_NAME = "Especies mas comunes";
@@ -33,7 +33,7 @@ export class ArbolesService {
   }
 
   getSpecies(){
-    return this.httpClient.get<Species[]>(`${environment.lifeTreeUrl}arboles/species`)
+    return this.httpClient.get<Especies[]>(`${environment.lifeTreeUrl}arboles/species`)
   }
 
   registrarArbol(arbol:ArbolReportar){
@@ -52,14 +52,14 @@ export class ArbolesService {
     return this.httpClient.post<string>(`${environment.lifeTreeUrl}/arboles/intervencion/${id}`,arbol)
   }
 
-  public orderSpeciesByFamily(species: Species[], withCommon = true): Map<string, Species[]> {
-    let speciesMap = new Map<string, Species[]>();
+  public orderSpeciesByFamily(species: Especies[], withCommon = true): Map<string, Especies[]> {
+    let speciesMap = new Map<string, Especies[]>();
     if(withCommon){
       speciesMap.set(COMMON_SPECIES_GROUP_NAME, this.getCommonSpecies(species));
     }    
     for(let sp of species){
       if (sp.family != "unknown"){
-        let spsOfFamily: Species[] = [];
+        let spsOfFamily: Especies[] = [];
         if(speciesMap.has(sp.family)){
           spsOfFamily = speciesMap.get(sp.family);
         }
@@ -70,11 +70,11 @@ export class ArbolesService {
     return speciesMap;
   }
 
-  filterSpeciesByQuery(species: Species[], query: string){
+  filterSpeciesByQuery(species: Especies[], query: string){
     return species.filter((sp) => sp.name.toLowerCase().includes(query.toLowerCase()));
   }
 
-  public getCommonSpecies(species: Species[]): Species[] {
-    return species.filter((sp:Species) => this.commonSpeciesNames.includes(sp.name));
+  public getCommonSpecies(species: Especies[]): Especies[] {
+    return species.filter((sp:Especies) => this.commonSpeciesNames.includes(sp.name));
   }
 }

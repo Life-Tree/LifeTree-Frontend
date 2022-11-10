@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start" defaultHref="/">
+      <ion-back-button color="success" (click)="dismiss()"></ion-back-button>
+    </ion-buttons> 
+    <img src="../../../assets/Logo.svg" class="logo animated fadeIn" alt="" >
+    <!--ion-title><h1>Arbol</h1></ion-title-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides mode="ios" pager="true" [options]="slideOpts" >
+    <ion-slide *ngFor="let img of arbol.imageSet.images">
+      <ion-card>
+        <ion-card-header>
+          <img src="{{img.url}}" alt="" srcset=""> 
+          <h4><i>{{img.frame}}</i> </h4>
+        </ion-card-header>
+      </ion-card>          
+    </ion-slide>               
+  </ion-slides>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="text-align: center;">{{arbol.ubicacion.barrio}}</ion-card-title>      
+    </ion-card-header>
+    <ion-card-content>
+      <ion-label style="display: block;"><b><u>Descripción:</u></b> {{arbol.descripcion}}</ion-label>
+      <ion-label style="display: block;"><b><u>Ubicación:</u></b>  lat: {{arbol.ubicacion.latitud}}, lon: {{arbol.ubicacion.longitud}}</ion-label>
+      <ion-label style="display: block;"><b><u>Especie:</u></b> {{arbol.species.name}}</ion-label>      
+      <ion-label style="display: block;"><b><u>Estado:</u></b> {{arbol.estado}}</ion-label>
+    </ion-card-content>
+    <ion-card-content>
+      <div >
+        <!--ion-button color="success" fill="clear" (click)="abrirModalReportarIntervencion()">Reportar Intervencion</ion-button-->
+        <hr>
+      </div>  
+      <div *ngIf="user.tipo == 'ADMIN' ">
+        <ion-button color="danger" fill="clear" (click)="presentAlertConfirm()">Eliminar</ion-button>
+        <hr>
+      </div>        
+    </ion-card-content>    
+    
+  </ion-card>
+  <!--div style="text-align: center; padding: 2%;">
+    <img src="{{arbol.imagenURL}}" alt="" srcset="">
+  </div>
+  
+  <div style="padding: 2%; border-top: 3px solid #bbb;">
+    <h2>{{arbol.ubicacion.barrio}}</h2>
+    <p>{{arbol.description}}</p>
+  </div>
+
+  <ion-button style="padding-left: 2%; padding-right: 2%;" color="success" fill="solid" expand="full" (click)="dismiss()">Atras</ion-button-->
+</ion-content>

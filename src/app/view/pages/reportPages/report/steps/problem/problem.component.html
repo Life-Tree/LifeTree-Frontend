@@ -1,0 +1,149 @@
+<div style="padding-bottom: 30px; border-top-width: 10px; padding-top: 20px;">
+    <div style="text-align: center;">
+        <h4 id="example-radio-group-label" style="font-size: x-large;">¿Conoces la afección del árbol?</h4>  
+    </div>
+    <div style="font-size: large; padding-top: 20px;">
+        <mat-radio-group class="example-radio-group" style="width: 100%; font-size: larger;" [color]="color" [value]="1" ngModel name="source" required="true">
+            <ion-grid class="ion-no-padding">
+                <ion-row class="ion-justify-content-around ion-nowrap">
+                    <mat-radio-button class="radio-button" [value]="1">
+                        <ion-col size="12"> Si </ion-col>
+                    </mat-radio-button>
+                    <mat-radio-button class="radio-button" [value]="2">
+                        <ion-col size="12"> No </ion-col>
+                    </mat-radio-button>
+                </ion-row>
+            </ion-grid>
+        </mat-radio-group> 
+    </div>   
+</div>
+
+
+<!-- Content -->
+
+<ion-grid>
+    <div>
+        <div style="text-align: center;">
+            <h4 id="example-radio-group-label" style="font-size: x-large; margin-bottom: 20px;">¿Donde ves la afección?</h4>  
+        </div>
+        <ion-grid>
+        <ion-row style="justify-content: space-between;">
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load" >
+                    <div class="postion-checkbox">
+                        <ion-checkbox [(ngModel)]="treeParts[0]" slot="start" mode="ios" ></ion-checkbox>
+                    </div>
+                    <div class="container-button">
+                        <button class="button-load" (click)="changeCheckbox(0)">
+                            <div class="text-size-x-large"><b><p class="edit-text">Raiz</p></b></div>  
+                        </button>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load">
+                    <div class="postion-checkbox">
+                        <ion-checkbox [(ngModel)]="treeParts[1]" slot="start" mode="ios" (ionChange)="changeCheckbox()"></ion-checkbox>
+                    </div>
+                    <div class="container-button">
+                        <button  class="button-load" (click)="check()">
+                            <div class="text-size-x-large">
+                                <b><p class="edit-text">Tallo</p></b>
+                            </div>       
+                        </button>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load">
+                    <div class="postion-checkbox">
+                        <ion-checkbox [(ngModel)]="raiz" slot="start" mode="ios" (ionChange)="changeCheckbox()"></ion-checkbox>
+                    </div>
+                    <div class="container-button">
+                        <button class="button-load" (click)="check()">
+                            <div class="text-size-x-large">
+                                <b><p class="edit-text">Fruto</p></b>
+                            </div>       
+                        </button>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load">
+                    <div class="postion-checkbox">
+                        <ion-checkbox [(ngModel)]="raiz" slot="start" mode="ios" (ionChange)="changeCheckbox()"></ion-checkbox>
+                    </div>
+                    <div class="container-button">
+                        <button class="button-load" (click)="check()">
+                            <div class="text-size-x-large">
+                                <b><p class="edit-text">Hojas</p></b>
+                            </div>       
+                        </button>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load">
+                    <div class="postion-checkbox">
+                        <ion-checkbox [(ngModel)]="raiz" slot="start" mode="ios" (ionChange)="changeCheckbox()"></ion-checkbox>
+                    </div>
+                    <div class="container-button">
+                        <button class="button-load" (click)="check()">
+                            <div class="text-size-x-large">
+                                <b><p class="edit-text">Flor</p></b>
+                            </div>       
+                        </button>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col size="6" sizeMd="2" style="height: 15vh;">
+                <div class="button-load">
+                        <div class="postion-checkbox" (click)="check()">
+                            <ion-checkbox [(ngModel)]="raiz" slot="start" mode="ios" (ionChange)="changeCheckbox()"></ion-checkbox>
+                        </div>
+                        <div class="container-button">
+                            <button class="button-load">
+                                <div class="text-size-x-large">
+                                    <b><p class="edit-text">Complemento</p></b>
+                                </div>       
+                            </button>
+                        </div>
+                </div>
+            </ion-col>
+            
+        </ion-row>
+    </ion-grid>
+    </div>
+
+    <div>
+    </div>
+
+    <div>
+        <ion-row style="margin-top: 10px;">
+            <ion-col size="6">
+                <ion-button
+                    mode="ios"
+                    color="primary"
+                    fill="outline"
+                    expand="block"
+                    (click)="onPrevious()">
+                        Atrás
+                    </ion-button>
+            </ion-col>
+            <ion-col  size="6">
+                    <ion-button
+                    mode="ios"
+                    color="primary"
+                    (click)="onFinish()"
+                    expand="block">
+                        Siguiente
+                    </ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-grid>
+
+<div>
+
+</div>
+
