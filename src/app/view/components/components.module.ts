@@ -8,16 +8,17 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ReportListComponent } from './reportList/reportList.component';
 import { MapComponent } from './map/map.component';
+import { ImgSetterComponent } from './img-setter/img-setter.component';
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent],
+  declarations: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent],
   imports: [
     CommonModule, IonicModule, RouterModule, HttpClientModule
   ],
   providers: [ArbolesService, HttpClient],
-  exports: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent]
+  exports: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent]
 })
 export class ComponentsModule { }

@@ -1,0 +1,12 @@
+
+<button *ngIf="!imageData.loaded" (click)="setImage()" class="button-load">
+    <div><h1><b>+</b></h1></div>
+    <div><p class="edit-text">{{name}}</p></div>       
+</button>
+<div *ngIf="imageData.loaded" 
+    class="edit-button  image-bg" 
+    [style.background-image]="'url('+imageData.base64+')'">
+    <button class="cancel-button" (click)="removeImage()">
+        <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
+    </button>
+</div>
