@@ -1,0 +1,167 @@
+<form  ngNativeValidate #form="ngForm" (ngSubmit)="onNext(form)">
+    <ion-grid>
+        <ion-row class="center ion-justify-content-center ion-text-center">
+            <ion-col size="12" size-sm class="single">
+                <ion-list  class="round" style="height: fit-content;">
+                    <h1>Datos de la especie</h1>
+                    
+                    
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;" (click)="presentModal(form)">
+                            <mat-label>Especie</mat-label>
+                            <input matInput placeholder="Ej. Mango" trim="blur" ngModel name="commonName" required="true">
+                            <mat-icon class="icon-color" matSuffix>expand_more</mat-icon>
+                            <mat-hint [ngStyle]="{'color': styleExp}">{{hintSpeciesText}} <mat-icon matSuffix color="success">{{iconSpeciesText}}</mat-icon> </mat-hint>
+                            <mat-error class="error-message" *ngIf="form.form.get('commonName')?.hasError('required')">
+                                Selecciona una especie de la lista
+                            </mat-error>
+                        </mat-form-field>                        
+                    
+                    
+                    <br>
+                    <br>
+
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Dirección</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                inputmode="text"
+                                ngModel
+                                name="address"
+                                trim="blur"
+                                required="true"
+                                />
+                                <mat-icon class="icon-color" matSuffix>emoji_transportation</mat-icon>
+                                <mat-hint>Dirección de la ubicación del arbol</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('address')?.hasError('required')">
+                                Debes indicar la dirección</mat-error>
+                        </mat-form-field>  
+
+                    <br>
+                    <br>
+
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Barrio</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                inputmode="text"
+                                ngModel
+                                name="neighborhood"
+                                trim="blur"
+                                required="true"
+                                />
+                                <mat-icon class="icon-color" matSuffix>emoji_transportation</mat-icon>
+                                <mat-hint>Barrio donde se encuentra ubicado el arbol</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('neighborhood')?.hasError('required')">
+                                Debes indicar el barrio</mat-error>
+                        </mat-form-field>  
+
+                    <br>
+                    <br>
+                                       
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Diámetro del tronco (cm)</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                inputmode="numeric"
+                                pattern="([0-9]*[.])?[0-9]+"
+                                ngModel 
+                                name="dch"
+                                trim="blur"
+                                />
+                                <mat-icon class="icon-color" matSuffix>straighten</mat-icon>
+                                <mat-hint>Diámetro a la altura del pecho</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('dch')?.hasError('pattern') 
+                                && !form.form.get('dch')?.hasError('required')">
+                                Verifica que el valor esté bien escrito</mat-error>
+                                <mat-error class="error-message" *ngIf="form.form.get('dch')?.hasError('required')">
+                                Debes indicar un diámetro</mat-error>
+                        </mat-form-field>                     
+                    
+                    <br>
+                    <br>                  
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Diámetro de la copa (m)</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                inputmode="numeric" 
+                                ngModel
+                                pattern="([0-9]*[.])?[0-9]+"
+                                name="cupDiameter"
+                                trim="blur"
+                                />
+                                <mat-icon class="icon-color" matSuffix>straighten</mat-icon>
+                                <mat-hint>Diámetro estimado de la copa</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('cupDiameter')?.hasError('pattern') 
+                                && !form.form.get('cupDiameter')?.hasError('required')">
+                                Verifica que el valor esté bien escrito</mat-error>
+                                <mat-error class="error-message" *ngIf="form.form.get('cupDiameter')?.hasError('required')">
+                                Debes indicar un diámetro</mat-error>
+                        </mat-form-field>                     
+                    
+                    <br>
+                    <br>
+                                      
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Altura (m)</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                pattern="([0-9]*[.])?[0-9]+"
+                                inputmode="numeric" 
+                                ngModel 
+                                name="height"
+                                trim="blur"
+                                />
+                                <mat-icon class="icon-color" matSuffix>straighten</mat-icon>
+                                <mat-hint>Altura estimada del árbol</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('height')?.hasError('pattern') 
+                                && !form.form.get('height')?.hasError('required')">
+                                Verifica que el valor esté bien escrito</mat-error>
+                                <mat-error class="error-message" *ngIf="form.form.get('height')?.hasError('required')">
+                                Debes indicar la altura del árbol</mat-error>
+                        </mat-form-field>                     
+                    
+                    <br>
+                    <br>
+                                    
+                        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+                            <mat-label>Bifurcaciones</mat-label>
+                            <input
+                                matInput
+                                type="tel"
+                                digitOnly
+                                pattern="\d*"
+                                inputmode="numeric" 
+                                ngModel 
+                                min="0" step="1"
+                                name="numForks"
+                                trim="blur"
+                                />
+                                <mat-icon class="icon-color" matSuffix>device_hub</mat-icon>
+                                <mat-hint>Número de bifurcaciones</mat-hint>
+                                <mat-error class="error-message" *ngIf="form.form.get('numForks')?.hasError('pattern') 
+                                && !form.form.get('numForks')?.hasError('required')">
+                                Solo números enteros</mat-error>
+                                <mat-error class="error-message" *ngIf="form.form.get('numForks')?.hasError('required')">
+                                Debes indicar el número de bifurcaciones</mat-error>
+                        </mat-form-field>                    
+                    <br>
+                </ion-list>               
+            </ion-col>
+        </ion-row>
+        <div class="ion-text-center">
+            <ion-button color="success" type="submit" matStepperNext expand="block">
+                siguiente
+            </ion-button> 
+        </div>
+    </ion-grid>
+</form>

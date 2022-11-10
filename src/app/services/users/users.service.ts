@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/interfaces/user.interface';
+import { User } from 'src/app/models/user.interface';
 
 export let user: User = {nickname: "User", password: "NA", tipo: "CIUDADANO"};
 

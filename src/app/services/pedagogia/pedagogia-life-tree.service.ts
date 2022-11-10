@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pedagogia } from 'src/app/interfaces/pedagogia.interface';
+import { Pedagogia } from 'src/app/models/pedagogia.interface';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

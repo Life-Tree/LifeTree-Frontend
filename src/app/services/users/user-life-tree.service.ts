@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/interfaces/user.interface';
+import { User } from 'src/app/models/user.interface';
 import { environment } from 'src/environments/environment';
 
 export let user: User = { nickname: "User", password: "NA", tipo: "CIUDADANO" };

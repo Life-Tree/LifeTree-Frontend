@@ -8,71 +8,52 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'contact',
-    loadChildren: () => import('./pages/contact/contact.module').then( m => m.ContactPageModule)
-  },
-  {
     path: 'inicio',
-    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+    loadChildren: () => import('./view/pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
   {
     path: 'bienvenido',
-    loadChildren: () => import('./pages/bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule)
+    loadChildren: () => import('./view/pages/bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./view/pages/authPages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'inicio-admin',
-    loadChildren: () => import('./pages/inicio-admin/inicio-admin.module').then( m => m.InicioAdminPageModule)
+    loadChildren: () => import('./view/pages/inicio-admin/inicio-admin.module').then( m => m.InicioAdminPageModule)
   },
   {
-    path: 'reportar',
-    loadChildren: () => import('./pages/reportar/reportar.module').then( m => m.ReportarPageModule)
-  },
-  {
-    path: 'intervenciones',
-    loadChildren: () => import('./pages/intervenciones/intervenciones.module').then( m => m.IntervencionesPageModule)
-  },
-  {
-    path: 'reportar-arbol',
-    loadChildren: () => import('./pages/reportar-arbol/reportar-arbol.module').then( m => m.ReportarArbolPageModule)
-  },
-  {
-    path: 'reportar-intervencion',
-    loadChildren: () => import('./pages/reportar-intervencion/reportar-intervencion.module').then( m => m.ReportarIntervencionPageModule)
+    path: 'report',
+    loadChildren: () => import('./view/pages/reportPages/report/report.module').then( m => m.ReportPageModule)
   },
   {
     path: 'instructivos',
-    loadChildren: () => import('./pages/instructivos/instructivos.module').then( m => m.InstructivosPageModule)
+    loadChildren: () => import('./view/pages/instructivos/instructivos.module').then( m => m.InstructivosPageModule)
   },
   {
-    path: 'indicadores',
-    loadChildren: () => import('./pages/indicadores/indicadores.module').then( m => m.IndicadoresPageModule)
+    path: 'reportsMap',
+    loadChildren: () => import('./view/pages/reportPages/reportsMap/reportsMap.module').then( m => m.ReportsMapPageModule)
   },
   {
-    path: 'arboles-list',
-    loadChildren: () => import('./pages/arboles-list/arboles-list.module').then( m => m.ArbolesListPageModule)
+    path: 'reportList',
+    loadChildren: () => import('./view/pages/reportPages/reportList/reportList.module').then( m => m.ReportListPageModule)
   },
   {
-    path: 'intervencion-modal',
-    loadChildren: () => import('./pages/intervencion-modal/intervencion-modal.module').then( m => m.IntervencionModalPageModule)
-  },
-  {
-    path: 'arbol-modal',
-    loadChildren: () => import('./pages/arbol-modal/arbol-modal.module').then( m => m.ArbolModalPageModule)
+    path: 'reportDetail',
+    loadChildren: () => import('./view/pages/reportPages/reportDetail/reportDetail.module').then( m => m.ReportDetailPageModule)
   },
   {
     path: 'intructivo-intervenciones',
-    loadChildren: () => import('./pages/intructivo-intervenciones/intructivo-intervenciones.module').then( m => m.IntructivoIntervencionesPageModule)
-  },  {
-    path: 'especies-modal',
-    loadChildren: () => import('./pages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
+    loadChildren: () => import('./view/pages/intructivo-intervenciones/intructivo-intervenciones.module').then( m => m.IntructivoIntervencionesPageModule)
   },
   {
-    path: 'reports',
-    loadChildren: () => import('./pages/reports/reports.module').then( m => m.ReportsPageModule)
+    path: 'especies-modal',
+    loadChildren: () => import('./view/pages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
+  },
+  {
+    path: 'reportStatistics',
+    loadChildren: () => import('./view/pages/reportPages/reportStatistics/reportStatistics.module').then( m => m.ReportStatisticsModule)
   },
 
 ];
