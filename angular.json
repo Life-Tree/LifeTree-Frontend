@@ -180,8 +180,9 @@
   },
   "cli": {
     "schematicCollections": [
-      "@angular-eslint/schematics"
-    ]
+      "@ionic/angular-toolkit"
+    ],
+    "analytics": "0d4a96b7-bf88-471d-a4ee-0d2fa348434d"
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {
