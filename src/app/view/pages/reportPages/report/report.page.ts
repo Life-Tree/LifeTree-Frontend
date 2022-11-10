@@ -7,7 +7,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Frame, ImageSet } from 'src/app/models/imageset';
 import { DomSanitizer } from '@angular/platform-browser';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { EspeciesModalPage } from '../../especies-modal/especies-modal.page';
 import { Especies } from 'src/app/models/especie';
 
@@ -31,8 +31,8 @@ export class ReportPage implements OnInit {
   specieSelected: Especies;
   reportState: {loading: boolean, loaded: boolean} = {loading: false, loaded: false};
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  firstFormGroup: UntypedFormGroup;
+  secondFormGroup: UntypedFormGroup;
 
   constructor(
     private geolocationService: GeolocationService,
@@ -42,7 +42,7 @@ export class ReportPage implements OnInit {
     private router: Router,
     public modalController: ModalController,
     public sanitizer: DomSanitizer,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) { 
     this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
     this.speciesByFamily = new Map<string,Especies[]>();    
