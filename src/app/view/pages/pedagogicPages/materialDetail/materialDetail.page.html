@@ -3,14 +3,15 @@
 <ion-content class="ion-padding">
   <div class="margings">
     <div>
-      <ion-text style="text-align: center ;">
+      <ion-text style="text-align: center ;" color="tertiary">
         <h1>{{material?.title}}</h1>
       </ion-text>
     </div>
-    <div *ngFor="let segment of material?.segments" style="margin-bottom: 9%;">
-      <ng-container *ngIf="segment.file.url !=''">
-        <ion-card style="text-align: center;">
-          <img alt="Silhouette of mountains" src="{{segment.file.url}}" />
+    <ion-card style="text-align: center;">
+      <div *ngFor="let segment of material?.segments" style="margin-bottom: 9%;">
+          <ng-container *ngIf="segment.file.url !=''">
+            <img alt="Silhouette of mountains" src="{{segment.file.url}}" />
+          </ng-container>
           <ng-container *ngIf="segment.text !=''" >
             <div class="aligText" >
               <ion-text>
@@ -18,9 +19,8 @@
               </ion-text>
             </div>
           </ng-container>
-        </ion-card>
-      </ng-container>
-    </div>
+      </div>
+  </ion-card>
   </div>
   
 
