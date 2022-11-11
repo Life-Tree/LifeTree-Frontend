@@ -1,8 +1,8 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title><h2><i>Especies</i></h2></ion-title>
     <ion-buttons slot="start">
-      <ion-button color="success" (click)="salirSinInfo()">Atrás</ion-button>
+      <ion-button (click)="salirSinInfo()">Atrás</ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-searchbar
@@ -10,7 +10,7 @@
   [animated]="true"
   [placeholder] = "'Buscar especie'"
   (ionInput) = "filter($event)"></ion-searchbar>
-  <ion-button color="success" fill="clear" style="width: 100%;" (click)="salirDefault()">¿Desconozco la especie?</ion-button>
+  <ion-button color="secondary" fill="clear" style="width: 100%;" (click)="salirDefault()">¿Desconozco la especie?</ion-button>
 </ion-header>
 
 <ion-content>
@@ -26,20 +26,12 @@
           <ion-label class="text-title-style">
             {{specie.name}}
             <br />
-            <ion-badge color="success"><i>{{specie.scientificName}}</i></ion-badge>
-            <ion-badge color="medium"><i>{{specie.genre}}</i></ion-badge>
-            <ion-badge color="medium">{{conservationStatusKeyValue[specie.conservationStatus]}}</ion-badge>
+            <ion-badge color="primary"><i>{{specie.scientificName}}</i></ion-badge>
+            <ion-badge color="secondary"><i>{{specie.genre}}</i></ion-badge>
+            <ion-badge color="tertiary">{{conservationStatusKeyValue[specie.conservationStatus]}}</ion-badge>
           </ion-label>
           
         </ion-item>
-        <!-- <ion-card *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
-          <ion-card-header>
-            <ion-card-title class="text-title-style" >{{specie.name}}</ion-card-title>
-           </ion-card-header>
-          <ion-card-content class="text-content-style">
-            <i>{{specie.scientificName}}</i>
-          </ion-card-content>
-        </ion-card> -->
       </div>    
     </ion-list>
   </div>

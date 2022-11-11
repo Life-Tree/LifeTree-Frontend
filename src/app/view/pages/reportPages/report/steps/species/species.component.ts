@@ -101,7 +101,7 @@ export class SpeciesComponent implements OnInit {
       this.specieSelected = data
       this.iconSpeciesText = 'check_circle';
       this.hintSpeciesText = 'Especie seleccionada';
-      this.styleExp = 'var(--ion-color-success)'
+      this.styleExp = 'var(--ion-color-primary)'
       this.speciesDisable = false;
       let value = this.specieSelected?.name ? this.specieSelected?.name : '';
       form.form.get('commonName').setValue(value);

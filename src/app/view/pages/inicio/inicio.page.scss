@@ -28,3 +28,16 @@ ion-slide{
     margin-left: auto;
     margin-right: auto;
 }
+
+img{
+    max-height: 50vh;
+}
+
+ion-button{
+    margin-bottom: 5%;
+}
+
+ion-card-title{
+    font-size: medium;
+    color: var(--ion-color-tertiary);
+}

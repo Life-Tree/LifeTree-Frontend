@@ -20,7 +20,7 @@
                 [(ngModel)]="material.title"
                 />
                 <mat-hint>Titulo del material pedagogico</mat-hint>
-                <mat-error class="error-message" *ngIf="material.title == ''">
+                <mat-error class="error-message" *ngIf="material.title === ''">
                   Debes ingresar un parrafo
                 </mat-error>
           </mat-form-field>
@@ -57,7 +57,7 @@
           </ion-button> 
         </div>
         <div>
-          <ion-button color="success"  expand="block" (click)="selectSubmit()">
+          <ion-button color="primary"  expand="block" (click)="selectSubmit()">
             Guardar
           </ion-button> 
         </div>

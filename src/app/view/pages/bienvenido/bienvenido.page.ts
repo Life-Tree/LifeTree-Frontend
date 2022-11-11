@@ -6,6 +6,7 @@ import { UserLifeTreeService, user } from 'src/app/services/users/user-life-tree
   templateUrl: './bienvenido.page.html',
   styleUrls: ['./bienvenido.page.scss'],
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class BienvenidoPage implements OnInit {
   constructor( private userService : UserLifeTreeService) { }
 

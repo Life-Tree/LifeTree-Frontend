@@ -28,7 +28,7 @@ export class ReportStatisticsPage implements OnInit {
       setTimeout(() => {
         this.createTPerSpeciesChart();
         this.createTPerNeighborChart();
-      }, 400);
+      }, 100);
     });    
   }
 

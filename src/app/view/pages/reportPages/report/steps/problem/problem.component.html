@@ -1,16 +1,16 @@
 <div style="padding-bottom: 30px; border-top-width: 10px; padding-top: 20px;">
     <div style="text-align: center;">
-        <h4 id="example-radio-group-label" style="font-size: x-large;">¿Conoces la afección del árbol?</h4>  
+        <h4 id="example-radio-group-label" style="font-size: x-large; color: var(--ion-color-tertiary);">¿Conoces la afección del árbol?</h4>  
     </div>
     <div style="font-size: large; padding-top: 20px;">
         <mat-radio-group class="example-radio-group" style="width: 100%; font-size: larger;" [value]="1" ngModel name="source" required="true" (change)="onChangeAnswer($event)">
             <ion-grid class="ion-no-padding">
                 <ion-row class="ion-justify-content-around ion-nowrap">
-                    <mat-radio-button class="radio-button" [value]="1">
+                    <mat-radio-button color="secondary" class="radio-button" [value]="1">
                         <ion-col size="12"> Si </ion-col>
                     </mat-radio-button>
-                    <mat-radio-button class="radio-button" [value]="2">
-                        <ion-col size="12"> No </ion-col>
+                    <mat-radio-button color="secondary" class="radio-button" [value]="2">
+                        <ion-col size="12">No</ion-col>
                     </mat-radio-button>
                 </ion-row>
             </ion-grid>
@@ -25,8 +25,8 @@
     <div *ngIf="knowCondition === 1">
         <ion-list>
             <ion-item>
-                <ion-label>Affecciones</ion-label>
-                <ion-select placeholder="Selecciona la afección" [(ngModel)]="conditionSelected" mode="ios">
+                <ion-label color="tertiary">Affecciones</ion-label>
+                <ion-select color="secondary" placeholder="Selecciona la afección" [(ngModel)]="conditionSelected" mode="ios">
                 <ion-select-option *ngFor="let condition of conditions" [value]="condition">{{this.extractConditionValue(condition)}}</ion-select-option>
                 </ion-select>
             </ion-item>
@@ -34,7 +34,7 @@
     </div>
     <div *ngIf="knowCondition === 2">
         <div style="text-align: center;">
-            <h4 id="example-radio-group-label" style="font-size: x-large; margin-bottom: 20px;">¿Donde ves la afección?</h4>  
+            <h4 id="example-radio-group-label" style="font-size: large; margin-bottom: 20px; color: var(--ion-color-tertiary);">¿Donde ves la afección?</h4>  
         </div>
         <ion-grid>
             <ion-row style="justify-content: space-between;">

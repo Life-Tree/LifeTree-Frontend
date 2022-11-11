@@ -84,7 +84,7 @@
 
 ion-checkbox {
     --size: 32px;
-    --background-checked: #00d13f;
+    --background-checked: var(--ion-color-primary);
 }
   
 ion-checkbox::part(container) {
@@ -114,4 +114,25 @@ ion-checkbox::part(container) {
     z-index: 1;
     width: 100%;
     height: 100%;
+}
+
+::ng-deep [aria-checked=true].sc-ion-alert-ios .alert-radio-label.sc-ion-alert-ios {
+    color:  var(--ion-color-secondary)!important;
+}
+
+::ng-deep [aria-checked=true].sc-ion-alert-ios .alert-radio-inner.sc-ion-alert-ios {
+    border-color: var(--ion-color-secondary);
+}
+
+::ng-deep .alert-button.sc-ion-alert-ios{
+    color:  var(--ion-color-secondary)!important;
+}
+
+ion-select::part(text) {
+    color: var(--ion-color-tertiary);
+}
+  
+ion-select::part(icon) {
+    color: var(--ion-color-secondary);
+    opacity: 1;
 }

@@ -8,7 +8,7 @@
                             <mat-label>Especie</mat-label>
                             <input matInput placeholder="Ej. Mango" trim="blur" ngModel name="commonName" required="true">
                             <mat-icon class="icon-color" matSuffix>expand_more</mat-icon>
-                            <mat-hint [ngStyle]="{'color': styleExp}">{{hintSpeciesText}} <mat-icon matSuffix color="success">{{iconSpeciesText}}</mat-icon> </mat-hint>
+                            <mat-hint [ngStyle]="{'color': styleExp}">{{hintSpeciesText}} <mat-icon matSuffix color="primary">{{iconSpeciesText}}</mat-icon> </mat-hint>
                             <mat-error class="error-message" *ngIf="form.form.get('commonName')?.hasError('required')">
                                 Selecciona una especie de la lista
                             </mat-error>
@@ -155,7 +155,7 @@
             </ion-col>
         </ion-row>
         <div class="ion-text-center">
-            <ion-button color="success" type="submit" matStepperNext expand="block">
+            <ion-button color="primary" type="submit" matStepperNext expand="block">
                 siguiente
             </ion-button> 
         </div>

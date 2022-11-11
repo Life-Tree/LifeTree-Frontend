@@ -56,15 +56,9 @@ export class MenuComponent implements OnInit {
     };
     
     this.consultarInstructivoIdentificacion ={
-      name: "Material pedagogico",
+      name: "Aprende a identificar",
       icon:"../../../assets/cuaderno.svg",
       redirectTo: "/listMaterial"
-    };
-
-    this.consultarInstructivoIntervencion ={
-      name: "Aprende sobre intervenciones",
-      icon:"../../../assets/ambiente.svg",
-      redirectTo: "/intructivo-intervenciones"
     };
 
   }

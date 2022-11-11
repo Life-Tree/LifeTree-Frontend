@@ -6,15 +6,15 @@
 <ion-grid>
   <ion-row>
       <ion-col> 
-        <div style="text-align: center;">
+        <div style="text-align: center; color: var(--ion-color-tertiary);">
           <h5 id="example-radio-group-label" style="font-size: x-large;">Toma fotos por cada signo o síntoma que observes</h5>  
       </div>
       </ion-col>
   </ion-row>
   <ion-row>
       <ion-col>
-        <ion-label color="Primary" ><i>Imágenes añadidas </i></ion-label>
-        <ion-label color="Primary">({{this.reportService.reportedTree.healthStatus.reportedSignSymptoms.length}}/{{reportService.signSymptomsToShow.length}})</ion-label>
+        <ion-label color="tertiary" ><i>Imágenes añadidas </i></ion-label>
+        <ion-label color="tertiary">({{this.reportService.reportedTree.healthStatus.reportedSignSymptoms.length}})</ion-label>
       </ion-col>
   </ion-row>
 </ion-grid>

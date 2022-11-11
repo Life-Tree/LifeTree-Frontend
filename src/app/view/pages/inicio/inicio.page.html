@@ -9,7 +9,8 @@
                             <ion-card-title>¿VES UN PROBLEMA EN EL ÁRBOL?</ion-card-title>
                         </ion-card-header>
                         <ion-card-content>
-                            <ion-button color="success"  routerLink="/report">Repórtalo</ion-button> 
+                            <div>Captura fotos del problema que observas</div>
+                            <ion-button color="primary"  routerLink="/report">Repórtalo</ion-button> 
                         </ion-card-content>
                         <div></div>             
                     </ion-card>
@@ -21,29 +22,32 @@
                         <ion-card-title>APRENDE SOBRE AFECCIONES EN LOS ÁRBOLES</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-button color="success"  routerLink="/listMaterial">Aprende</ion-button>
+                        <div>Aprende a indetificar las señales</div>
+                        <ion-button color="primary"  routerLink="/listMaterial">Aprende</ion-button>
                     </ion-card-content>                    
                 </ion-card>
             </ng-template>
             <ng-template swiperSlide class="slide-2">
                 <ion-card>
-                    <img src = "../../../assets/mapa.png">
+                    <img src="../../../assets/Salvando arboles.png">
                     <ion-card-header>
-                        <ion-card-title>CONSULTA LOS INDICADORES DE ÁRBOLES ENFERMOS</ion-card-title>
+                        <ion-card-title>INDICADORES DE ÁRBOLES AFECTADOS</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-button color="success"  routerLink="/reportStatistics">Consulta</ion-button>
+                        <div>Información estadística sobre reportes</div>
+                        <ion-button color="primary"  routerLink="/reportStatistics">Consulta</ion-button>
                     </ion-card-content>
                 </ion-card>
             </ng-template>
             <ng-template swiperSlide>
                 <ion-card>
-                    <img src="../../../assets/Salvando arboles.png">
+                    <img src = "../../../assets/mapa.png">
                     <ion-card-header>
-                        <ion-card-title>VISUALIZA EL MAPA DE REPORTES REALIZADOS</ion-card-title>
+                        <ion-card-title>MAPA DE REPORTES REALIZADOS</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        <ion-button color="success"  routerLink="/reportsMap">Consulta</ion-button>
+                        <div>Visualiza el mapa con los reportes geolocalizados</div>
+                        <ion-button color="primary"  routerLink="/reportsMap">Consulta</ion-button>
                     </ion-card-content>
                 </ion-card>
             </ng-template>

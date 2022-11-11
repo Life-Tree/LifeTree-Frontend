@@ -14,7 +14,7 @@
           <img src="{{imgSelector(material.segments)}}" alt="" >        
         </ion-label>
         <ion-grid> 
-            <ion-row routerLink="/materialDetail">
+            <ion-row (click)="redirectView(material.id)">
               <ion-col size="13" >
                 <h2><b>{{material.title}}</b></h2>
               </ion-col>
@@ -38,11 +38,4 @@
       </ion-item>    
     </ion-card>
   </ion-list>
-
-  <ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Cargando...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>
