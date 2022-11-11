@@ -1,58 +1,47 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { Frame, ImageSet } from 'src/app/models/imageset';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
-import { CameraService } from 'src/app/services/camera/camera.service';
+import { ReportService } from 'src/app/services/reports/report.service';
 
 @Component({
   selector: 'app-photos',
   templateUrl: './photos.component.html',
   styleUrls: ['./photos.component.css']
 })
-export class PhotosComponent implements OnInit {
+export class PhotosComponent {
 
   @Input() stepper: MatStepper;
-  imageSet: ImageSet = {images:[]};
   imgBase64: string = "";
-  framesLoaded: Map<string,{loaded: boolean, path: string}>;
   geolocation: { latitude: number, longitude: number } = null;
+  reportState: {loading: boolean, loaded: boolean} = {loading: false, loaded: false};
 
-  constructor(private cameraService: CameraService,
-    private arbolesService: ArbolesService,
+  constructor(
+    public reportService: ReportService,
+    private router: Router,
     public toastController: ToastController) {
-    this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
   }
 
-  ngOnInit(): void {
-    this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FLOR.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
+  async setImage(base64:any, signsymptomToShow: any) {
+    const imageSet = {images: [{name: signsymptomToShow.signsymptom.name, base64: base64, url:''}]}
+    this.reportService.reportedTree.healthStatus.reportedSignSymptoms.push({imageSet: imageSet, signSymptom: signsymptomToShow.signsymptom});
+    console.log(this.reportService.reportedTree)
   }
 
-  async setArbolPicture(frameString: string) {
-    try {
-      this.imgBase64 = await this.cameraService.takePicture();
-      let pre:string = "data:image/png;base64,";
-      this.imgBase64 = pre+this.imgBase64;
-      let frame = this.getFrameFromString(frameString);
-      this.framesLoaded.set(frameString,{loaded: true, path: this.imgBase64});
-      this.imageSet.images.push({frame: frame, base64: this.imgBase64, url:''})
-    } catch (error) {
-      console.log(error);      
-    }
+  async removeImage(name:any, signsymptomToShow: any) {
+    const reportedSignSymptoms = this.reportService.reportedTree.healthStatus.reportedSignSymptoms;
+    this.reportService.reportedTree.healthStatus.reportedSignSymptoms = reportedSignSymptoms.filter((reportedSignSymptom) => reportedSignSymptom.signSymptom.id !== signsymptomToShow.signsymptom.id);
+    console.log(this.reportService.reportedTree)
   }
 
   onFinish() {    
-    if(this.imageSet.images.length == 6) {
-      this.stepper.steps.get(1).completed = true;
-      console.log(this.imageSet);            
-      this.presentToast('¡Árbol registrado con éxito!', 'success');
+    this.reportService.reportedTree.healthStatus.status = 2;
+    console.log(this.reportService.reportedTree);
+    if(this.reportService.reportedTree.healthStatus.reportedSignSymptoms.length > 0){
+      this.stepper.steps.get(2).completed = true;
+      this.report();
     }else {
-      this.presentToast('Debe añadir todas las fotos requeridas', 'danger'); 
+      this.presentToast('Debe añadir almenos una foto de un signo o síntoma', 'danger'); 
     }
   }
 
@@ -60,38 +49,34 @@ export class PhotosComponent implements OnInit {
     this.stepper.previous();
   }
 
-  unsetArbolPicture(frameString: string){
-    let newImages = this.imageSet.images.filter((img) => img.frame != frameString);
-    this.imageSet.images = newImages;
-    this.framesLoaded.set(frameString, {loaded: false, path: ""});    
+  report() {
+    this.reportState.loading = true;
+    this.reportState.loaded = false;
+    this.reportService.report().subscribe((data) => {
+      console.log(data);
+      this.reportState.loading = false;
+      this.reportState.loaded = true;
+      if (data && data.id !== ''){
+        this.presentToast("¡Árbol reportado exitosamente!");
+        this.router.navigate(['./reportsMap'])
+      }else{
+        this.presentToast("¡Upss, algo salió mal!", 'danger')
+      }
+    }, err => {
+      this.reportState.loading = false;
+      this.reportState.loaded = true;
+      this.presentToast("¡Upss, algo salió mal!", 'danger')
+    })
   }
 
-  getFrameFromString(fs: string): Frame {
-    switch (fs) {
-      case 'TALLO':
-        return Frame.TALLO;
-      case 'FLOR':
-        return Frame.FLOR;
-      case 'HOJAS':
-        return Frame.HOJAS;
-      case 'RAIZ':
-          return Frame.RAIZ;
-      case 'FRUTO':
-        return Frame.FRUTO;
-      case 'PARTE_ENFERMA':
-        return Frame.PARTE_ENFERMA;
-      default:
-        return Frame.TALLO;
-    }
-  }
-
-  cleanFramesLoaded(){
-    this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FLOR.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
+  reportFake(){
+    this.reportState.loading = true;
+    this.reportState.loaded = false;
+    setTimeout(() => {
+      this.reportState.loading = false;
+      this.reportState.loaded = true;
+      this.router.navigate(['./reportsMap'])
+    }, 3000);
   }
 
   async presentToast(mensaje: string, color= 'success') {

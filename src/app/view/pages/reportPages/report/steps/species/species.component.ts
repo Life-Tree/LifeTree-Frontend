@@ -2,12 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { ModalController, ToastController } from '@ionic/angular';
-import { EspeciesModalPage } from 'src/app/view/pages/especies-modal/especies-modal.page';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
+import { EspeciesModalPage } from 'src/app/view/pages/reportPages/especies-modal/especies-modal.page';
 import { ThemePalette } from '@angular/material/core'; 
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ReportService } from 'src/app/services/reports/report.service';
-import { Especies } from 'src/app/models/especie';
+import { Specie } from 'src/app/models/domain/specie';
 
 @Component({
   selector: 'app-species',
@@ -19,32 +18,32 @@ export class SpeciesComponent implements OnInit {
   @Input() stepper : MatStepper
       
   color: ThemePalette = "primary";
-  species: Especies[] = [];
-  defaultSpecies: Especies;
-  speciesByFamily: Map<string,Especies[]>;
-  specieSelected: Especies;
+  species: Specie[] = [];
+  defaultSpecies: Specie;
+  speciesByFamily: Map<string,Specie[]>;
+  specieSelected: Specie;
   iconSpeciesText = '';
   hintSpeciesText = 'Seleccione la especie'
   speciesDisable = true;
   styleExp = '';
 
-  constructor(private arbolesService: ArbolesService,
+  constructor(
     private reportService: ReportService, 
     public toastController: ToastController, 
     public modalController: ModalController,
     private geolocationService: GeolocationService,) {
-    this.speciesByFamily = new Map<string,Especies[]>();
+    this.speciesByFamily = new Map<string,Specie[]>();
    }
 
   ngOnInit(): void {
-    this.arbolesService.getSpecies().subscribe( (data) => {
+    this.reportService.getSpecies().subscribe( (data) => {
       this.species = data;
       for (const sp of data){
         if (sp.name == 'unknown'){
           this.defaultSpecies = sp;
           break;
         }
-        this.speciesByFamily = this.arbolesService.orderSpeciesByFamily(data);
+        this.speciesByFamily = this.reportService.orderSpeciesByFamily(data);
       }
     }, (error) => {
       console.log(error);
@@ -71,10 +70,11 @@ export class SpeciesComponent implements OnInit {
       this.stepper.steps.get(0).completed =true;
       this.reportService.reportedTree.location.address = form.value.address;
       this.reportService.reportedTree.location.neighborhood = form.value.neighborhood;
-      this.reportService.reportedTree.dch = form.value.dch;
-      this.reportService.reportedTree.cupDiameter = form.value.cupDiameter;
-      this.reportService.reportedTree.height = form.value.height;
-      this.reportService.reportedTree.numForks= form.value.numForks;
+      this.reportService.reportedTree.dch = +form.value.dch;
+      this.reportService.reportedTree.cupDiameter = +form.value.cupDiameter;
+      this.reportService.reportedTree.height = +form.value.height;
+      this.reportService.reportedTree.numForks= +form.value.numForks;
+      this.reportService.reportedTree.specie = this.specieSelected;
       console.log("Form del service", this.reportService.reportedTree);
       this.stepper.next();
     }

@@ -97,6 +97,10 @@ ion-checkbox::part(container) {
     font-size: x-large;
 }
 
+.text-size-large{
+    font-size: large;
+}
+
 .postion-checkbox{
     display: block;
     z-index: 4;

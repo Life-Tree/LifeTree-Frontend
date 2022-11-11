@@ -1,5 +1,6 @@
-export interface Species {
-    _id: string;
+export interface Specie {
+    id: string;
+    commonName: string;
     name: string;
     scientificName: string;
     family: string;

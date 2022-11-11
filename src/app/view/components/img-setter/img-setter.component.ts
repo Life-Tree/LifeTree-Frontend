@@ -10,6 +10,7 @@ export class ImgSetterComponent implements OnInit {
 
   @Input() name: string;
   @Input() url: string;
+  @Input() infoMessage: string;
   @Output() set = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
   imageData: {name: string, loaded: boolean, base64: string};
@@ -19,7 +20,6 @@ export class ImgSetterComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageData = this.url && this.url !=""? {name:this.name, loaded:true, base64:this.url} : {name: this.name, loaded: false, base64: ''};
-    console.log("imgData",this.imageData);
   }
 
   async setImage() {

@@ -1,15 +1,15 @@
 <ion-content>
 
   <ion-list>  
-    <ion-card *ngFor="let arbol of arbolesLoaded" (click)="abrirModal(arbol)">
+    <ion-card *ngFor="let report of reportsLoaded" (click)="abrirModal(report)">
       <ion-item>
-        <ion-label size="4">
-          <img src="{{arbol.imageSet.images[0].url}}" alt="" >        
+        <ion-label class="image" size="4">
+          <img src="{{this.getImage(report?.reportedTree?.healthStatus?.reportedSignSymptoms)}}" alt="" >        
         </ion-label>
         <ion-grid>
             <ion-row>
               <ion-col size="12" >
-                <h4><b>{{arbol.ubicacion.barrio}}</b> </h4>
+                <h4><b>{{report?.reportedTree?.location?.neighborhood}}</b> </h4>
               </ion-col>
             </ion-row>
             <ion-row style="height: 40px;">
@@ -19,7 +19,7 @@
                 </div>              
               </ion-col>
               <ion-col size="10">                  
-                <p>{{arbol.descripcion}}</p>
+                <p>{{report?.reportedTree?.healthStatus?.reportedSignSymptoms[0]?.signSymptom?.description}}</p>
               </ion-col>          
             </ion-row>
             <ion-row style="height: 40px;">
@@ -29,19 +29,10 @@
                 </div>              
               </ion-col>
               <ion-col size="10">
-                <p><i>{{arbol.species.name}}</i></p>
+                <p><i>{{report?.reportedTree?.specie?.name}}</i></p>
               </ion-col>
             </ion-row>      
         </ion-grid>
-        
-        
-        <!-- <ion-label slot="start">
-          <h4>{{arbol.ubicacion.barrio}}</h4>
-          <p>{{arbol.descripcion}}</p>
-        </ion-label>        
-        <ion-label slot="end" text-right>
-          <img src="{{arbol.imageSet.images[0].url}}" alt="">
-        </ion-label> -->
       </ion-item>    
     </ion-card>
   </ion-list>

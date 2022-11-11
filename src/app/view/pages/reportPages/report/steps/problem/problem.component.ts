@@ -4,101 +4,59 @@ import { ToastController } from '@ionic/angular';
 import { Frame, ImageSet } from 'src/app/models/imageset';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { CameraService } from 'src/app/services/camera/camera.service';
+import { ReportService } from 'src/app/services/reports/report.service';
 
 @Component({
   selector: 'app-problem',
   templateUrl: './problem.component.html',
   styleUrls: ['./problem.component.css']
 })
-export class ProblemComponent implements OnInit {
+export class ProblemComponent implements OnInit{
 
   @Input() stepper: MatStepper;
-  imageSet: ImageSet = {images:[]};
-  imgBase64: string = "";
-  framesLoaded: Map<string,{loaded: boolean, path: string}>;
-  //treeParts: Map<number,boolean> = new Map<number,boolean>();
   treeParts = [false,false,false,false,false,false];
+  knowCondition = 0;
+  conditions: any[] = [];
+  conditionSelected: any;
 
 
-  constructor(private cameraService: CameraService,
-    private arbolesService: ArbolesService,
+  constructor(
+    private reportService: ReportService,
     public toastController: ToastController) {
-    this.framesLoaded = new Map<string, {loaded: boolean, path: string}>();
   }
-
-  ngOnInit(): void {
-    //Hoja, raiz, tallo, fruto, flor, arbolCompleto
-  }
-
-  async setArbolPicture(frameString: string) {
-    try {
-      this.imgBase64 = await this.cameraService.takePicture();
-      let pre:string = "data:image/png;base64,";
-      this.imgBase64 = pre+this.imgBase64;
-      let frame = this.getFrameFromString(frameString);
-      this.framesLoaded.set(frameString,{loaded: true, path: this.imgBase64});
-      this.imageSet.images.push({frame: frame, base64: this.imgBase64, url:''})
-    } catch (error) {
-      console.log(error);      
-    }
+  async ngOnInit(): Promise<void> {
+    this.conditions = await this.reportService.getConditions().toPromise();
   }
 
   changeCheckbox(value: number){
     this.treeParts[value] = !this.treeParts[value]
-    console.log("Cambio", this.treeParts[value]);
   }
-
-  check(value: Boolean){
-    console.log("lo que pase", value);
-    value=!value;
-  }
-
-  onFinish() {    
-    if(this.imageSet.images.length == 6) {
-      this.stepper.steps.get(1).completed = true;
-      console.log(this.imageSet);            
-      this.presentToast('¡Árbol registrado con éxito!', 'success');
-    }else {
-      this.presentToast('Debe añadir todas las fotos requeridas', 'danger'); 
+  async onFinish() {
+    if(this.knowCondition === 1) {
+      if(this.conditionSelected) {
+        this.reportService.fillSignSymptomsToShow(this.conditionSelected.signSymptoms);
+        this.stepper.steps.get(0).completed = true;
+        this.stepper.steps.get(1).completed = true;
+        this.stepper.next();
+      } else {
+        this.presentToast('Debes seleccionar una afección de la lista', 'danger'); 
+      }
+    }else if(this.knowCondition === 2) {
+      const parts = this.extractAffectedTreeParts();
+      if(parts && parts.length > 0) {
+        const signsymptoms = await this.reportService.getSignSymptomsByTreeParts(parts).toPromise();
+        this.reportService.fillSignSymptomsToShow(signsymptoms);
+        this.stepper.steps.get(0).completed = true;
+        this.stepper.steps.get(1).completed = true;
+        this.stepper.next();
+      }else {
+        this.presentToast('Debes marcar las partes del árbol que ves afectadas', 'danger'); 
+      }
     }
   }
 
   onPrevious() {
     this.stepper.previous();
-  }
-
-  unsetArbolPicture(frameString: string){
-    let newImages = this.imageSet.images.filter((img) => img.frame != frameString);
-    this.imageSet.images = newImages;
-    this.framesLoaded.set(frameString, {loaded: false, path: ""});    
-  }
-
-  getFrameFromString(fs: string): Frame {
-    switch (fs) {
-      case 'TALLO':
-        return Frame.TALLO;
-      case 'FLOR':
-        return Frame.FLOR;
-      case 'HOJAS':
-        return Frame.HOJAS;
-      case 'RAIZ':
-          return Frame.RAIZ;
-      case 'FRUTO':
-        return Frame.FRUTO;
-      case 'PARTE_ENFERMA':
-        return Frame.PARTE_ENFERMA;
-      default:
-        return Frame.TALLO;
-    }
-  }
-
-  cleanFramesLoaded(){
-    this.framesLoaded.set(Frame.HOJAS.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.RAIZ.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FLOR.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.TALLO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.FRUTO.toString(),{loaded: false, path: ""});
-    this.framesLoaded.set(Frame.PARTE_ENFERMA.toString(),{loaded: false, path: ""});
   }
 
   async presentToast(mensaje: string, color= 'success') {
@@ -109,6 +67,36 @@ export class ProblemComponent implements OnInit {
       color: color
     });
     toast.present();
+  }
+
+  onChangeAnswer(event: any) {
+    this.knowCondition = event.value;
+  }
+
+  extractAffectedTreeParts(): number[] {
+    const parts:number[] = [] = [];
+    this.treeParts.forEach((value, index) => {
+      if(value) parts.push(index+1);
+    });
+    return parts;
+  }
+
+  extractConditionValue(condition: any): string{
+    if(!condition) return '';
+    if(condition.commonName !== '') {
+      return condition.commonName;
+    }
+    if(condition.scientificName) {
+      return condition.scientificName;
+    }
+    if(condition.family !== '' && condition.causativeAgent !== ''){
+      return condition.family + ', causa: '+condition.causativeAgent;
+    }
+    return '';
+  }
+
+  onChangeConditionSelection(event: any) {
+    this.conditionSelected = event.detail.value;
   }
 
 }
