@@ -19,7 +19,7 @@
     <ion-list>
       <div *ngFor= "let family of speciesByFamilyToShow | keyvalue: unsorted">
         <ion-item >
-          <h5 class="color-text" *ngIf="family.key != commonSpeciesName">Familia:</h5>
+          <h5 class="color-text" *ngIf="family.key !== commonSpeciesName">Familia:</h5>
           <ion-title size="small"> <h2>{{family.key}}</h2></ion-title>
         </ion-item>
         <ion-item *ngFor= "let specie of family.value" button (click)="salirConinfo(specie)">
@@ -27,8 +27,8 @@
             {{specie.name}}
             <br />
             <ion-badge color="success"><i>{{specie.scientificName}}</i></ion-badge>
-            <ion-badge color="medium"><i>género</i></ion-badge>
-            <ion-badge color="medium">EC</ion-badge>
+            <ion-badge color="medium"><i>{{specie.genre}}</i></ion-badge>
+            <ion-badge color="medium">{{conservationStatusKeyValue[specie.conservationStatus]}}</ion-badge>
           </ion-label>
           
         </ion-item>

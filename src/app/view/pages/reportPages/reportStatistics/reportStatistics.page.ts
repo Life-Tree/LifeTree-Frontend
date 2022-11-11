@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { BasicReport, ChartService } from 'src/app/services/charts/chart.service';
+import { ReportService } from 'src/app/services/reports/report.service';
 Chart.register(...registerables);
 
 @Component({
@@ -9,6 +10,7 @@ Chart.register(...registerables);
   templateUrl: './reportStatistics.page.html',
   styleUrls: ['./reportStatistics.page.scss'],
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ReportStatisticsPage implements OnInit {
   @ViewChild("doughnutCanvas1") doughnutCanvas1: ElementRef;
   @ViewChild("doughnutCanvas2") doughnutCanvas2: ElementRef;
@@ -17,12 +19,12 @@ export class ReportStatisticsPage implements OnInit {
   reportsPerNeighbor: BasicReport;
   reportsPerSpecies: BasicReport;
 
-  constructor(private arbolesService: ArbolesService, private reportsService: ChartService) { }
+  constructor(private reportService: ReportService, private chartService: ChartService) { }
 
   ngOnInit() {
-    this.arbolesService.obtenerArboles().subscribe(arboles  => {
-      this.reportsPerNeighbor = this.reportsService.findTreesPerNeighbor(arboles);
-      this.reportsPerSpecies = this.reportsService.findTreesPerSpecies(arboles);
+    this.reportService.getReports().subscribe(reports  => {
+      this.reportsPerNeighbor = this.chartService.findTreesPerNeighbor(reports);
+      this.reportsPerSpecies = this.chartService.findTreesPerSpecies(reports);
       setTimeout(() => {
         this.createTPerSpeciesChart();
         this.createTPerNeighborChart();
@@ -37,7 +39,7 @@ export class ReportStatisticsPage implements OnInit {
         labels: this.reportsPerSpecies.labels,
         datasets: [
           {
-            label: "# de Árboles",
+            label: "# de Reportes",
             data: this.reportsPerSpecies.data,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",
@@ -77,7 +79,7 @@ export class ReportStatisticsPage implements OnInit {
         labels: this.reportsPerNeighbor.labels,
         datasets: [
           {
-            label: "# de Árboles",
+            label: "# de Reportes",
             data: this.reportsPerNeighbor.data,
             backgroundColor: [
               "rgba(255, 99, 132, 0.2)",

@@ -49,7 +49,7 @@ const routes: Routes = [
   },
   {
     path: 'especies-modal',
-    loadChildren: () => import('./view/pages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
+    loadChildren: () => import('./view/pages/reportPages/especies-modal/especies-modal.module').then( m => m.EspeciesModalPageModule)
   },
   {
     path: 'reportStatistics',

@@ -4,8 +4,6 @@
             <ion-col size="12" size-sm class="single">
                 <ion-list  class="round" style="height: fit-content;">
                     <h1>Datos de la especie</h1>
-                    
-                    
                         <mat-form-field appearance="outline" style="width: -webkit-fill-available;" (click)="presentModal(form)">
                             <mat-label>Especie</mat-label>
                             <input matInput placeholder="Ej. Mango" trim="blur" ngModel name="commonName" required="true">
@@ -14,9 +12,7 @@
                             <mat-error class="error-message" *ngIf="form.form.get('commonName')?.hasError('required')">
                                 Selecciona una especie de la lista
                             </mat-error>
-                        </mat-form-field>                        
-                    
-                    
+                        </mat-form-field>
                     <br>
                     <br>
 

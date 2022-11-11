@@ -8,6 +8,7 @@ import { InicioPageRoutingModule } from './inicio-routing.module';
 
 import { InicioPage } from './inicio.page';
 import { ComponentsModule } from '../../components/components.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { ComponentsModule } from '../../components/components.module';
     FormsModule,
     IonicModule,
     InicioPageRoutingModule, 
-    ComponentsModule
+    ComponentsModule,
+    SwiperModule
   ],
   declarations: [InicioPage]
 })

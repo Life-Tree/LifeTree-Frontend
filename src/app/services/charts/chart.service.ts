@@ -13,19 +13,19 @@ export class ChartService {
 
   constructor() { }
 
-  public findTreesPerNeighbor(arboles: Arbol[]): BasicReport{
-    let arbolesMap = new Map<string, number>();
-    for (let arbol of arboles){
+  public findTreesPerNeighbor(reports: any[]): BasicReport{
+    let reportsMap = new Map<string, number>();
+    for (let report of reports){
       let count: number = 0;
-      if(arbolesMap.has(arbol.ubicacion.barrio)){
-        count = arbolesMap.get(arbol.ubicacion.barrio);
+      if(reportsMap.has(report.reportedTree.location.neighborhood)){
+        count = reportsMap.get(report.reportedTree.location.neighborhood);
       }
       count++;
-      arbolesMap.set(arbol.ubicacion.barrio,count);
+      reportsMap.set(report.reportedTree.location.neighborhood,count);
     }
     let basicReport: BasicReport = {labels: [], data: []};
     let index = 0;
-    for (let [key, value] of arbolesMap) {
+    for (let [key, value] of reportsMap) {
       basicReport.labels.push(key);
       basicReport.data.push(value);
       index++;
@@ -36,20 +36,20 @@ export class ChartService {
     return basicReport;
   }
 
-  public findTreesPerSpecies(arboles: Arbol[]): BasicReport{
-    let arbolesMap = new Map<string, number>();
-    for (let arbol of arboles){
+  public findTreesPerSpecies(reports: any[]): BasicReport{
+    let reportsMap = new Map<string, number>();
+    for (let report of reports){
       let count: number = 0;
-      if(arbolesMap.has(arbol.species.name)){
-        count = arbolesMap.get(arbol.species.name);
+      if(reportsMap.has(report.reportedTree.specie.name)){
+        count = reportsMap.get(report.reportedTree.specie.name);
       }
       count++;
-      arbolesMap.set(arbol.species.name,count);
+      reportsMap.set(report.reportedTree.specie.name,count);
     }
 
     let basicReport: BasicReport = {labels: [], data: []};
     let index = 0;
-    for (let [key, value] of arbolesMap) {
+    for (let [key, value] of reportsMap) {
       basicReport.labels.push(key);
       basicReport.data.push(value);
       index++;

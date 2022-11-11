@@ -1,10 +1,20 @@
 
-<button *ngIf="!imageData.loaded" (click)="setImage()" class="button-load">
-    <div><h1><b>+</b></h1></div>
-    <div><p class="edit-text">{{name}}</p></div>       
+<button *ngIf="!imageData.loaded" class="div-load">
+    <ng-container *ngIf="this.infoMessage && this.infoMessage !== ''">
+        <div [id]="'infoButton'+name" class="info-button">
+            <ion-icon class="info-icon" ios="information-circle" ></ion-icon>
+        </div>
+        <ion-popover [trigger]="'infoButton'+name" triggerAction="click">
+            <ng-template>
+                <ion-content class="ion-padding">{{this.infoMessage}}</ion-content>
+            </ng-template>
+        </ion-popover>
+    </ng-container>
+    <div style="width: 50%;" (click)="setImage()"><h1><b>+</b></h1></div>
+    <div style="width: 100%;" (click)="setImage()"><p class="edit-text">{{name}}</p></div> 
 </button>
 <div *ngIf="imageData.loaded" 
-    class="edit-button  image-bg" 
+    class="image-bg" 
     [style.background-image]="'url('+imageData.base64+')'">
     <button class="cancel-button" (click)="removeImage()">
         <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>

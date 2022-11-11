@@ -1,96 +1,29 @@
+<div fullscreen class="{{reportState.loading ? 'fondo-transparente': 'fondo-normal'}}">
+    <div class="spin" *ngIf="reportState.loading">
+        <ion-spinner name="lines" ></ion-spinner>    
+    </div>
+
 <ion-grid>
-    <ion-row>
-        <ion-col>
-            <ion-list>
-                <ion-item lines="none">
-                    <ion-label color="Primary" >Añadir imagenes</ion-label>
-                    <ion-label color="Primary">({{this.imageSet.images.length}}/6)</ion-label>
-                  </ion-item>
-            </ion-list>
-        </ion-col>
-    </ion-row>
+  <ion-row>
+      <ion-col> 
+        <div style="text-align: center;">
+          <h5 id="example-radio-group-label" style="font-size: x-large;">Toma fotos por cada signo o síntoma que observes</h5>  
+      </div>
+      </ion-col>
+  </ion-row>
+  <ion-row>
+      <ion-col>
+        <ion-label color="Primary" ><i>Imágenes añadidas </i></ion-label>
+        <ion-label color="Primary">({{this.reportService.reportedTree.healthStatus.reportedSignSymptoms.length}}/{{reportService.signSymptomsToShow.length}})</ion-label>
+      </ion-col>
+  </ion-row>
 </ion-grid>
 
 <!-- Content -->
 <ion-grid>
     <ion-row>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('HOJAS').loaded" (click)="setArbolPicture('HOJAS')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Hojas</p></div>       
-            </button>
-            <div *ngIf="framesLoaded.get('HOJAS').loaded" 
-                class="edit-button  image-bg" 
-                [style.background-image]="'url('+framesLoaded.get('HOJAS').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('HOJAS')">
-                    <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-            </div>
-        </ion-col>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('RAIZ').loaded" (click)="setArbolPicture('RAIZ')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Raiz</p></div>
-              </button>
-              <div *ngIf="framesLoaded.get('RAIZ').loaded" 
-              class="edit-button image-bg" 
-              [style.background-image]="'url('+framesLoaded.get('RAIZ').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('RAIZ')">
-                  <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-              </div>
-        </ion-col>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('TALLO').loaded" (click)="setArbolPicture('TALLO')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Tallo</p></div>
-              </button>
-              <div *ngIf="framesLoaded.get('TALLO').loaded" 
-              class="edit-button  image-bg" 
-              [style.background-image]="'url('+framesLoaded.get('TALLO').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('TALLO')">
-                  <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-              </div>
-        </ion-col>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('FLOR').loaded" (click)="setArbolPicture('FLOR')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Flor</p></div> 
-              </button>
-              <div *ngIf="framesLoaded.get('FLOR').loaded" 
-              class="edit-button image-bg" 
-              [style.background-image]="'url('+framesLoaded.get('FLOR').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('FLOR')">
-                  <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-              </div>
-        </ion-col>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('FRUTO').loaded" (click)="setArbolPicture('FRUTO')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Fruto</p></div>
-              </button>
-              <div *ngIf="framesLoaded.get('FRUTO').loaded" 
-              class="edit-button  image-bg" 
-              [style.background-image]="'url('+framesLoaded.get('FRUTO').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('FRUTO')">
-                  <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-              </div>
-        </ion-col>
-        <ion-col size="6" sizeMd="2" style="height: 15vh;">
-            <button *ngIf="!framesLoaded.get('PARTE_ENFERMA').loaded" (click)="setArbolPicture('PARTE_ENFERMA')" class="button-load">
-                <div><h1><b>+</b></h1></div>
-                <div><p class="edit-text">Parte enferma</p></div>
-              </button>
-              <div *ngIf="framesLoaded.get('PARTE_ENFERMA').loaded" 
-              class="edit-button image-bg" 
-              [style.background-image]="'url('+framesLoaded.get('PARTE_ENFERMA').path+')'">
-                <button class="cancel-button" (click) = "unsetArbolPicture('PARTE_ENFERMA')">
-                  <ion-icon class="cancel-icon" name="close-outline" ></ion-icon>
-                </button>
-              </div>
+        <ion-col *ngFor="let signsymptom of reportService.signSymptomsToShow" size="6" sizeMd="2" style="height: 15vh;">
+            <app-img-setter [name]="signsymptom.signsymptom.name" [infoMessage]="signsymptom.signsymptom.description" (set)="setImage($event,signsymptom)" (remove)="removeImage($event, signsymptom)"></app-img-setter>
         </ion-col>
     </ion-row>
     <ion-row>
@@ -108,6 +41,7 @@
                 <ion-button
                 mode="ios"
                 color="primary"
+                [disabled]="reportState.loading"
                 (click)="onFinish()"
                 expand="block">
                     Finalizar
@@ -115,3 +49,4 @@
         </ion-col>
     </ion-row>
 </ion-grid>
+</div>

@@ -2,25 +2,28 @@ import { KeyValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavParams} from '@ionic/angular';
-import { Especies } from 'src/app/models/especie';
-import {ArbolesService, COMMON_SPECIES_GROUP_NAME} from '../../../services/arboles/arboles.service'
+import { ConservationStatus } from 'src/app/models/constants/constants';
+import { Specie } from 'src/app/models/domain/specie';
+import { COMMON_SPECIES_GROUP_NAME, ReportService } from 'src/app/services/reports/report.service';
 
 @Component({
   selector: 'app-especies-modal',
   templateUrl: './especies-modal.page.html',
   styleUrls: ['./especies-modal.page.scss'],
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class EspeciesModalPage implements OnInit {
-   species: Especies[] = [];
+   species: Specie[] = [];
    familiaE: string;
    descripciónE: string;
-   speciesByFamily: Map<string, Especies[]>;
-   speciesByFamilyToShow: Map<string, Especies[]>;
-   specie: Especies;
+   speciesByFamily: Map<string, Specie[]>;
+   speciesByFamilyToShow: Map<string, Specie[]>;
+   specie: Specie;
    commonSpeciesName = COMMON_SPECIES_GROUP_NAME;
    query: string = "";
-   defaultSpecie:Especies;
-  constructor(public modalController: ModalController, public navParamsSpecies : NavParams, public arbolesService: ArbolesService) { }
+   defaultSpecie:Specie;
+   conservationStatusKeyValue = ConservationStatus;
+  constructor(public modalController: ModalController, public navParamsSpecies : NavParams, public reportService: ReportService) { }
 
 
   ngOnInit() {
@@ -36,7 +39,7 @@ export class EspeciesModalPage implements OnInit {
     this.modalController.dismiss(null);
   }
 
-  salirConinfo(specieinfo: Especies){
+  salirConinfo(specieinfo: Specie){
     this.modalController.dismiss(specieinfo);
   }
 
@@ -47,14 +50,14 @@ export class EspeciesModalPage implements OnInit {
   filter(e: any){
     let query = e.target.value;
     if(query != ""){
-      let speciesFiltered = this.arbolesService.filterSpeciesByQuery(this.species, query);
-      this.speciesByFamilyToShow = this.arbolesService.orderSpeciesByFamily(speciesFiltered,false);
+      let speciesFiltered = this.reportService.filterSpeciesByQuery(this.species, query);
+      this.speciesByFamilyToShow = this.reportService.orderSpeciesByFamily(speciesFiltered,false);
     }else{
       this.speciesByFamilyToShow = this.speciesByFamily;
     }
   }
 
-  unsorted(a: KeyValue<string,Especies[]>, b: KeyValue<string,Especies[]>):number{
+  unsorted(a: KeyValue<string,Specie[]>, b: KeyValue<string,Specie[]>):number{
       return 0;
   }
 

@@ -3,6 +3,12 @@ ion-content {
       width: 100%;
       height: 80%;
       background-color: grey;
+      position: relative;
+      overflow: hidden;
+      left: 2%;
+      width: 94%;
+      height: 60vh;
+      top: 3%;
     }
   }
 
