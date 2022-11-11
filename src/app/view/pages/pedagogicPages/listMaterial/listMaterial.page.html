@@ -1,0 +1,48 @@
+<app-header titulo="Lista de material pedagogico"></app-header>
+
+<ion-content>
+  <div *ngIf="autorize" class="alignButtonAdd" >
+    <ion-button color="primary"  expand="block" routerLink="/managementMaterial/new">
+      <ion-icon name="add-outline" slot="start"></ion-icon>
+      Agregar
+    </ion-button> 
+  </div>
+  <ion-list>  
+    <ion-card *ngFor="let material of materialList" >
+      <ion-item>
+        <ion-label style="height: 20vh;" size="4" (click)="redirectView(material.id)">
+          <img src="{{imgSelector(material.segments)}}" alt="" >        
+        </ion-label>
+        <ion-grid> 
+            <ion-row routerLink="/materialDetail">
+              <ion-col size="13" >
+                <h2><b>{{material.title}}</b></h2>
+              </ion-col>
+            </ion-row>
+            <ion-row style="height: 40px;">
+              <ion-col size="13">                  
+                <p>{{textSelector(material.segments)}}</p>
+              </ion-col>          
+            </ion-row>  
+            <ion-row *ngIf="autorize" style="height: 40px;">
+              <ion-col size="10">                  
+                <div class="icon">
+                  <ion-button color="primary"  expand="block" (click)="redirect(material.id)">
+                    <ion-icon name="create-outline" slot="start"></ion-icon>
+                    Editar
+                  </ion-button> 
+                </div> 
+              </ion-col>          
+            </ion-row>     
+        </ion-grid>
+      </ion-item>    
+    </ion-card>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

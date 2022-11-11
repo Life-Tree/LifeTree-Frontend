@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Pedagogia } from 'src/app/models/pedagogia.interface';
-import { PedagogiaService } from 'src/app/services/pedagogia/pedagogia-life-tree.service';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 import { DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
+import { PedagogiaService } from 'src/app/services/pedagogia/pedagogia-life-tree.service';
 
 const options: DocumentViewerOptions = {
   title: 'Como identificar un árbol enfermo'

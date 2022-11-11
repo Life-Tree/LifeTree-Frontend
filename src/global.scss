@@ -42,3 +42,9 @@
         --border-radius: 30px !important;
     }
  }
+
+ ion-loading.custom-loading {
+    --background: #ffffff28;
+    --spinner-color: #0b0f0b;
+    color: #151616;
+  }

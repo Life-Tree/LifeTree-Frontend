@@ -1,0 +1,27 @@
+<app-header titulo="Visualizador de material pedagogico"></app-header>
+
+<ion-content class="ion-padding">
+  <div class="margings">
+    <div>
+      <ion-text style="text-align: center ;">
+        <h1>{{material?.title}}</h1>
+      </ion-text>
+    </div>
+    <div *ngFor="let segment of material?.segments" style="margin-bottom: 9%;">
+      <ng-container *ngIf="segment.file.url !=''">
+        <ion-card style="text-align: center;">
+          <img alt="Silhouette of mountains" src="{{segment.file.url}}" />
+          <ng-container *ngIf="segment.text !=''" >
+            <div class="aligText" >
+              <ion-text>
+                <h3>{{segment.text}}</h3>
+              </ion-text>
+            </div>
+          </ng-container>
+        </ion-card>
+      </ng-container>
+    </div>
+  </div>
+  
+
+</ion-content>

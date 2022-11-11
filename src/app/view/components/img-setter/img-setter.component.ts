@@ -9,14 +9,17 @@ import { CameraService } from 'src/app/services/camera/camera.service';
 export class ImgSetterComponent implements OnInit {
 
   @Input() name: string;
+  @Input() url: string;
   @Output() set = new EventEmitter<string>();
   @Output() remove = new EventEmitter<string>();
   imageData: {name: string, loaded: boolean, base64: string};
+  
 
   constructor(private cameraService: CameraService) { }
 
   ngOnInit(): void {
-    this.imageData = {name: this.name, loaded: false, base64: ''};
+    this.imageData = this.url && this.url !=""? {name:this.name, loaded:true, base64:this.url} : {name: this.name, loaded: false, base64: ''};
+    console.log("imgData",this.imageData);
   }
 
   async setImage() {

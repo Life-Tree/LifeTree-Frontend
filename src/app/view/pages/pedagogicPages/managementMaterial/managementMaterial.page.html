@@ -1,0 +1,66 @@
+<app-header titulo="Gestion de material pedagogico"></app-header>
+<ion-content>
+
+    <div class="margins">
+      <div style="text-align: center;">
+        <ion-title >Gestión de material pedagogico</ion-title>
+      </div>
+      <div class="organizeBlockPedagogicContent">
+        <div>
+          <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+            <mat-label>Titulo</mat-label>
+            <input
+                matInput
+                type="tel"
+                digitOnly
+                inputmode="text"
+                name="title"
+                trim="blur"
+                required="true"
+                [(ngModel)]="material.title"
+                />
+                <mat-hint>Titulo del material pedagogico</mat-hint>
+                <mat-error class="error-message" *ngIf="material.title == ''">
+                  Debes ingresar un parrafo
+                </mat-error>
+          </mat-form-field>
+        </div>
+        <div *ngFor="let segment of material.segments" class="blockDisplay">
+          <div class="sizeAddFile">
+            <app-img-setter [name]="'imagen'" [url]="segment.file.url" (set)="onSetImg($event, segment)" (remove)="deletImg(segment)"></app-img-setter>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+              <mat-label>Parrafo</mat-label>
+              <textarea 
+                matInput
+                cdkTextareaAutosize
+                [(ngModel)]="segment.text"
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5">
+              </textarea>
+                  <mat-hint>Parrafo o parrafos despues de la imagen</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="organizeButtons">
+        <div>
+          <ion-button color="medium" fill="outline" expand="block" (click)="addSegment()">
+            Agregar sección
+          </ion-button> 
+        </div>
+        <div *ngIf="material?.segments?.length > 1">
+          <ion-button color="danger" fill="outline" expand="block" (click)="deleteSegment()">
+            Eliminar ultima sección
+          </ion-button> 
+        </div>
+        <div>
+          <ion-button color="success"  expand="block" (click)="selectSubmit()">
+            Guardar
+          </ion-button> 
+        </div>
+      </div>
+    </div>
+</ion-content>

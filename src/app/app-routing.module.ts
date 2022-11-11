@@ -55,6 +55,18 @@ const routes: Routes = [
     path: 'reportStatistics',
     loadChildren: () => import('./view/pages/reportPages/reportStatistics/reportStatistics.module').then( m => m.ReportStatisticsModule)
   },
+  {
+    path: 'managementMaterial/:id',
+    loadChildren: () => import('./view/pages/pedagogicPages/managementMaterial/managementMaterial.module').then( m => m.ManagementMaterialPageModule)
+  },
+  {
+    path: 'listMaterial',
+    loadChildren: () => import('./view/pages/pedagogicPages/listMaterial/listMaterial.module').then( m => m.ListMaterialPageModule)
+  },
+  {
+    path: 'materialDetail/:id',
+    loadChildren: () => import('./view/pages/pedagogicPages/materialDetail/materialDetail.module').then( m => m.MaterialDetailPageModule)
+  },
 
 ];
 
