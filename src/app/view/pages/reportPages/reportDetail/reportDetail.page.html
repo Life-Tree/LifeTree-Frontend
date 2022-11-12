@@ -1,4 +1,15 @@
-<app-header titulo="Detalles del reporte"></app-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  slot="start" defaultHref="/">
+      <ion-back-button color="tertiary" (click)="dismiss()"></ion-back-button>
+    </ion-buttons> 
+    <img src="../../../assets/LogoEbano.svg" class="logo animated fadeIn" alt="" >
+    <ion-buttons slot="end" style="margin-right: 20%;">
+      <div>
+      </div>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
   <swiper mode="ios" pager="true" [slidesPerView]="1" [scrollbar]="{ draggable: true }"
