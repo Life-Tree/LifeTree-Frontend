@@ -9,6 +9,7 @@ import { PedagogicService } from 'src/app/services/pedagogic/pedagogic.service';
   templateUrl: './listMaterial.page.html',
   styleUrls: ['./listMaterial.page.scss'],
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class ListMaterialPage {
 
 

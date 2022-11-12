@@ -9,7 +9,8 @@ import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.servi
   styleUrls: ['./login.page.scss'],
 })
 
-export class LoginPage implements OnInit {
+// eslint-disable-next-line @angular-eslint/component-class-suffix
+export class LoginPage {
   usuario: string;
   contrasena: string;
   result: boolean;
@@ -29,9 +30,6 @@ export class LoginPage implements OnInit {
       console.log("Usuario o contraseña errados")
     }
 
-  }
-
-  ngOnInit() {
   }
 
 }

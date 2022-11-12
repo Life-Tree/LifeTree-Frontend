@@ -9,6 +9,7 @@ import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ReportListComponent } from './reportList/reportList.component';
 import { MapComponent } from './map/map.component';
 import { ImgSetterComponent } from './img-setter/img-setter.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +17,7 @@ import { ImgSetterComponent } from './img-setter/img-setter.component';
 @NgModule({
   declarations: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent],
   imports: [
-    CommonModule, IonicModule, RouterModule, HttpClientModule
+    CommonModule, IonicModule, RouterModule, HttpClientModule, FormsModule
   ],
   providers: [ArbolesService, HttpClient],
   exports: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent]
