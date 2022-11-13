@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'bienvenido',
-    loadChildren: () => import('./view/pages/bienvenido/bienvenido.module').then( m => m.BienvenidoPageModule)
+    loadChildren: () => import('./view/pages/commonPages/welcome/welcome.module').then( m => m.WelcomePageModule)
   },
   {
     path: 'login',
@@ -66,6 +66,10 @@ const routes: Routes = [
   {
     path: 'materialDetail/:id',
     loadChildren: () => import('./view/pages/pedagogicPages/materialDetail/materialDetail.module').then( m => m.MaterialDetailPageModule)
+  },
+  {
+    path: 'singup',
+    loadChildren: () => import('./view/pages/authPages/singup/singup.module').then( m => m.SingupPageModule)
   },
 
 ];
