@@ -27,7 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 const headers = request.clone({
                     headers: request.headers.set('Authorization', 'Bearer'+' '+token.value)
                 });
-                console.log("Se intersecto la petición",token.value);
                 return next.handle(headers)
                     .pipe(catchError(this.handleError));
             }));
@@ -50,10 +49,9 @@ export class AuthInterceptor implements HttpInterceptor {
       `Backend returned code ${error.status}, ` +
       `body was: ${error.error.message}`);
     console.log(error);
-    this.router.navigate(['login'])
-
+    this.router.navigate(['/login']);
 
     // return an observable with a user-facing error message
-    return throwError(error.error);
+    return throwError(error);
   }
 }

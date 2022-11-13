@@ -15,8 +15,8 @@ export class UsersService {
   constructor(private httpClient:HttpClient) { 
   }
 
-  public getUser(): User{
-    return user;
+  public getOwnUser(): any{
+    return this.httpClient.get<any[]>(`${environment.lifeTreeUrl}users/own`);
   } 
 
   login(data: any){
