@@ -20,10 +20,6 @@ const routes: Routes = [
     loadChildren: () => import('./view/pages/authPages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'inicio-admin',
-    loadChildren: () => import('./view/pages/inicio-admin/inicio-admin.module').then( m => m.InicioAdminPageModule)
-  },
-  {
     path: 'report',
     loadChildren: () => import('./view/pages/reportPages/report/report.module').then( m => m.ReportPageModule)
   },

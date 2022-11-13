@@ -10,7 +10,7 @@ import { ToastService } from 'src/app/services/toast/toast.service';
   styleUrls: ['./login.page.scss'],
 })
 
-export class LoginPage implements OnInit {
+export class LoginPage {
   usuario: string = "";
   contrasena: string = "";
   result: boolean;
@@ -35,9 +35,6 @@ export class LoginPage implements OnInit {
     }
     
 
-  }
-
-  ngOnInit() {
   }
 
 }

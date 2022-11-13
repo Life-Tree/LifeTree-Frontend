@@ -13,6 +13,7 @@ const options: DocumentViewerOptions = {
   templateUrl: './instructivos.page.html',
   styleUrls: ['./instructivos.page.scss'],
 })
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InstructivosPage implements OnInit {
   descripcion: string = '';
   

@@ -1,8 +1,8 @@
 
-<button *ngIf="!imageData.loaded" class="div-load">
+<button *ngIf="!imageData.loaded" class="{{this.infoMessage && this.infoMessage !== '' ? 'div-load-with-info' : 'div-load' }} ">
     <ng-container *ngIf="this.infoMessage && this.infoMessage !== ''">
         <div [id]="'infoButton'+name" class="info-button">
-            <ion-icon class="info-icon" ios="information-circle" ></ion-icon>
+            <ion-icon class="info-icon" name="information-circle" ios="information-circle" ></ion-icon>
         </div>
         <ion-popover [trigger]="'infoButton'+name" triggerAction="click">
             <ng-template>

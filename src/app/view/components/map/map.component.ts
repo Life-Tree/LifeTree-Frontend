@@ -10,7 +10,7 @@ declare var google;
 })
 export class MapComponent implements OnInit {
 
-  ionToggle = true;
+  ionToggle = false;
   map = null;
   heatmap = null;
   infoWindow: any
@@ -61,15 +61,12 @@ export class MapComponent implements OnInit {
   }
 
   toggleHeatmap() {
-    console.log(this.ionToggle)
     if (this.ionToggle) {
       this.heatmap.setMap(this.map);
       this.desactivarMarkers();
-      this.ionToggle = !this.ionToggle;
     } else {
       this.activarMarkers();
       this.heatmap.setMap(null);
-      this.ionToggle = !this.ionToggle;
     }
   }
 
