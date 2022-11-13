@@ -33,10 +33,10 @@
               name="usuario"
               trim="blur"
               required="true"
-              [(ngModel)]="usuario"
+              [(ngModel)]="username"
               />
               <mat-hint>usuario con el que se encuentra registrado</mat-hint>
-              <mat-error class="error-message" *ngIf="usuario=== ''">
+              <mat-error class="error-message" *ngIf="username=== ''">
                 Debes ingresar el usuario
               </mat-error>
         </mat-form-field>
@@ -51,10 +51,10 @@
                 name="contrasena"
                 trim="blur"
                 required="true"
-                [(ngModel)]="contrasena"
+                [(ngModel)]="password"
                 />
                 <mat-hint>contraseña registrada para el ususario</mat-hint>
-                <mat-error class="error-message" *ngIf="contrasena=== ''">
+                <mat-error class="error-message" *ngIf="password=== ''">
                   Debes ingresar la Contraseña
                 </mat-error>
         </mat-form-field>

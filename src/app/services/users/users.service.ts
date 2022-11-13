@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Preferences } from '@capacitor/preferences';
 import { User } from 'src/app/models/user.interface';
 import { environment } from 'src/environments/environment';
 
@@ -14,25 +15,19 @@ export class UsersService {
   constructor(private httpClient:HttpClient) { 
   }
 
-  public validarUsuario(nickname: string, password: string): boolean{
-    if(password == "pass"){
-      user = {nickname: nickname, password: password, tipo:"ADMIN"};
-      console.log(user);
-      
-      return true;
-    }
-    return false;
-  }
-
   public getUser(): User{
     return user;
   } 
 
-  logingService(email: string, password: string){
-    //return this.httpClient.post<any>(`${environment.lifeTreeUrl}materials`,material)
+  login(data: any){
+    return this.httpClient.post<any>(`${environment.lifeTreeUrl}auth/login`,data);
   }
 
-  registerService(){
+  async logout(){
+    await Preferences.remove({ key: 'token' });
+  }
 
+  signup(data: any){
+    return this.httpClient.post<any>(`${environment.lifeTreeUrl}auth/signup`,data);
   }
 }

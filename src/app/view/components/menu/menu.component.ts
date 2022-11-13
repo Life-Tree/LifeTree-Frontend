@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLifeTreeService,user} from 'src/app/services/users/user-life-tree.service';
 import { UsersService } from 'src/app/services/users/users.service';
 
 export interface menuItem{
@@ -22,14 +21,10 @@ export class MenuComponent implements OnInit {
   listaIntervenciones: menuItem; 
   consultarInstructivoIntervencion: menuItem;
   listaArbolesRegistrados: menuItem;
-  //itemsMenu: menuItem[] = [];
-  constructor(private userService: UsersService,private userLifeTreeService:UserLifeTreeService) {
-    //console.log(this.user);    
+  constructor(private userService: UsersService) {
   }
 
   ngOnInit() {
-    
-    //this.itemsMenu = this.getItems();
 
     this.reportarArbol =  {
       name: "Reportar un árbol",
@@ -62,27 +57,4 @@ export class MenuComponent implements OnInit {
     };
 
   }
-
-  getUserTipo(): string{
-    return user.tipo;
-  }
-
-  /*getItems(): menuItem[]{
-    let items = [
-      {
-        name: "Reportar arbol",
-        icon: "../../../assets/arbol-muerto.svg",
-        redirectTo: "/reportar-arbol"
-      },
-      {
-        name: "",
-        icon: "",
-        redirectTo: ""
-      }
-    ];
-    return items;
-  }*/
-
-
-
 }

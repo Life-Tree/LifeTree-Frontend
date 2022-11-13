@@ -8,11 +8,12 @@ import {
 import { from, Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { Preferences } from '@capacitor/preferences';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -49,6 +50,8 @@ export class AuthInterceptor implements HttpInterceptor {
       `Backend returned code ${error.status}, ` +
       `body was: ${error.error.message}`);
     console.log(error);
+    this.router.navigate(['login'])
+
 
     // return an observable with a user-facing error message
     return throwError(error.error);
