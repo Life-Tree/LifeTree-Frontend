@@ -1,21 +1,80 @@
-<app-header></app-header>
- <ion-content  class="alineacionVertical">
-   <div style="text-align: center;  font-style: italic;">
-    <ion-label color ="success" >LOGIN</ion-label>
-   </div>
-   <hr>
-     <ion-item mode="ios">
-       <ion-label position="floating">Nombre de usuario:</ion-label>
-       <ion-input [(ngModel)]="usuario" required="true" mode="ios" type="text"></ion-input>
-     </ion-item>
-     <ion-item mode="ios">
-      <ion-label position="floating">Contraseña:</ion-label>
-      <ion-input [(ngModel)]="contrasena"  required="true" mode="ios" type="password"></ion-input>
-     </ion-item>
-     <ion-toolbar padding class="topB">
-      <div style="text-align: center;">
-        <ion-button mode="ios"expand="block" type= "submit" fill="outline"color="success" (click)="validacion()">ENTRAR</ion-button>
-      </div> 
-     </ion-toolbar> 
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="margin-left: 20%;;">
+      <div>
+      </div>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button style="margin-right: 2vw;" color="tertiary" defaultHref="/" text="Atrás" icon=""></ion-back-button>      
+    </ion-buttons>
+    <img src="../../../assets/LogoEbano.svg" class="logo animated fadeIn" alt="" >
+  </ion-toolbar>
+</ion-header>
+
+ <ion-content>
+  <div class="alingContent">
+     <div style="text-align: center;">
+      <ion-icon color="tertiary" name="person-circle-outline" ></ion-icon>
+     </div>
+     <div style="text-align: center;  font-style: italic;">
+      <ion-text color="tertiary">
+        <h2>Iniciar sesión</h2>
+      </ion-text>
+     </div>
+     <hr>
+     <div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Usuario</mat-label>
+          <input
+              matInput
+              type="tel"
+              inputmode="text"
+              name="usuario"
+              trim="blur"
+              required="true"
+              [(ngModel)]="usuario"
+              />
+              <mat-hint>usuario con el que se encuentra registrado</mat-hint>
+              <mat-error class="error-message" *ngIf="usuario=== ''">
+                Debes ingresar el usuario
+              </mat-error>
+        </mat-form-field>
+       </div>
+       <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+        <mat-label>Contraseña</mat-label>
+            <input
+                matInput
+                type="tel"
+                inputmode="text"
+                name="contrasena"
+                trim="blur"
+                required="true"
+                [(ngModel)]="contrasena"
+                />
+                <mat-hint>contraseña registrada para el ususario</mat-hint>
+                <mat-error class="error-message" *ngIf="contrasena=== ''">
+                  Debes ingresar la Contraseña
+                </mat-error>
+        </mat-form-field>
+       </div>
+     </div>
+      <div style="text-align: center; margin-top: 6%;">
+        <ion-button mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="validation()">Ingresar</ion-button>
+      </div>
+      <div style=" margin-top: 6%;">
+        <hr>
+        <div style="text-align: center; margin-top: 5%;">
+          <ion-text color="tertiary">
+            <h4>¿No tienes cuenta?</h4>
+          </ion-text>
+        </div>
+        <div>
+          <ion-button mode="ios"expand="block" type= "submit" fill="outline"color="tertiary" routerLink="/singup">Registrate</ion-button>
+        </div>
+        
+      </div>  
+  </div>
 </ion-content>
 

@@ -1,10 +1,27 @@
-.alineacionVertical{
-    height: 100%;
-    display: block;
-    top:15%;
-    padding: 5%;
+.alingContent{
+    margin-top: 10%;
+    margin-right: 5%;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
 }
 
 .topB{
     top:20%
 }
+
+ion-icon {
+    font-size: 50px;
+}
+
+.logo{
+    width: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+hr {
+    background-color: rgb(209, 190, 172);
+    border-bottom: rgb(148, 137, 112);
+  }

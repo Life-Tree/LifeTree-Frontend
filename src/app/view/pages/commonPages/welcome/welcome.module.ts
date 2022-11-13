@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BienvenidoPageRoutingModule } from './bienvenido-routing.module';
+import { BienvenidoPageRoutingModule } from './welcome-routing.module';
+import { WelcomePage } from './welcome.page';
 
-import { BienvenidoPage } from './bienvenido.page';
 
 @NgModule({
   imports: [
@@ -15,6 +15,6 @@ import { BienvenidoPage } from './bienvenido.page';
     IonicModule,
     BienvenidoPageRoutingModule
   ],
-  declarations: [BienvenidoPage]
+  declarations: [WelcomePage]
 })
-export class BienvenidoPageModule {}
+export class WelcomePageModule {}

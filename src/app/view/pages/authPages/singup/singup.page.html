@@ -1,0 +1,188 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" style="margin-left: 20%;;">
+      <div>
+      </div>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button style="margin-right: 2vw;" color="tertiary" defaultHref="/" text="Atrás" icon=""></ion-back-button>      
+    </ion-buttons>
+    <img src="../../../assets/LogoEbano.svg" class="logo animated fadeIn" alt="" >
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="alingContent">
+    <div>
+      <div style="text-align: center;  font-style: italic;">
+        <ion-text color="tertiary">
+          <h2>Crea una cuenta</h2>
+        </ion-text>
+        <ion-text color="tertiary">
+          <h4>Despues de registrarte recibiras un correo para activar tu cuenta, sigue sus instrucciones.</h4>
+        </ion-text>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Nombre</mat-label>
+          <input
+              matInput
+              type="text"
+              inputmode="text"
+              name="name"
+              trim="blur"
+              required="true"
+              [(ngModel)]="name"
+              />
+              <mat-hint>Nombre completo </mat-hint>
+              <mat-error class="error-message" *ngIf="name=== ''">
+                Debes ingresar el nombre
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Apellido</mat-label>
+          <input
+              matInput
+              type="text"
+              inputmode="text"
+              name="lastName"
+              trim="blur"
+              required="true"
+              [(ngModel)]="lastName"
+              />
+              <mat-hint>Apellido completo </mat-hint>
+              <mat-error class="error-message" *ngIf="lastName=== ''">
+                Debes ingresar un apellido
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" style="width: -webkit-fill-available;">
+          <mat-label>Tipo de documento</mat-label>
+          <mat-select [(ngModel)]="type" name="type" required="true">
+            <mat-option value="CC">
+              CC
+            </mat-option>
+            <mat-option value="TI">
+              TI
+            </mat-option>
+            <mat-option value="NIT">
+              NIT
+            </mat-option>
+            <mat-option value="TE">
+              TE
+            </mat-option>
+          </mat-select>
+              <mat-error class="error-message" *ngIf="type=== ''">
+                Debes seleccionar un tipo
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Numero de documento</mat-label>
+          <input
+              matInput
+              type="tel"
+              inputmode="numeric"
+              digitOnly
+              pattern="([0-9]*[.])?[0-9]+"
+              name="number"
+              trim="blur"
+              required="true"
+              [(ngModel)]="number"
+              />
+              <mat-hint>Numero de documento de identidad </mat-hint>
+              <mat-error class="error-message" *ngIf="number=== ''">
+                Debes ingresar el numero de documento
+              </mat-error>
+              <mat-error class="error-message" *ngIf="number!= '([0-9]*[.])?[0-9]+' && number != ''">
+                Debes ingresar solo numeros
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Dirección</mat-label>
+          <input
+              matInput
+              type="text"
+              inputmode="text"
+              name="address"
+              trim="blur"
+              required="true"
+              [(ngModel)]="address"
+              />
+              <mat-hint>Dirección de residencia</mat-hint>
+              <mat-error class="error-message" *ngIf="address=== ''">
+                Debes ingresar una dirección
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Correo</mat-label>
+          <input
+              matInput
+              type="email"
+              inputmode="text"
+              name="email"
+              trim="blur"
+              required="true"
+              [(ngModel)]="email"
+              />
+              <mat-hint>correo electronico con el cual podra loguearse</mat-hint>
+              <mat-error class="error-message" *ngIf="email=== ''">
+                Debes ingresar un correo
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Contraseña</mat-label>
+          <input
+              matInput
+              type="password"
+              inputmode="text"
+              name="password"
+              trim="blur"
+              required="true"
+              [(ngModel)]="password"
+              />
+              <mat-hint>usuario con el que se encuentra registrado</mat-hint>
+              <mat-error class="error-message" *ngIf="password=== ''">
+                Debes ingresar una contraseña
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Confirmar contraseña</mat-label>
+          <input
+              matInput
+              type="password"
+              inputmode="text"
+              name="passwordConfirm"
+              trim="blur"
+              required="true"
+              [(ngModel)]="passwordConfirm"
+              />
+              <mat-hint>ingrese la contraseña nuevamente </mat-hint>
+              <mat-error class="error-message" *ngIf="passwordConfirm=== ''">
+                Debes confirmar la contraseña
+              </mat-error>
+              <mat-error class="error-message" *ngIf="password != passwordConfirm && passwordConfirm != ''">
+                Las contraseñas no coinciden, intentelo nuevamente
+              </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div style="margin-top: 6%">
+      <ion-button mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="register()">Registrate</ion-button>
+    </div>
+    
+  </div>
+
+</ion-content>

@@ -9,8 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './view/components/components.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 
 @NgModule({
@@ -26,7 +27,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        HttpClient
+        HttpClient,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent]
 })

@@ -3,6 +3,7 @@ import { UsersService } from 'src/app/services/users/users.service';
 import { Router } from '@angular/router';
 import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginPage {
       /*this.userService.logingService().subscribe(data=>{
 
       }).err{}*/
-      //await Storage.set({key: 'token', value: token});
+      await Preferences.set({key: 'token', value: "50"});
       this.router.navigate(['/inicio'])
     }else{
       this.toastService.presentToast("Debes ingresar todos los datos", 'danger');

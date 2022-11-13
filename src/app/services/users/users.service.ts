@@ -1,5 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user.interface';
+import { environment } from 'src/environments/environment';
 
 export let user: User = {nickname: "User", password: "NA", tipo: "CIUDADANO"};
 
@@ -8,9 +10,8 @@ export let user: User = {nickname: "User", password: "NA", tipo: "CIUDADANO"};
 })
 export class UsersService {
 
-  //private user: User;
-  constructor() { 
-    //this.user = {nickname: "User", password: "NA", tipo: "CIUDADANO"};
+
+  constructor(private httpClient:HttpClient) { 
   }
 
   public validarUsuario(nickname: string, password: string): boolean{
@@ -26,4 +27,12 @@ export class UsersService {
   public getUser(): User{
     return user;
   } 
+
+  logingService(email: string, password: string){
+    //return this.httpClient.post<any>(`${environment.lifeTreeUrl}materials`,material)
+  }
+
+  registerService(){
+
+  }
 }

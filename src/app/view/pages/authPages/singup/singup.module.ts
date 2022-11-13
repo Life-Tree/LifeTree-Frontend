@@ -4,11 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoginPageRoutingModule } from './login-routing.module';
+import { SingupPageRoutingModule } from './singup-routing.module';
 
-import { LoginPage } from './login.page';
-import { UsersService } from 'src/app/services/users/users.service';
-import { ComponentsModule } from '../../../components/components.module';
+import { SingupPage } from './singup.page';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,15 +18,13 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     FormsModule,
     IonicModule,
-    LoginPageRoutingModule,
-    ComponentsModule,
+    SingupPageRoutingModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     MatRadioModule,
     MatSelectModule
   ],
-  providers: [UsersService],
-  declarations: [LoginPage]
+  declarations: [SingupPage]
 })
-export class LoginPageModule {}
+export class SingupPageModule {}
