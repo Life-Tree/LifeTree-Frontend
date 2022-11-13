@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserLifeTreeService, user } from 'src/app/services/users/user-life-tree.service';
+import { Preferences } from '@capacitor/preferences';
 
 @Component({
   selector: 'app-bienvenido',
@@ -8,20 +8,14 @@ import { UserLifeTreeService, user } from 'src/app/services/users/user-life-tree
   styleUrls: ['./welcome.page.scss'],
 })
 // eslint-disable-next-line @angular-eslint/component-class-suffix
-export class WelcomePage implements OnInit {
+export class WelcomePage{
 
-  login: Boolean = false;
-
-  constructor( private userService : UserLifeTreeService,
+  constructor(
     private router: Router) { }
 
-  ngOnInit() {
-   this.userService.cambiarUsuario()
-   console.log(user)
-  }
-
-  redirect(){
-    if(this.login){
+  async redirect(){
+    const { value } = await Preferences.get({ key: 'token' });
+    if(value && value.length > 0){
       this.router.navigate(['/inicio']);
     }else{
       this.router.navigate(['/login']);

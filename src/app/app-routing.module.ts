@@ -65,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: 'singup',
-    loadChildren: () => import('./view/pages/authPages/singup/singup.module').then( m => m.SingupPageModule)
+    loadChildren: () => import('./view/pages/authPages/signup/singup.module').then( m => m.SingupPageModule)
   },
 
 ];

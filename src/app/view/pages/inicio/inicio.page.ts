@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom } from 'swiper';
-import { IonicSlides } from '@ionic/angular';
+import { IonicSlides, ToastController } from '@ionic/angular';
+import { ReportService } from 'src/app/services/reports/report.service';
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 
 @Component({
@@ -11,6 +12,17 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InicioPage {
 
-  constructor() { }
-
+  constructor(private reportService: ReportService, private toastController: ToastController) { 
+    this.reportService.getReports().subscribe((data) => {
+      // This is the first calling to the server
+    }, async (error) => {
+      const toast = await this.toastController.create({
+        message: 'Verifique su conexión a internet',
+        duration: 10000,
+        position: 'top',
+        color: 'danger'
+      });
+      toast.present();
+    });
+  }
 }

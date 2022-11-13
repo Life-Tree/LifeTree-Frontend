@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from 'src/app/services/users/users.service';
 import { Router } from '@angular/router';
-import { UserLifeTreeService } from 'src/app/services/users/user-life-tree.service';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { Preferences } from '@capacitor/preferences';
 
@@ -11,31 +10,29 @@ import { Preferences } from '@capacitor/preferences';
   styleUrls: ['./login.page.scss'],
 })
 
+// eslint-disable-next-line @angular-eslint/component-class-suffix
 export class LoginPage {
-  usuario: string = "";
-  contrasena: string = "";
+  username: string = "";
+  password: string = "";
   result: boolean;
 
-  constructor(private userServices: UsersService, private router: Router,
-    private userLifeTreeService: UserLifeTreeService,
+  constructor(
+    private router: Router,
     private toastService: ToastService,
     private userService: UsersService) {
 
   }
 
   public async validation(): Promise<void> {
-    console.log(this.userLifeTreeService.validarUsuario({ nickname: this.usuario, password: this.contrasena }))
-    if(this.usuario != "" && this.contrasena != ""){
-      /*this.userService.logingService().subscribe(data=>{
-
-      }).err{}*/
-      await Preferences.set({key: 'token', value: "50"});
-      this.router.navigate(['/inicio'])
+    if(this.username != "" && this.password != ""){
+      this.userService.login({username: this.username, password: this.password}).subscribe(async data=>{
+        await Preferences.set({key: 'token', value: data.access_token});
+        this.router.navigate(['/inicio'])
+      }, err => {
+        console.log(err);
+      });
     }else{
       this.toastService.presentToast("Debes ingresar todos los datos", 'danger');
     }
-    
-
   }
-
 }

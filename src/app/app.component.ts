@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Platform, ToastController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ArbolesService } from './services/arboles/arboles.service';
+import { ReportService } from './services/reports/report.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private arbolesService: ArbolesService,
+    private reportService: ReportService,
     private toastController: ToastController
   ) {
     this.initializeApp();
@@ -26,7 +26,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.arbolesService.obtenerArboles().subscribe((data) => {
+    this.reportService.getReports().subscribe((data) => {
       // This is the first calling to the server
     }, async (error) => {
       const toast = await this.toastController.create({

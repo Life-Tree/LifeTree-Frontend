@@ -61,23 +61,20 @@
       <div>
         <mat-form-field appearance="fill" style="width: -webkit-fill-available;">
           <mat-label>Tipo de documento</mat-label>
-          <mat-select [(ngModel)]="type" name="type" required="true">
-            <mat-option value="CC">
+          <mat-select [(ngModel)]="type" name="type" required="true" required>
+            <mat-option value="1">
               CC
             </mat-option>
-            <mat-option value="TI">
+            <mat-option value="2">
               TI
             </mat-option>
-            <mat-option value="NIT">
-              NIT
+            <mat-option value="3">
+              RC
             </mat-option>
-            <mat-option value="TE">
-              TE
+            <mat-option value="4">
+              CE
             </mat-option>
           </mat-select>
-              <mat-error class="error-message" *ngIf="type=== ''">
-                Debes seleccionar un tipo
-              </mat-error>
         </mat-form-field>
       </div>
       <div>
@@ -95,10 +92,10 @@
               [(ngModel)]="number"
               />
               <mat-hint>Numero de documento de identidad </mat-hint>
-              <mat-error class="error-message" *ngIf="number=== ''">
+              <mat-error class="error-message" *ngIf="number === ''">
                 Debes ingresar el numero de documento
               </mat-error>
-              <mat-error class="error-message" *ngIf="number!= '([0-9]*[.])?[0-9]+' && number != ''">
+              <mat-error class="error-message" *ngIf="number !== '([0-9]*[.])?[0-9]+' && number !== ''">
                 Debes ingresar solo numeros
               </mat-error>
         </mat-form-field>
@@ -173,14 +170,14 @@
               <mat-error class="error-message" *ngIf="passwordConfirm=== ''">
                 Debes confirmar la contraseña
               </mat-error>
-              <mat-error class="error-message" *ngIf="password != passwordConfirm && passwordConfirm != ''">
+              <mat-error class="error-message" *ngIf="password !== passwordConfirm && passwordConfirm !== ''">
                 Las contraseñas no coinciden, intentelo nuevamente
               </mat-error>
         </mat-form-field>
       </div>
     </div>
     <div style="margin-top: 6%">
-      <ion-button mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="register()">Registrate</ion-button>
+      <ion-button [disabled]="password !== passwordConfirm || passwordConfirm !== ''" mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="register()">Registrate</ion-button>
     </div>
     
   </div>
