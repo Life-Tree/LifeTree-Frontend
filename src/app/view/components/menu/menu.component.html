@@ -7,7 +7,7 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-menu-toggle menu="primerMenu" >
-      <ion-list >
+      <ion-list>
           <div  *ngIf="getUserTipo() == 'ADMIN'; else bloqueElse">
             <ion-item routerLink="/inicio-admin">
               <ion-icon color="tertiary" slot="start" src="../../../assets/energia.svg"></ion-icon>
@@ -42,7 +42,26 @@
           <ion-item routerLink='{{verMapa.redirectTo}}'>
             <ion-icon color="tertiary" slot="start" src="{{verMapa.icon}}"></ion-icon>
             <ion-label color="tertiary">{{verMapa.name}}</ion-label>
-          </ion-item>       
+          </ion-item> 
+          
+          <div style="margin-top: 40%;">
+            <div class="alingUserInfo">
+              <div>
+                <ion-icon color="tertiary" name="person-circle-outline"></ion-icon>
+              </div>
+              <div class="alingUser">
+                <div>
+                  <ion-text color="tertiary"><b>{{name}} {{lastName}}</b></ion-text>
+                </div>
+                <div>
+                  <ion-text color="tertiary">{{role}}</ion-text>
+                </div>
+              </div>
+            </div>
+            <div>
+              <ion-button mode="ios" expand="block"  fill="outline" color="danger" (click)="logout()">Salir</ion-button>
+            </div>
+          </div>
       </ion-list>
     </ion-menu-toggle>
     </ion-content>

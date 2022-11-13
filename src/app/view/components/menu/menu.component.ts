@@ -22,6 +22,9 @@ export class MenuComponent implements OnInit {
   listaIntervenciones: menuItem; 
   consultarInstructivoIntervencion: menuItem;
   listaArbolesRegistrados: menuItem;
+  name: string = "";
+  role: string = "";
+  lastName: string = "";
   //itemsMenu: menuItem[] = [];
   constructor(private userService: UsersService,private userLifeTreeService:UserLifeTreeService) {
     //console.log(this.user);    
@@ -82,6 +85,10 @@ export class MenuComponent implements OnInit {
     ];
     return items;
   }*/
+
+  logout(){
+    console.log("Desloguarse")
+  }
 
 
 
