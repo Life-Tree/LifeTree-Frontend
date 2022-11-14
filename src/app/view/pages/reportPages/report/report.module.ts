@@ -10,7 +10,6 @@ import {MatInputModule } from '@angular/material/input';
 import { ComponentsModule } from 'src/app/view/components/components.module';
 import { CameraService } from 'src/app/services/camera/camera.service';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ToastController } from '@ionic/angular';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
@@ -40,7 +39,7 @@ import { ProblemComponent } from './steps/problem/problem.component';
     ComponentsModule,
     MatSelectModule
   ],
-  providers: [CameraService, GeolocationService, ArbolesService, ToastController, 
+  providers: [CameraService, GeolocationService, ToastController, 
     {
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { displayDefaultIndicatorType: false }

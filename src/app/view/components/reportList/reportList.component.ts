@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Arbol } from 'src/app/models/arbol.interface';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ModalController } from '@ionic/angular';
 import { ReportDetailPage } from '../../pages/reportPages/reportDetail/reportDetail.page';
 import { ReportService } from 'src/app/services/reports/report.service';
@@ -15,7 +13,6 @@ export class ReportListComponent implements OnInit {
   reports: any[] = [];
   constructor(
     private reportsService: ReportService,
-    private arbolesService: ArbolesService,
     private modalCtrl: ModalController,
   ) { }
 

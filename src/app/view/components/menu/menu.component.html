@@ -16,7 +16,7 @@
             <ion-icon color="tertiary" slot="start" src="{{consultarInstructivoIdentificacion.icon}}"></ion-icon>
             <ion-label color="tertiary">{{consultarInstructivoIdentificacion.name}}</ion-label>
           </ion-item>
-          <ion-item routerLink='{{reportarArbol.redirectTo}}'>
+          <ion-item *ngIf="userService?.permissions?.has('report.create')" routerLink='{{reportarArbol.redirectTo}}'>
             <ion-icon color="tertiary" slot="start"  src="{{reportarArbol.icon}}"></ion-icon>
             <ion-label color="tertiary">{{reportarArbol.name}}</ion-label>        
           </ion-item>
@@ -43,10 +43,10 @@
               </div>
               <div class="alingUser">
                 <div>
-                  <ion-text color="tertiary"><b>{{name}} {{lastName}}</b></ion-text>
+                  <ion-text color="tertiary"><b>{{userService?.user?.firstName}} {{userService?.user?.lastName}}</b></ion-text>
                 </div>
                 <div>
-                  <ion-text color="tertiary">{{role}}</ion-text>
+                  <ion-text color="tertiary">{{userService?.user?.role?.name}}</ion-text>
                 </div>
               </div>
             </div>

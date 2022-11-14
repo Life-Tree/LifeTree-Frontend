@@ -1,22 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
-import { User } from 'src/app/models/user.interface';
 import { environment } from 'src/environments/environment';
 
-export let user: User = {nickname: "User", password: "NA", tipo: "CIUDADANO"};
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  user: any;
+  permissions: Map<string,boolean> = new Map<string,boolean>();
 
-  constructor(private httpClient:HttpClient) { 
+  constructor(private httpClient:HttpClient,
+    private router: Router) { 
   }
 
   public getOwnUser(): any{
-    return this.httpClient.get<any[]>(`${environment.lifeTreeUrl}users/own`);
+    return this.httpClient.get<any>(`${environment.lifeTreeUrl}users/own`);
   } 
 
   login(data: any){
@@ -25,6 +27,8 @@ export class UsersService {
 
   async logout(){
     await Preferences.remove({ key: 'token' });
+    this.user = "";
+    this.router.navigate(['/bienvenido']);
   }
 
   signup(data: any){

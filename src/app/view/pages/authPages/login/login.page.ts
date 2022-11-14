@@ -25,9 +25,11 @@ export class LoginPage {
 
   public async validation(): Promise<void> {
     if(this.username != "" && this.password != ""){
-      this.userService.login({username: this.username, password: this.password}).subscribe(async data=>{
-        await Preferences.set({key: 'token', value: data.access_token});
-        this.router.navigate(['/inicio'])
+      this.userService.login({username: this.username, password: this.password}).subscribe( data=>{
+        Preferences.set({key: 'token', value: data.access_token}).then(()=> {
+          this.router.navigate(['/inicio']);
+        });
+        
       }, err => {
         console.log(err);
       });

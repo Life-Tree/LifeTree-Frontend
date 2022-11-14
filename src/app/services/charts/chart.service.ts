@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Arbol } from 'src/app/models/arbol.interface';
 
 export interface BasicReport{
   labels: string[];

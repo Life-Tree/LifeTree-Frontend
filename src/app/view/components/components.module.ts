@@ -5,7 +5,6 @@ import { IonicModule } from '@ionic/angular';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { ReportListComponent } from './reportList/reportList.component';
 import { MapComponent } from './map/map.component';
 import { ImgSetterComponent } from './img-setter/img-setter.component';
@@ -19,7 +18,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule, IonicModule, RouterModule, HttpClientModule, FormsModule
   ],
-  providers: [ArbolesService, HttpClient],
+  providers: [ HttpClient],
   exports: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent]
 })
 export class ComponentsModule { }

@@ -1,7 +1,7 @@
 <app-header titulo="Lista de material pedagogico"></app-header>
 
 <ion-content>
-  <div *ngIf="autorize" class="alignButtonAdd" >
+  <div *ngIf="userService?.permissions?.has('material.create')" class="alignButtonAdd" >
     <ion-button color="primary"  expand="block" routerLink="/managementMaterial/new">
       <ion-icon name="add-outline" slot="start"></ion-icon>
       Agregar
@@ -24,10 +24,10 @@
                 <p>{{textSelector(material.segments)}}</p>
               </ion-col>          
             </ion-row>  
-            <ion-row *ngIf="autorize" style="height: 40px;">
+            <ion-row *ngIf="userService?.permissions?.has('material.create')" style="height: 40px;">
               <ion-col size="10">                  
                 <div class="icon">
-                  <ion-button color="primary"  expand="block" (click)="redirect(material.id)">
+                  <ion-button  color="primary"  expand="block" (click)="redirect(material.id)">
                     <ion-icon name="create-outline" slot="start"></ion-icon>
                     Editar
                   </ion-button> 

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Material } from 'src/app/models/domain/material';
 import { Segment } from 'src/app/models/domain/segment';
 import { PedagogicService } from 'src/app/services/pedagogic/pedagogic.service';
+import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-list-material',
@@ -14,11 +15,11 @@ export class ListMaterialPage {
 
 
   materialList: Material[];
-  autorize:Boolean = true;
 
   constructor(
     private materialPedagogicService: PedagogicService,
-    private router: Router
+    private router: Router,
+    private userService: UsersService
   ) { }
 
   ionViewWillEnter(){
@@ -29,13 +30,7 @@ export class ListMaterialPage {
     })
   }
 
-  /*ngOnInit() {
-    this.materialPedagogicService.getMaterials().subscribe(data =>{
-      console.log("Esta es la data", data);
-      this.materialList = data;
-      console.log("Esta es la materialList", this.materialList);
-    })
-  }*/
+
 
   imgSelector(segmentList: Segment[]){
     for (const segment of segmentList) {

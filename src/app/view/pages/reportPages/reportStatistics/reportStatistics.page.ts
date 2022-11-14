@@ -1,6 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
 import { BasicReport, ChartService } from 'src/app/services/charts/chart.service';
 import { ReportService } from 'src/app/services/reports/report.service';
 Chart.register(...registerables);

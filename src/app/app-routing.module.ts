@@ -24,10 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./view/pages/reportPages/report/report.module').then( m => m.ReportPageModule)
   },
   {
-    path: 'instructivos',
-    loadChildren: () => import('./view/pages/instructivos/instructivos.module').then( m => m.InstructivosPageModule)
-  },
-  {
     path: 'reportsMap',
     loadChildren: () => import('./view/pages/reportPages/reportsMap/reportsMap.module').then( m => m.ReportsMapPageModule)
   },
@@ -38,10 +34,6 @@ const routes: Routes = [
   {
     path: 'reportDetail',
     loadChildren: () => import('./view/pages/reportPages/reportDetail/reportDetail.module').then( m => m.ReportDetailPageModule)
-  },
-  {
-    path: 'intructivo-intervenciones',
-    loadChildren: () => import('./view/pages/intructivo-intervenciones/intructivo-intervenciones.module').then( m => m.IntructivoIntervencionesPageModule)
   },
   {
     path: 'especies-modal',

@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatStepper } from '@angular/material/stepper';
 import { ToastController } from '@ionic/angular';
-import { Frame, ImageSet } from 'src/app/models/imageset';
-import { ArbolesService } from 'src/app/services/arboles/arboles.service';
-import { CameraService } from 'src/app/services/camera/camera.service';
 import { ReportService } from 'src/app/services/reports/report.service';
 
 @Component({

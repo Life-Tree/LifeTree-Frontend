@@ -21,14 +21,15 @@ export class MenuComponent implements OnInit {
   listaIntervenciones: menuItem; 
   consultarInstructivoIntervencion: menuItem;
   listaArbolesRegistrados: menuItem;
-  name: string = "";
-  role: string = "";
-  lastName: string = "";
   //itemsMenu: menuItem[] = [];
-  constructor() {   
+  constructor(
+    public userService: UsersService
+  ) {   
   }
 
   ngOnInit() {
+
+    console.log("USer",this.userService.permissions)
 
     this.reportarArbol =  {
       name: "Reportar un árbol",
@@ -44,7 +45,7 @@ export class MenuComponent implements OnInit {
 
     this.consultarIndicadores = {
       name: "Consultar indicadores",
-      icon: "../../../assets/chart-svgrepo-com.svg",
+      icon: "../../../assets/bar-chart-svgrepo-com.svg",
       redirectTo: "/reportStatistics"
     };
 
@@ -63,6 +64,6 @@ export class MenuComponent implements OnInit {
   }
 
   logout(){
-    console.log("Me desloguie")
+    this.userService.logout();
   }
 }
