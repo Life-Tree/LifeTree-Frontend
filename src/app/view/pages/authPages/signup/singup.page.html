@@ -148,7 +148,7 @@
               required="true"
               [(ngModel)]="password"
               />
-              <mat-hint>usuario con el que se encuentra registrado</mat-hint>
+              <mat-hint>contraseña para iniciar sesión</mat-hint>
               <mat-error class="error-message" *ngIf="password=== ''">
                 Debes ingresar una contraseña
               </mat-error>
@@ -177,7 +177,7 @@
       </div>
     </div>
     <div style="margin-top: 6%">
-      <ion-button [disabled]="password !== passwordConfirm || passwordConfirm !== ''" mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="register()">Registrate</ion-button>
+      <ion-button mode="ios"expand="block" type= "submit" fill="solid"color="success" (click)="register()">Registrate</ion-button>
     </div>
     
   </div>

@@ -46,7 +46,7 @@
                   <ion-text color="tertiary"><b>{{userService?.user?.firstName}} {{userService?.user?.lastName}}</b></ion-text>
                 </div>
                 <div>
-                  <ion-text color="tertiary">{{userService?.user?.role?.name}}</ion-text>
+                  <ion-text color="tertiary">{{userService?.user?.role?.name === 'Citizen' ? 'Ciudadano' : userService?.user?.role?.name}}</ion-text>
                 </div>
               </div>
             </div>
