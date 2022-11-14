@@ -19,7 +19,7 @@ export class ListMaterialPage {
   constructor(
     private materialPedagogicService: PedagogicService,
     private router: Router,
-    private userService: UsersService
+    public userService: UsersService
   ) { }
 
   ionViewWillEnter(){

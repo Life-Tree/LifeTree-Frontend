@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 import { type } from 'os';
 import { ToastService } from 'src/app/services/toast/toast.service';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -24,29 +25,46 @@ export class SingupPage{
   constructor(
     private userService: UsersService,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private loadingCtrl: LoadingController,
   ) { }
 
 
 
-  register(){
-    this.userService.signup({
-      firstName: this.name,
-      lastName: this.lastName,
-      email: this.email,
-      password: this.password,
-      idNumber: this.number,
-      idType: this.type,
-      address: this.address
-    }).subscribe((response) => {
-      if(response.regitered){
-        this.toastService.presentToast("¡Registro exitoso! Revisa tu correo electrónico para activar tu cuenta", "success")
-        this.router.navigate(['/login'])
-      }else{
-        this.toastService.presentToast("El usuario ya se encuentra registrado, por favor inicia sesión o activa tu cuenta", "success")
-      }  
-    }, err => {
-      this.toastService.presentToast("Algo salió mal, vuelve a intentarlo mas", "danger")
-    })
+  async register(){
+    if(this.name == "" || this.lastName == "" || this.email== "" || this.password == "" || this.number ==""  || this.address == ""){
+      this.toastService.presentToast("Debes llenar todos los campos","danger")
+    }else if(this.password != this.passwordConfirm ){
+      this.toastService.presentToast("Las contraseñas no coinciden, verifiquelas","danger")
+    }else{
+      const loading = await this.loadingCtrl.create({
+        cssClass: 'custom-loading',
+        showBackdrop:true,
+        mode: "ios",
+        spinner:"lines"
+      });
+      this.userService.signup({
+        firstName: this.name,
+        lastName: this.lastName,
+        email: this.email,
+        password: this.password,
+        idNumber: this.number,
+        idType: this.type,
+        address: this.address
+      }).subscribe((response) => {
+        loading.dismiss();
+        if(response.registered){
+          this.toastService.presentToast("¡Registro exitoso! Revisa tu correo electrónico para activar tu cuenta", "success")
+          this.router.navigate(['/login'])
+        }else{
+          this.toastService.presentToast("El usuario ya se encuentra registrado, por favor inicia sesión o activa tu cuenta", "success")
+          this.router.navigate(['/login'])
+        }  
+      }, err => {
+        loading.dismiss();
+        this.toastService.presentToast("Algo salió mal, vuelve a intentarlo mas", "danger")
+      })
+    }
+    
   }
 }
