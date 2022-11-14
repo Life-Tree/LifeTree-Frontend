@@ -16,10 +16,7 @@ export class InicioPage {
   constructor(private reportService: ReportService, private toastController: ToastController, private userService: UsersService) { 
     this.reportService.getReports();
     this.userService.getOwnUser().subscribe(data=>{
-      this.userService.user = data;
-      data.role.permissions.forEach(permission=> {
-        this.userService.permissions.set(permission.name,true);
-      });
+      this.userService.fillPermissions(data);
       console.log("USEr inicio",this.userService.user)
     });
   }

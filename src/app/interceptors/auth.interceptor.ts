@@ -9,11 +9,12 @@ import { from, Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { Preferences } from '@capacitor/preferences';
 import { Router } from '@angular/router';
+import { UsersService } from '../services/users/users.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private router: Router) { }
+  constructor(private userService: UsersService, private router: Router) { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
 
@@ -23,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
                     return next.handle(request)
                         .pipe(catchError(this.handleError));
                 }
-
                 const headers = request.clone({
                     headers: request.headers.set('Authorization', 'Bearer'+' '+token.value)
                 });
@@ -43,15 +43,10 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
   handleError(error: HttpErrorResponse) {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong,
-    console.log(
-      `Backend returned code ${error.status}, ` +
-      `body was: ${error.error.message}`);
-    console.log(error);
-    this.router.navigate(['/login']);
-
-    // return an observable with a user-facing error message
+    if (!error.url.endsWith('/auth/login') && error.status === 401) {
+      console.log(error);
+      return from<Promise<any>>(this.router.navigate(['/login']));
+    }
     return throwError(error);
   }
 }

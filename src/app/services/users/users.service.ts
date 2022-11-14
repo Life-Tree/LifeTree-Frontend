@@ -34,4 +34,11 @@ export class UsersService {
   signup(data: any){
     return this.httpClient.post<any>(`${environment.lifeTreeUrl}auth/signup`,data);
   }
+
+  fillPermissions(user: any){
+    this.user = user;
+    user.role.permissions.forEach(permission=> {
+      this.permissions.set(permission.name,true);
+    });
+  }
 }

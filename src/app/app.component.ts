@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ReportService } from './services/reports/report.service';
+import { PedagogicService } from './services/pedagogic/pedagogic.service';
+import { Preferences } from '@capacitor/preferences';
+import { UsersService } from './services/users/users.service';
 
 @Component({
   selector: 'app-root',
@@ -15,27 +17,23 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private reportService: ReportService,
-    private toastController: ToastController
+    private materialService: PedagogicService,
+    private userService: UsersService
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
+  async initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
-    this.reportService.getReports().subscribe((data) => {
-      // This is the first calling to the server
-    }, async (error) => {
-      const toast = await this.toastController.create({
-        message: 'Verifique su conexión a internet',
-        duration: 10000,
-        position: 'top',
-        color: 'danger'
-      });
-      toast.present();
-    });
+    this.materialService.getMaterials();
+    const { value } = await Preferences.get({ key: 'token' });
+    if(value && value.length > 0){
+      this.userService.getOwnUser().subscribe((data) => {
+        this.userService.fillPermissions(data);
+      })
+    }
   }
 }

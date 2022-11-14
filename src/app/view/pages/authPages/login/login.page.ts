@@ -29,9 +29,8 @@ export class LoginPage {
         Preferences.set({key: 'token', value: data.access_token}).then(()=> {
           this.router.navigate(['/inicio']);
         });
-        
       }, err => {
-        console.log(err);
+        this.toastService.presentToast(err?.error?.message, 'danger');
       });
     }else{
       this.toastService.presentToast("Debes ingresar todos los datos", 'danger');
