@@ -12,6 +12,7 @@ import { ComponentsModule } from './view/components/components.module';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-        }
+        },
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

@@ -30,22 +30,11 @@ export class AuthInterceptor implements HttpInterceptor {
                 return next.handle(headers)
                     .pipe(catchError(this.handleError));
             }));
-            // const token = this.storageService.token;
-            // if (!token) {
-            //   return next.handle(request)
-            //     .pipe(catchError(this.handleError));
-            // }
-            // const headers = request.clone({
-            //   headers: request.headers.set('x-access-token', `${token}`)
-            // });
-            // return next.handle(headers)
-            //   .pipe(catchError(this.handleError));
     }
 
   handleError(error: HttpErrorResponse) {
     if (!error.url.endsWith('/auth/login') && error.status === 401) {
       console.log(error);
-      return from<Promise<any>>(this.router.navigate(['/login']));
     }
     return throwError(error);
   }

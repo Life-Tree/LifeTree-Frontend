@@ -41,4 +41,12 @@ export class UsersService {
       this.permissions.set(permission.name,true);
     });
   }
+
+  async hasToken(): Promise<boolean>{
+    const { value } = await Preferences.get({ key: 'token' });
+    if(value && value.length > 0){
+      return true;
+    }
+    return false;
+  }
 }
