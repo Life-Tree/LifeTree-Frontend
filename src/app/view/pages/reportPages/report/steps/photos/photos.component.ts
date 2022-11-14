@@ -58,6 +58,10 @@ export class PhotosComponent {
       this.reportState.loaded = true;
       if (data && data.id !== ''){
         this.presentToast("¡Árbol reportado exitosamente!");
+        this.reportService.reportedTree = {location: {}, healthStatus: {reportedSignSymptoms: []}};
+        this.stepper.steps.get(0).completed = false;
+        this.stepper.steps.get(1).completed = false;
+        this.stepper.steps.get(2).completed = false;
         this.router.navigate(['./reportsMap'])
       }else{
         this.presentToast("¡Upss, algo salió mal!", 'danger')
