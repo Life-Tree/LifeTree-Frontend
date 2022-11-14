@@ -13,13 +13,14 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, IonicSlides]);
 // eslint-disable-next-line @angular-eslint/component-class-suffix
 export class InicioPage {
 
-  constructor(private reportService: ReportService, private toastController: ToastController, private userService: UsersService) { 
-    this.reportService.getReports();
+  constructor(private reportService: ReportService, private toastController: ToastController, public userService: UsersService) {
+  }
+
+  ionViewWillEnter(){
     this.userService.getOwnUser().subscribe(data=>{
       this.userService.fillPermissions(data);
       console.log("USEr inicio",this.userService.user)
     });
   }
-
 
 }

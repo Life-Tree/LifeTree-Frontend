@@ -2,8 +2,8 @@
     <app-header></app-header>
     <ion-content fullscream>
         <swiper pager="true" [pagination]="true">
-            <ng-template swiperSlide class="slide-1">
-                    <ion-card>
+            <ng-template *ngIf="userService?.permissions?.has('report.create')" swiperSlide class="slide-1">
+                    <ion-card >
                         <img src = "../../../assets/celular1.jpg">
                         <ion-card-header>
                             <ion-card-title>¿VES UN PROBLEMA EN EL ÁRBOL?</ion-card-title>

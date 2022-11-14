@@ -25,7 +25,7 @@
      <div>
       <div>
         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
-          <mat-label>Usuario</mat-label>
+          <mat-label>Correo</mat-label>
           <input
               matInput
               type="email"
@@ -35,9 +35,9 @@
               required="true"
               [(ngModel)]="username"
               />
-              <mat-hint>usuario con el que se encuentra registrado</mat-hint>
+              <mat-hint>correo con el que se encuentra registrado</mat-hint>
               <mat-error class="error-message" *ngIf="username=== ''">
-                Debes ingresar el usuario
+                Debes ingresar el correo
               </mat-error>
         </mat-form-field>
        </div>

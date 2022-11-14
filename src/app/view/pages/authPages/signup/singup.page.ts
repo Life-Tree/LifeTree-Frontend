@@ -40,7 +40,6 @@ export class SingupPage{
       const loading = await this.loadingCtrl.create({
         cssClass: 'custom-loading',
         showBackdrop:true,
-        mode: "ios",
         spinner:"lines"
       });
       this.userService.signup({

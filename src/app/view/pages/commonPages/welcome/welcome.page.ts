@@ -11,7 +11,8 @@ import { Preferences } from '@capacitor/preferences';
 export class WelcomePage{
 
   constructor(
-    private router: Router) { }
+    private router: Router,
+    ) { }
 
   async redirect(){
     const { value } = await Preferences.get({ key: 'token' });
