@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'inicio',
-    loadChildren: () => import('./view/pages/inicio/inicio.module').then( m => m.InicioPageModule),
+    loadChildren: () => import('./view/pages/commonPages/home/inicio.module').then( m => m.InicioPageModule),
     canActivate: [AuthGuard]
   },
   {

@@ -5,20 +5,19 @@ import { IonicModule } from '@ionic/angular';
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ReportListComponent } from './reportList/reportList.component';
-import { MapComponent } from './map/map.component';
 import { ImgSetterComponent } from './img-setter/img-setter.component';
 import { FormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent],
+  declarations: [HeaderComponent, MenuComponent, MapComponent, ImgSetterComponent],
   imports: [
     CommonModule, IonicModule, RouterModule, HttpClientModule, FormsModule
   ],
   providers: [ HttpClient],
-  exports: [HeaderComponent, MenuComponent, MapComponent, ReportListComponent, ImgSetterComponent]
+  exports: [HeaderComponent, MenuComponent, MapComponent, ImgSetterComponent]
 })
 export class ComponentsModule { }

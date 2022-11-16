@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ReportDetailPage } from '../../pages/reportPages/reportDetail/reportDetail.page';
+import { ReportDetailPage } from '../../reportDetail/reportDetail.page';
 import { ReportService } from 'src/app/services/reports/report.service';
 
 @Component({
