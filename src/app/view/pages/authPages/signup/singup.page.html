@@ -120,6 +120,29 @@
       </div>
       <div>
         <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
+          <mat-label>Teléfono</mat-label>
+          <input
+              matInput
+              type="tel"
+              inputmode="numeric"
+              digitOnly
+              pattern="([0-9]*[.])?[0-9]+"
+              name="number"
+              trim="blur"
+              required="true"
+              [(ngModel)]="phone"
+              />
+              <mat-hint>Teléfono fijo o celular </mat-hint>
+              <mat-error class="error-message" *ngIf="phone === ''">
+                Debes ingresar el número telefónico
+              </mat-error>
+              <mat-error class="error-message" *ngIf="phone !== '([0-9]*[.])?[0-9]+' && phone !== ''">
+                Debes ingresar solo números
+              </mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="outline" style="width: -webkit-fill-available;">
           <mat-label>Correo</mat-label>
           <input
               matInput

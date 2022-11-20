@@ -19,6 +19,7 @@ import { PhotosComponent } from './steps/photos/photos.component';
 import { ReportPage } from './report.page';
 import { ReportPageRoutingModule } from './report-routing.module';
 import { ProblemComponent } from './steps/problem/problem.component';
+import { VideoPlayer } from '@awesome-cordova-plugins/video-player/ngx'
 
 
 
@@ -39,7 +40,7 @@ import { ProblemComponent } from './steps/problem/problem.component';
     ComponentsModule,
     MatSelectModule
   ],
-  providers: [CameraService, GeolocationService, ToastController, 
+  providers: [CameraService, GeolocationService, VideoPlayer, ToastController, 
     {
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { displayDefaultIndicatorType: false }

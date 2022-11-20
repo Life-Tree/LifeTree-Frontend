@@ -21,6 +21,7 @@ export class SingupPage{
   type: number = 1;
   address: string ="";
   passwordConfirm: string = "";
+  phone: string = "";
 
   constructor(
     private userService: UsersService,
@@ -49,7 +50,8 @@ export class SingupPage{
         password: this.password,
         idNumber: this.number,
         idType: this.type,
-        address: this.address
+        address: this.address,
+        phone: this.phone
       }).subscribe((response) => {
         loading.dismiss();
         if(response.registered){

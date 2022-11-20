@@ -7,6 +7,8 @@ import { ThemePalette } from '@angular/material/core';
 import { GeolocationService } from 'src/app/services/geolocation/geolocation.service';
 import { ReportService } from 'src/app/services/reports/report.service';
 import { Specie } from 'src/app/models/domain/specie';
+import { DCH_VIDEO_URL } from 'src/app/models/constants/constants';
+import { VideoPlayer } from '@awesome-cordova-plugins/video-player/ngx';
 
 @Component({
   selector: 'app-species',
@@ -26,12 +28,13 @@ export class SpeciesComponent implements OnInit {
   hintSpeciesText = 'Seleccione la especie'
   speciesDisable = true;
   styleExp = '';
+  DCH_VIDEO_URL_CONSTANT = DCH_VIDEO_URL;
 
   constructor(
     private reportService: ReportService, 
     public toastController: ToastController, 
     public modalController: ModalController,
-    private geolocationService: GeolocationService,) {
+    private videoPlayer: VideoPlayer) {
     this.speciesByFamily = new Map<string,Specie[]>();
    }
 
@@ -110,5 +113,13 @@ export class SpeciesComponent implements OnInit {
       this.presentToast('Upss verifique su conexión a internet', 'danger');
     }
     
+  }
+
+  openVideo(url: string){
+    this.videoPlayer.play(url).then(() => {
+      console.log('video completed');
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }
